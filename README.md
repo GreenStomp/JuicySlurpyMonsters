@@ -1,2 +1,2 @@
 # JuicySlurpyMonsters
-Mobile game 
+Unity Mobile game Endless runner
