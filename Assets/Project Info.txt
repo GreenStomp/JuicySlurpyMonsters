@@ -1,0 +1,137 @@
+https://docs.unity3d.com/Manual/iphone.html
+https://docs.unity3d.com/Manual/android.html
+https://unity3d.com/learn/tutorials/s/mobile-touch
+https://docs.unity3d.com/Manual/MobileDeveloperChecklist.html
+bezier
+http://www.theappguruz.com/blog/bezier-curve-in-games
+Mesh deformer
+https://www.youtube.com/watch?v=TQnKRAaUNOM
+https://www.youtube.com/watch?v=gQh4J5s144g
+
+Nome : 
+Endless runner , mobile
+
+Caratteristiche:
+
+-Mostro player
+	Vita che si ricarica quando raggiungi e mangi un umano e che perdi quando colpisci ostacoli. Sconfitta se la vita si esaurisce
+	Movimento destra-sinistra fra corsie con swipe
+	Abilità per superare/distruggere ostacoli
+	Rimane fermo
+
+-AI umano che scappa
+	Può cambiare corsia
+	Può evitare ostacoli saltando etc.
+	Si muove rispetto al mostro, è più lento e si avvicina al mostro lentamente
+	Quando il mostro colpisce un ostacolo l'uomo si allontana, se è troppo lontano perdi punteggio, appare un messaggio e spawna un nuovo umano
+
+-Score
+	Aumenta automaticamente col passare del tempo,prendendo monete e mangiando umani. Diminuisce se perdi un umano
+
+-Ostacoli
+	fanno parte del percorso
+
+-Percorso al centro con corsie
+	Prefab utilizzati poi da codice per generare il percorso
+	Contiene ostacoli e monete
+	Suddiviso in 3 corsie
+
+
+-Power ups nel percorso
+	non fanno parte del percorso, vengono spawnati da codice su una corsia
+
+-Money nel percorso
+	Aumentano lo score
+
+-Modalità di gioco
+	livelli
+
+-GUI
+	Menu principale
+	Menu di pause
+	Score, vita , abilità, power up corrente
+
+	-----------------------------------------------------------------------------------
+-Sprinting 10/03
+ Tools:
+	Movements       done v
+	Pooling         done v
+
+Controllers:   
+	player-Controller     donut  metty v
+
+AI:            
+   Human       done v
+
+Gameplay:
+	Score            none     anto v
+	Ranking          none     insieme -
+	coin             none     peppe v
+	Power Up         none     peppe v
+	Abilities Trees  none     metty -
+
+	obstacles (general)      ... v
+
+
+Platforms:        
+	Difficulty value          metty Done
+	special platform   (revert controls , speed up , slow down) Metty Done
+	
+
+Gui:Anto
+	Level Selection v
+	skill selection -
+	Charachter customization -
+	gameover v
+	start game v
+
+
+Graphics        none -
+---------------------------------------------------------
+2 sprint 18/03
+
+Terrain																													Matteo done
+Platform modifica, levare supplements																					Matteo done
+Editor,data modifica sopra segnalare se punti sono stati messi +- bene													Matteo poca priorità -
+Tirare un eccezione o warning se la curva creata in editor non ha una conformazione ideale								Matteo poca priorità -
+Risolvere bug curve create, porzione finale non è precisa e porta ad errori visibili sia in altezza che nelle curve		Matteo poca priorità -
+Skills + Upgrades																										Matteo v-
+Mobile Input refactoring mezzo completo																					Matteo -
+
+Charachter selection (skill select, example)																			anto poca priorità
+pause menu																												anto   v
+music manager																											anto   v
+HUD																														anto   v
+Levels Layout   
+  3 flat 
+  2 slalom                                                                                                        anto    metà
+
+Soul / monete da vedere																									peppe
+Ottimizzazione ai e spawn di + umani																					peppe    v
+Power up																												peppe    v
+
+Obiettivo : Demo livello base funzionante         FALLIMENTO TOTALE!!!
+--------------------------------------------------------------------------------------------------------------
+
+3 Sprint 25/03
+
+Upgades + skills optimization               met
+Mobile input refactoring                    met
+
+Coins System                                peppe
+power up test                               peppe
+
+Level Layout                               anto
+  2 hill up    priority
+  2 hill down    ptiority
+  1 flat
+  1 slalom
+   
+Test Gui Skill                                                 anto
+Character selection optimization   fix bug click scrollrect    anto
+
+
+Obiettivo : Demo livello base funzionante 
+----------------------------------------------------------------------------------------------------------------
+12/05/2018   Meeting And Polishing Game 
+
