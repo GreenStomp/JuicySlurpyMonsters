@@ -1,0 +1,863 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SOPRO.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventEditorGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventEditorGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventListenerGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOEventListenerGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOReferenceEditorGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceEditorGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOReferenceGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOReferenceGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOVariableGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.SOVariableGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.UnityEventWrapperGenerator">
+            <summary>
+            Class to produce the template output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGenerator.TransformText">
+            <summary>
+            Create the template output
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase">
+            <summary>
+            Base class for this transformation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.GenerationEnvironment">
+            <summary>
+            The string builder that generation-time code is using to assemble generated output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.Errors">
+            <summary>
+            The error collection for the generation process
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.indentLengths">
+            <summary>
+            A list of the lengths of each indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.CurrentIndent">
+            <summary>
+            Gets the current indent we use when adding lines to the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.Session">
+            <summary>
+            Current transformation session
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.Write(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.WriteLine(System.String)">
+            <summary>
+            Write text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.Write(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.WriteLine(System.String,System.Object[])">
+            <summary>
+            Write formatted text directly into the generated output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.Error(System.String)">
+            <summary>
+            Raise an error
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.Warning(System.String)">
+            <summary>
+            Raise a warning
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.PushIndent(System.String)">
+            <summary>
+            Increase the indent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.PopIndent">
+            <summary>
+            Remove the last indent that was added with PushIndent
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.ClearIndent">
+            <summary>
+            Remove any indentation
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.ToStringInstanceHelper">
+            <summary>
+            Utility class to produce culture-oriented representation of an object as a string.
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.ToStringInstanceHelper.FormatProvider">
+            <summary>
+            Gets or sets format provider to be used by ToStringWithCulture method.
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.ToStringInstanceHelper.ToStringWithCulture(System.Object)">
+            <summary>
+            This is called from the compile/run appdomain to convert objects within an expression block to a string
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.CodeGenerators.UnityEventWrapperGeneratorBase.ToStringHelper">
+            <summary>
+            Helper to produce culture-oriented representation of an object as a string
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.SOEventVoidEditor">
+            <summary>
+            Class that modifies SOEvent inspector view
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.SOEventVoidEditor.OnInspectorGUI">
+            <summary>
+            Method that modifies SOEvent inspector view
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.SOPROEventSystemGenerator">
+            <summary>
+            Class that generates event code
+            </summary>
+        </member>
+        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.MaxTypes">
+            <summary>
+            Max number of types allowed
+            </summary>
+        </member>
+        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.TargetFolderPath">
+            <summary>
+            Folder path under Assets
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.Types">
+            <summary>
+            Types used in the next code generation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.FullTargetFolderPath">
+            <summary>
+            Target folder for the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.FullTargetEditorFolderPath">
+            <summary>
+            Target Editor folder for the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.ListenerMode">
+            <summary>
+            Listener mode for the next code generation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.NameSpace">
+            <summary>
+            Namespace for the next code generation
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.GenerateCode">
+            <summary>
+            Set to true in order to generate code
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.SOPROEventSystemGenerator.GenerateEventCode">
+            <summary>
+            Generate all event code
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.SOPROListenerGenMode">
+            <summary>
+            Describes how a listener will register/unregister to SOEvents
+            </summary>
+        </member>
+        <member name="F:SOPRO.Editor.SOPROListenerGenMode.Default">
+            <summary>
+            Listener will not automatically register/unregister
+            </summary>
+        </member>
+        <member name="F:SOPRO.Editor.SOPROListenerGenMode.AwakeDestroy">
+            <summary>
+            Listener will register/unregister on Awake/OnDestroy
+            </summary>
+        </member>
+        <member name="F:SOPRO.Editor.SOPROListenerGenMode.OnEnableOnDisable">
+            <summary>
+            Listener will register/unregister on OnEnable/OnDisable
+            </summary>
+        </member>
+        <member name="T:SOPRO.Editor.SOPROVariableSystemGenerator">
+            <summary>
+            Class that generates SO var system code
+            </summary>
+        </member>
+        <member name="F:SOPRO.Editor.SOPROVariableSystemGenerator.TargetFolderPath">
+            <summary>
+            Folder path under Assets
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.Type">
+            <summary>
+            Type used
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.NameSpace">
+            <summary>
+            namespace used
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.Generate">
+            <summary>
+            True to generate code
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.FullTargetFolderPath">
+            <summary>
+            Target folder for the output
+            </summary>
+        </member>
+        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.FullTargetEditorFolderPath">
+            <summary>
+            Target Editor folder for the output
+            </summary>
+        </member>
+        <member name="M:SOPRO.Editor.SOPROVariableSystemGenerator.GenerateVariableCode">
+            <summary>
+            Generates scripts for SO var system
+            </summary>
+        </member>
+    </members>
+</doc>
