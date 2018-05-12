@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SOPRO</name>
+    </assembly>
+    <members>
+        <member name="T:SOPRO.SOEventVoid">
+            <summary>
+            Scriptable Object event
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOEventVoid.Raise">
+            <summary>
+            Invokes all listeners of this event
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOEventVoid.AddListener(SOPRO.SOEventVoidListener)">
+            <summary>
+            Adds listener to the event
+            </summary>
+            <param name="listener">listener to add</param>
+        </member>
+        <member name="M:SOPRO.SOEventVoid.RemoveListener(SOPRO.SOEventVoidListener)">
+            <summary>
+            Removes listener from the event
+            </summary>
+            <param name="listener">listener to remove</param>
+        </member>
+        <member name="T:SOPRO.SOEventVoidListener">
+            <summary>
+            Listener for Scriptable Object event
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOEventVoidListener.OnEnable">
+            <summary>
+            Adds listener to event
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOEventVoidListener.OnDisable">
+            <summary>
+            Removes listener from event
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOEventVoidListener.OnEventRaised">
+            <summary>
+            Invokes unity event
+            </summary>
+        </member>
+        <member name="T:SOPRO.UnityEventWrapperVoid">
+            <summary>
+            Wrapper for a unity event, usefull in order to see generic unityevent-T- in inspector
+            </summary>
+        </member>
+    </members>
+</doc>
