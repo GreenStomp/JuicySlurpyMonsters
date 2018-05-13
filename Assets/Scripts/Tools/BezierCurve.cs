@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
-[Serializable]
-public class BezierCurve
+[CreateAssetMenu(fileName = "BezierCurve" , menuName = "Level/BezierCurve")]
+public class BezierCurve : ScriptableObject
 {
     private const float minLenghtUpdFrequency = 0.001f;
     public const int MinValidPoints = 2;

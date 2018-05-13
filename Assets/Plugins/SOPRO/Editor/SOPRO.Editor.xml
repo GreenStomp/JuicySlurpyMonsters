@@ -739,12 +739,12 @@
             Helper to produce culture-oriented representation of an object as a string
             </summary>
         </member>
-        <member name="T:SOPRO.Editor.SOEventVoidEditor">
+        <member name="T:SOPRO.Editor.SOEvVoidDrawer">
             <summary>
             Class that modifies SOEvent inspector view
             </summary>
         </member>
-        <member name="M:SOPRO.Editor.SOEventVoidEditor.OnInspectorGUI">
+        <member name="M:SOPRO.Editor.SOEvVoidDrawer.OnInspectorGUI">
             <summary>
             Method that modifies SOEvent inspector view
             </summary>
