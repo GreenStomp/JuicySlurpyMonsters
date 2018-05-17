@@ -18,7 +18,6 @@ public class BuildAssetBundles
 
         BuildForTarget(assetBundleDirectoryPath, androidDirectoryPath, BuildAssetBundleOptions.None, BuildTarget.Android);
     }
-
     static void BuildForTarget(string assetBundleDirectoryPath, string targetPlatformDirectoryPath, BuildAssetBundleOptions opt, BuildTarget target)
     {
         if (!Directory.Exists(assetBundleDirectoryPath))

@@ -203,18 +203,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 131505025}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 774534dbb13410849a0c947d2bd18f0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5828cc9827badca46bb11d463ed182c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assetBundlesFolder: {fileID: 11400000, guid: b5ebe96712a2add4dbcba5beed40b44d, type: 2}
-  assetBundleName: coin
-  assetToInstantiate: coin
-  loadBundleAndInstantiate: 0
-  unloadBundle: 0
-  unloadUnusedAssets: 0
-  bundleToUnload: 
-  unloadAll: 0
-  logLoadedBundles: 0
+  mng: {fileID: 11400000, guid: ccbd18b1f3cb72c4cb300f5bedf5d40b, type: 2}
 --- !u!1 &1921086185
 GameObject:
   m_ObjectHideFlags: 0

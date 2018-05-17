@@ -7,30 +7,48 @@ public enum AssetBundleRootPath
     StreamingAssetsPath,
     PersistentPath,
 }
-[CreateAssetMenu(fileName = "AssetBundleRootFolder")]
+[CreateAssetMenu(menuName = "AssetBundlesManagement/AssetBundleRootFolder")]
 public class AssetBundleRootFolder : ScriptableObject
 {
-    //were AssetBundles folder is stored
+    //path were AssetBundles folder is stored (ex: C://Users/MyAccount/Documents/MyProject/Assets if we chose default value)
     [SerializeField]
     private AssetBundleRootPath rootPath = AssetBundleRootPath.DataPath;
-
     //our assetBundles folder
     [SerializeField]
     private string assetBundleFolder = "AssetBundles";
-    //our platform Folder Name(ex:Windows) we build all bundles eachtime for different platforms
+    //our platform Folder Name(ex:Windows) we build all bundles each time for different platforms
     [SerializeField]
     private string platformFolderName;
-    public string GetAssetBundlePath(string assetBundleName)
-    {
-        string directory = Path.Combine(GetRootPath(), assetBundleFolder);
-        return Path.Combine(directory, Path.Combine(platformFolderName, assetBundleName));
-    }
+
+    /// <summary>
+    /// Get manifest assetbundle container path. Ready to be estracted 
+    /// </summary>
     public string GetManifestBundlePath()
     {
-        //this because when we build our manifest assetbundle will be called as the platform folder
-        return this.GetAssetBundlePath(platformFolderName);
+        //the manifest container will be automatically called like our platform folder name
+        return getAssetBundlePath(platformFolderName);
     }
-    private string GetRootPath()
+    /// <summary>
+    /// Get AssetBundle folder path. Were our platforms folder will be.
+    /// </summary>
+    public string GetAssetBundlesFolderPath()
+    {
+        return Path.Combine(getRootPath(), assetBundleFolder);
+    }
+    /// <summary>
+    /// Get Platform folder path inside out AssetBundles folder. Here we have every assetBundles
+    /// builded for this platform in particular
+    /// </summary>
+    public string GetAssetBundlesFolderPlatformPath()
+    {
+        return Path.Combine(GetAssetBundlesFolderPath(), platformFolderName);
+    }
+    private string getAssetBundlePath(string assetBundleName)
+    {
+        string directory = Path.Combine(getRootPath(), assetBundleFolder);
+        return Path.Combine(directory, Path.Combine(platformFolderName, assetBundleName));
+    }
+    private string getRootPath()
     {
         string initialPath = string.Empty;
         if (rootPath == AssetBundleRootPath.DataPath)
