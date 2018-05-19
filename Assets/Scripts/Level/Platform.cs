@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-public class Platform : MonoBehaviour, IPoolable
+public class Platform : MonoBehaviour
 {
+    public PlatformData Data;
+    /*
     public const float DefaultLanesDistance = 6f;
     public const uint DefaultLanesNumber = 3;
-    #region IPoolable
-    public IPoolable Prefab { get; set; }
-    public GameObject Self { get { return this.gameObject; } }
-    #endregion
+
     /// <summary>
     /// Unique id of this type of platform
     /// </summary>
@@ -78,7 +77,7 @@ public class Platform : MonoBehaviour, IPoolable
     [SerializeField]
     private uint totalLanes = DefaultLanesNumber;
     [SerializeField]
-    private BezierCurve curve = new BezierCurve();
+    private V3BezierCurve curve;
 
     private SpecialPlatform special;
 
@@ -145,7 +144,6 @@ public class Platform : MonoBehaviour, IPoolable
         this.end = end;
 
         //Create and set main curve
-        this.curve = new BezierCurve();
         this.curve.Set(this.start.position, this.bezierP1.position, this.bezierP2.position, this.end.position, validPoints);
         this.curve.ForceUpdateLenghts();
     }
@@ -197,5 +195,5 @@ public class Platform : MonoBehaviour, IPoolable
         {
             obstacles[i].gameObject.SetActive(true);
         }
-    }
+    }*/
 }

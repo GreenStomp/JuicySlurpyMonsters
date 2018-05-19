@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 public class PlayerController : SkillHolder
 {
     public float TotalDistanceWalked { get { return step.TotalDistanceWalked; } }
@@ -158,4 +158,4 @@ public class PlayerController : SkillHolder
             return this;
         }
     }
-}
+}*/

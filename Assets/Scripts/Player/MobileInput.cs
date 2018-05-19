@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System;
-public sealed class MobileInput : MonoBehaviour
+[CreateAssetMenu(fileName = "Input" , menuName = "Input")]
+public sealed class MobileInput : ScriptableObject
 {
-    public static MobileInput Instance { get; private set; }
-
     public const int DeadZoneSqr = 125 * 125;
 
     /// <summary>
@@ -55,14 +54,6 @@ public sealed class MobileInput : MonoBehaviour
     private bool swipeLeft, swipeRight, swipeUp, swipeDown, tap, doubleTap;
     private int currentFingerId;
 
-    void Awake()
-    {
-        //Singleton
-        if (Instance != null)
-            Destroy(this);
-        else
-            Instance = this;
-    }
     /// <summary>
     /// Initializes several fields
     /// </summary>
@@ -244,7 +235,7 @@ public sealed class MobileInput : MonoBehaviour
         }
     }
 #endif
-    void Update()
+    public void UpdateInput(float deltaTime)
     {
         //Initialize values
         PreUpdate();
@@ -258,10 +249,5 @@ public sealed class MobileInput : MonoBehaviour
 
         //did we cross the deadzone?
         SwipeStatusCheck();
-    }
-    void OnDestroy()
-    {
-        if (Instance == this)
-            Instance = null;
     }
 }

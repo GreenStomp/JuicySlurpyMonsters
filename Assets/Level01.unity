@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ Prefab:
     - target: {fileID: 224986038223760858, guid: 5c5e1da68c2042f409ff08434a19419d,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -0.28137207
+      value: -0.28125
       objectReference: {fileID: 0}
     - target: {fileID: 224986038223760858, guid: 5c5e1da68c2042f409ff08434a19419d,
         type: 2}
@@ -591,9 +591,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1530026641}
-  - component: {fileID: 1530026644}
   - component: {fileID: 1530026642}
-  - component: {fileID: 1530026643}
   - component: {fileID: 1530026640}
   m_Layer: 0
   m_Name: PlatformManager
@@ -645,32 +643,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CoinsPicked: 0
   CoinsMissed: 0
---- !u!114 &1530026643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530026639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04bf3d474d0023246addda0fd3c2be26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 114460979738230226, guid: dc3e8b896d69d6442b2112c697aaffa8,
-    type: 2}
-  coinsPerSegment: 10
-  maxCoinsInScene: 200
---- !u!114 &1530026644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530026639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dfdba56bff6116428507cadd63cb990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1573481928
 GameObject:
   m_ObjectHideFlags: 0

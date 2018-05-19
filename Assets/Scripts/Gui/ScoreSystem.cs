@@ -8,12 +8,12 @@ public class ScoreSystem : MonoBehaviour
     public static ScoreSystem Instance;
     public Text ScoreText;
 
-    public int Score { get { return score + (int)(p.TotalDistanceWalked * 0.05f) + (int)p.TotalPlatformsPassed + (int)p.SpecialPlatformsPassed; } }
+    //public int Score { get { return score + (int)(p.TotalDistanceWalked * 0.05f) + (int)p.TotalPlatformsPassed + (int)p.SpecialPlatformsPassed; } }
 
-    public string ScoreToString { get { return Score.ToString(); } }
+    //public string ScoreToString { get { return Score.ToString(); } }
 
     private int score;
-    PlayerController p;
+    //PlayerController p;
     private void Awake()
     {
         Instance = this;
@@ -21,11 +21,11 @@ public class ScoreSystem : MonoBehaviour
     }
     private void Start()
     {
-        p = FindObjectOfType<PlayerController>();
+        //p = FindObjectOfType<PlayerController>();
     }
     public void LateUpdate()
     {
-        ScoreText.text = Score.ToString();
+        //ScoreText.text = Score.ToString();
     }
 
     public void UpdatingScore_Positive(int amount)

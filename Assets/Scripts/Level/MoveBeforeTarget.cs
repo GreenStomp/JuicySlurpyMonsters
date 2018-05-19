@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 public class MoveBeforeTarget : MonoBehaviour
 {
     public EntityStats Target;
@@ -17,4 +17,4 @@ public class MoveBeforeTarget : MonoBehaviour
         this.transform.LookAt(step.TangentToCenter + this.transform.position, step.Up);
         this.transform.position = step.Center;
     }
-}
+}*/

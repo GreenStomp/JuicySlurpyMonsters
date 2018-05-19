@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿/*using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(CoinManager))]
@@ -53,6 +53,10 @@ public sealed class PlatformManager : MonoBehaviour
     private int platformsInScene = 10;
     [SerializeField]
     private int platformPoolPreallocation = 1;
+    [SerializeField]
+    private Level[] levels;
+
+    private Level currentLevel;
 
     private Queue<Platform> platforms;
     private Queue<Platform> platformsInQueue;
@@ -231,7 +235,7 @@ public sealed class PlatformManager : MonoBehaviour
             {
                 Platform toRecycle = platforms.Dequeue();
 
-                PoolManager.Recycle(toRecycle);
+                currentLevel.Recycle(toRecycle);
             }
         }
         platforms = new Queue<Platform>(platformsInScene);
@@ -523,4 +527,4 @@ public sealed class PlatformManager : MonoBehaviour
             SpecialPlatformsPassed = 0;
         }
     }
-}
+}*/

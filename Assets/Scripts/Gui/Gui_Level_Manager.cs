@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -62,3 +62,4 @@ public class Gui_Level_Manager : MonoBehaviour
         Main_HUD_Canvas.enabled = false;
     }
 }
+*/

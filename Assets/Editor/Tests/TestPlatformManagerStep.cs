@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
@@ -7,3 +7,4 @@ using System.Collections;
 public class TestPlatformManagerStep {
 
 }
+*/

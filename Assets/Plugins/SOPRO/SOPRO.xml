@@ -4,6 +4,28 @@
         <name>SOPRO</name>
     </assembly>
     <members>
+        <member name="T:SOPRO.SOContainer`1">
+            <summary>
+            A generic class used to represent a shared list of objects
+            </summary>
+            <typeparam name="T">objs type</typeparam>
+        </member>
+        <member name="F:SOPRO.SOContainer`1.Elements">
+            <summary>
+            List of elements stored
+            </summary>
+        </member>
+        <member name="T:SOPRO.SORuntimeContainer`1">
+            <summary>
+            A generic class used to represent a shared list of objects at runtime
+            </summary>
+            <typeparam name="T">objs type</typeparam>
+        </member>
+        <member name="F:SOPRO.SORuntimeContainer`1.Elements">
+            <summary>
+            List of elements stored
+            </summary>
+        </member>
         <member name="T:SOPRO.SOEvVoid">
             <summary>
             Scriptable Object event

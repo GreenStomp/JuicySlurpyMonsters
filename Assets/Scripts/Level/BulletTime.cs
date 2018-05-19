@@ -1,26 +1,55 @@
 ﻿using UnityEngine;
+[CreateAssetMenu(fileName = "BulletTime", menuName = "Level/Platform/Special/BulletTime")]
 public class BulletTime : SpecialPlatform
 {
     public float TimeScale = 0.5f;
-    private float prevTimescale;
-    public override void OnEnter(PlatformManager.Step step)
+    public LayerHolder MonsterLayer;
+
+    public bool Activated { get { return activated; } }
+    public float InitialTimeScale { get { return initialTimeScale; } }
+
+    private float initialTimeScale = 1f;
+    private bool activated = false;
+
+    public void ResetEffect()
     {
-        if (step.Owner.gameObject.layer == GameManager.MonsterLayer)
+        if (activated)
         {
-            prevTimescale = Time.timeScale;
+            Time.timeScale = initialTimeScale;
+            activated = false;
+        }
+    }
+    public override void OnEnter(Transform entered, float currentPercentage)
+    {
+        if (activated)
+            return;
+
+        if (entered.gameObject.layer == MonsterLayer.LayerIndex)
+        {
+            initialTimeScale = Time.timeScale;
             Time.timeScale = TimeScale;
+            activated = true;
         }
     }
 
-    public override void OnExit(PlatformManager.Step step)
+    public override void OnExit(Transform exited, float prevPrecentage)
     {
-        if (step.Owner.gameObject.layer == GameManager.MonsterLayer)
-            Time.timeScale = prevTimescale;
+        if (!activated)
+            return;
+
+        if (MonsterLayer.LayerIndex == exited.gameObject.layer)
+        {
+            Time.timeScale = initialTimeScale;
+            activated = false;
+        }
     }
 
-    public override void OnStepTaken(PlatformManager.Step step, float prevPercentage)
+    public override void OnStepTaken(Transform walker, float currentPercentage, float prevPercentage)
     {
-        if (step.Owner.gameObject.layer == GameManager.MonsterLayer)
-            Time.timeScale = Utils.Lerp(TimeScale, prevTimescale, step.Percentage);
+        if (!activated)
+            return;
+
+        if (MonsterLayer.LayerIndex == walker.gameObject.layer)
+            Time.timeScale = Utils.Lerp(TimeScale, initialTimeScale, currentPercentage);
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public abstract class Obstacle : MonoBehaviour
 {
@@ -46,4 +46,4 @@ public abstract class Obstacle : MonoBehaviour
     protected abstract void OnMonsterTriggerExit(Collider monster);
     protected abstract void OnHumanTriggerExit(Collider human);
     protected abstract void OnObstacleDestroyerTriggerExit(Collider human);
-}
+}*/

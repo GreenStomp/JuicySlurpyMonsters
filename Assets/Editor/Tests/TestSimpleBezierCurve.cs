@@ -230,126 +230,126 @@ public class TestSimpleBezierCurve
     public void TestCalculateBezierStart()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res = curve.GetValue(0);
+        float res = curve.GetPoint(0);
         Assert.That(res, Is.EqualTo(1).Within(0.0001));
     }
     [Test]
     public void TestCalculateBezierStartRedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res = curve.GetValue(0);
+        float res = curve.GetPoint(0);
         Assert.That(res, Is.Not.EqualTo(0).Within(0.0001));
     }
     [Test]
     public void TestCalculateBezierEnd()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res = curve.GetValue(1);
+        float res = curve.GetPoint(1);
         Assert.That(res, Is.EqualTo(80).Within(0.0001));
     }
     [Test]
     public void TestCalculateBezierEndRedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res = curve.GetValue(1);
+        float res = curve.GetPoint(1);
         Assert.That(res, Is.Not.EqualTo(0).Within(0.0001));
     }
     [Test]
     public void TestCalculateBezierMidPoint1()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res = curve.GetValue(0.3f);
+        float res = curve.GetPoint(0.3f);
         Assert.That(res, Is.GreaterThan(1));
     }
     [Test]
     public void TestCalculateBezierMidPoint1RedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res = curve.GetValue(0.3f);
+        float res = curve.GetPoint(0.3f);
         Assert.That(res, Is.Not.LessThan(1));
     }
     [Test]
     public void TestCalculateBezierMidPoint2()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.GetValue(0.6f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.GetPoint(0.6f);
         Assert.That(res2, Is.GreaterThan(res1));
     }
     [Test]
     public void TestCalculateBezierMidPoint2RedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.GetValue(0.6f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.GetPoint(0.6f);
         Assert.That(res2, Is.Not.LessThan(res1));
     }
     [Test]
     public void TestDifferenceBetweenCalculates()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.CalculateBezierSecond(0.3f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.CalculateQuadraticBezier(0.3f);
         Assert.That(res2, Is.Not.EqualTo(res1));
     }
     [Test]
     public void TestDifferenceBetweenCalculatesRedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.CalculateBezierSecond(0.3f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.CalculateQuadraticBezier(0.3f);
         Assert.That(res1, Is.Not.EqualTo(res2));
     }
     [Test]
     public void TestSimilaritiesBetweenCalculates()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.CalculateBezierThird(0.3f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.CalculateCubicBezier(0.3f);
         Assert.That(res1, Is.EqualTo(res2).Within(0.0001));
     }
     [Test]
     public void TestSimilaritiesBetweenCalculatesRedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
+        float res1 = curve.GetPoint(0.3f);
         Assert.That(res1, Is.Not.EqualTo(0).Within(0.0001));
     }
     [Test]
     public void TestGetPointUsingValidPoints1()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.CalculateBezierThird(0.3f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.CalculateCubicBezier(0.3f);
         Assert.That(res1, Is.EqualTo(res2).Within(0.0001));
     }
     [Test]
     public void TestGetPointUsingValidPoints1RedLight()
     {
         curve.Set(1, 15, 29, 80, 4);
-        float res1 = curve.GetValue(0.3f);
+        float res1 = curve.GetPoint(0.3f);
         Assert.That(res1, Is.Not.EqualTo(0).Within(0.0001));
     }
     [Test]
     public void TestGetPointUsingValidPoints2()
     {
         curve.Set(1, 15, 29, 80, 3);
-        float res1 = curve.GetValue(0.3f);
-        float res2 = curve.CalculateBezierSecond(0.3f);
+        float res1 = curve.GetPoint(0.3f);
+        float res2 = curve.CalculateQuadraticBezier(0.3f);
         Assert.That(res1, Is.EqualTo(res2).Within(0.0001));
     }
     [Test]
     public void TestGetPointUsingValidPoints2RedLight()
     {
         curve.Set(1, 15, 29, 80, 3);
-        float res1 = curve.GetValue(0.3f);
+        float res1 = curve.GetPoint(0.3f);
         Assert.That(res1, Is.Not.EqualTo(0).Within(0.0001));
     }
     [Test]
     public void TestGetPointUsingValidPoints3()
     {
         curve.Set(1, 15, 29, 80, 2);
-        float res1 = curve.GetValue(0.3f);
+        float res1 = curve.GetPoint(0.3f);
         float res2 = curve.CalculateBezierFirst(0.3f);
         Assert.That(res1, Is.EqualTo(res2).Within(0.0001));
     }
@@ -357,7 +357,7 @@ public class TestSimpleBezierCurve
     public void TestGetPointUsingValidPoints3RedLight()
     {
         curve.Set(1, 15, 29, 80, 2);
-        float res1 = curve.GetValue(0.3f);
+        float res1 = curve.GetPoint(0.3f);
         Assert.That(res1, Is.Not.EqualTo(0).Within(0.0001));
     }
 }
