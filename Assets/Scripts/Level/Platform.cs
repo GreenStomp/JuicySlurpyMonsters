@@ -2,7 +2,15 @@
 using System.Collections.Generic;
 public class Platform : MonoBehaviour
 {
-    public PlatformData Data;
+    public Platform Next;
+
+    public uint PlatformUniqueId;
+
+    public RenderingData SidesRendering;
+    public RenderingData PlatformRendering;
+
+    public Lane[] Lanes;
+    public SpecialPlatform SpecialEffect;
     /*
     public const float DefaultLanesDistance = 6f;
     public const uint DefaultLanesNumber = 3;

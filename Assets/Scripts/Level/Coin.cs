@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System;
+[RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class Coin : MonoBehaviour
 {
     [NonSerialized]
     public PoolCoin Pool;
+
+    public LayerHolder CoinLayer;
 
     public ReferenceInt Value;
     public SOEvInt Event;
@@ -29,7 +32,7 @@ public class Coin : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
         int collidedLayer = collider.gameObject.layer;
-        
+
         if (collidedLayer == this.MonsterLayer.LayerIndex)
         {
             this.Collected();
@@ -38,5 +41,17 @@ public class Coin : MonoBehaviour
         {
             this.Pool.Recycle(this);
         }
+    }
+    void Start()
+    {
+        this.gameObject.layer = CoinLayer.LayerIndex;
+    }
+    void Reset()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        GetComponent<Collider>().isTrigger = true;
     }
 }

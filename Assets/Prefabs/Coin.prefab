@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbdfbc4faa72d544b80df974f9fd0c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pool: {fileID: 0}
+  CoinLayer: {fileID: 11400000, guid: a9b10b4a2da1f064b87702a82b888012, type: 2}
   Value:
     useConstant: 1
     constantValue: 1

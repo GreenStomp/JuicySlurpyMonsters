@@ -56,7 +56,7 @@ public class CoinManager : ScriptableObject
 
         PoolCoin pool = CoinPools[index];
 
-        coinCount = Mathf.Min(positions.Elements.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex, maxCount);
+        coinCount = Mathf.Min(Mathf.Min(positions.Elements.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex), maxCount);
 
         for (int i = 0; i < coinCount; i++)
         {
@@ -121,7 +121,7 @@ public class CoinManager : ScriptableObject
 
         int j = spawnsPerFrame;
 
-        int length = Mathf.Min(positions.Elements.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex, maxCount);
+        int length = Mathf.Min(Mathf.Min(positions.Elements.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex), maxCount);
 
         for (int i = 0; i < length; i++, j--)
         {

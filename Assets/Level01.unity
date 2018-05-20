@@ -592,7 +592,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1530026641}
   - component: {fileID: 1530026642}
-  - component: {fileID: 1530026640}
   m_Layer: 0
   m_Name: PlatformManager
   m_TagString: Untagged
@@ -600,23 +599,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1530026640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1530026639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c24f802111c3cad469a7e0755bc6f70e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformsPathNames:
-  - StandardPlatforms
-  initialPosition: {fileID: 1159714469}
-  deathPlane: {fileID: 999916358}
-  platformsInScene: 7
-  platformPoolPreallocation: 1
 --- !u!4 &1530026641
 Transform:
   m_ObjectHideFlags: 0
