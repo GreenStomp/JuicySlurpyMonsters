@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 [CreateAssetMenu(fileName = "PlatManager", menuName = "Level/Platform/Manager")]
@@ -15,7 +14,9 @@ public class PlatformManager : ScriptableObject
         [Serializable]
         public class Data
         {
+            [NonSerialized]
             public Platform Plat;
+
             public float Percentage;
 
             public bool IsSwitchingLanes;
@@ -23,18 +24,28 @@ public class PlatformManager : ScriptableObject
             public float LaneLerpPercentage;
             public int DestinationLane;
 
+            [NonSerialized]
             public Vector3 LocalPosition;
+            [NonSerialized]
             public Vector3 LocalForward;
+            [NonSerialized]
             public Vector3 LocalUp;
+
+            public float ForwardPrecision;
+
+            public Data()
+            {
+                ForwardPrecision = 0.00001f;
+            }
         }
 
         public PlatformManager Manager;
 
-        public ReferenceFloat TotalDistanceWalked;
+        public SOVariableFloat TotalDistanceWalked;
 
-        public ReferenceUint TotalPlatformsPassed;
+        public SOVariableUint TotalPlatformsPassed;
 
-        public ReferenceUint SpecialPlatformsPassed;
+        public SOVariableUint SpecialPlatformsPassed;
 
         /// <summary>
         /// Calculates next step data
@@ -66,18 +77,18 @@ public class PlatformManager : ScriptableObject
             if (!data.Plat)
             {
                 data.Plat = Manager.platforms.Peek();
+            }
 
-                if (resetStepDataStructure)
-                {
-                    data.CurrentLane = data.Plat.Lanes.Length / 2;
-                    data.DestinationLane = data.CurrentLane;
-                    Lane lane = data.Plat.Lanes[data.CurrentLane];
-                    data.LocalForward = lane.StartLocalDirection;
-                    data.IsSwitchingLanes = false;
-                    data.LaneLerpPercentage = 0f;
-                    data.Percentage = 0f;
-                    data.LocalPosition = lane.LocalCurve.Start;
-                }
+            if (resetStepDataStructure)
+            {
+                data.CurrentLane = data.Plat.Lanes.Length / 2;
+                data.DestinationLane = data.CurrentLane;
+                Lane lane = data.Plat.Lanes[data.CurrentLane];
+                data.LocalForward = lane.StartLocalDirection;
+                data.IsSwitchingLanes = false;
+                data.LaneLerpPercentage = 0f;
+                data.Percentage = 0f;
+                data.LocalPosition = lane.LocalCurve.Start;
             }
 
             if (resetStats)
@@ -132,7 +143,7 @@ public class PlatformManager : ScriptableObject
             Vector3 newCenter = lane.LocalCurve.GetPoint(newPercentage);
 
             //calcolo la tangente dato il Center appena calcolato e il Center dello step precedente
-            Vector3 newTangent = (newCenter - data.LocalPosition).normalized;
+            Vector3 newTangent = (lane.LocalCurve.GetPoint(newPercentage + data.ForwardPrecision) - lane.LocalCurve.GetPoint(newPercentage - data.ForwardPrecision)).normalized;
 
             float prevPercentage = data.Percentage;
 
@@ -140,7 +151,7 @@ public class PlatformManager : ScriptableObject
             data.LocalPosition = newCenter;
             data.LocalForward = newTangent;
             data.Percentage = newPercentage;
-            data.LocalUp = Vector3.Lerp(lane.StartLocalUp, lane.EndLocalUp, data.Percentage);
+            data.LocalUp = Vector3.Lerp(data.Plat.StartLocalUp, data.Plat.EndLocalUp, data.Percentage).normalized;
 
             //Richiamo evento StepTaken della special platform
             if (data.Plat.SpecialEffect != null)
@@ -191,7 +202,9 @@ public class PlatformManager : ScriptableObject
             Vector3 newCenter = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage), secondLane.LocalCurve.GetPoint(newPercentage), data.LaneLerpPercentage); ;
 
             //calcolo la tangente dato il Center appena calcolato e il Center dello step precedente
-            Vector3 newTangent = (newCenter - data.LocalPosition).normalized;
+            Vector3 first = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage + data.ForwardPrecision), secondLane.LocalCurve.GetPoint(newPercentage + data.ForwardPrecision), data.LaneLerpPercentage);
+            Vector3 second = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage - data.ForwardPrecision), secondLane.LocalCurve.GetPoint(newPercentage - data.ForwardPrecision), data.LaneLerpPercentage);
+            Vector3 newTangent = (first - second).normalized;
 
             float prevPercentage = data.Percentage;
 
@@ -199,15 +212,15 @@ public class PlatformManager : ScriptableObject
             data.LocalPosition = newCenter;
             data.LocalForward = newTangent;
             data.Percentage = newPercentage;
-            Vector3 startUp = Vector3.Lerp(firstLane.StartLocalUp, secondLane.StartLocalUp, data.LaneLerpPercentage).normalized;
-            Vector3 endUp = Vector3.Lerp(firstLane.EndLocalUp, secondLane.EndLocalUp, data.LaneLerpPercentage).normalized;
-            data.LocalUp = Vector3.Lerp(startUp, endUp, data.Percentage);
+            data.LocalUp = Vector3.Lerp(data.Plat.StartLocalUp, data.Plat.EndLocalUp, data.Percentage).normalized;
 
             //Richiamo evento StepTaken della special platform
             if (data.Plat.SpecialEffect != null)
                 data.Plat.SpecialEffect.OnStepTaken(walker, data.Percentage, prevPercentage);
         }
     }
+
+
     /*
     public static PlatformManager Instance { get; private set; }
 

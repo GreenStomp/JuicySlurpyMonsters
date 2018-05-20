@@ -11,6 +11,9 @@ public class Platform : MonoBehaviour
 
     public Lane[] Lanes;
     public SpecialPlatform SpecialEffect;
+
+    public ReferenceVector3 StartLocalUp;
+    public ReferenceVector3 EndLocalUp;
     /*
     public const float DefaultLanesDistance = 6f;
     public const uint DefaultLanesNumber = 3;

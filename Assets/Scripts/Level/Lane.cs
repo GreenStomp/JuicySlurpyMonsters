@@ -5,8 +5,6 @@ public class Lane : ScriptableObject
     public V3BezierCurve LocalCurve;
     public ReferenceVector3 StartLocalDirection;
     public ReferenceVector3 EndLocalDirection;
-    public ReferenceVector3 StartLocalUp;
-    public ReferenceVector3 EndLocalUp;
 
 #if UNITY_EDITOR
     [Range(0.0000001f, 0.01f)]
