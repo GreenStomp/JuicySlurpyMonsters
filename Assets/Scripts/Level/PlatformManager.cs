@@ -8,8 +8,8 @@ public class PlatformManager : ScriptableObject
     /// <summary>
     /// Class used to navigate correctly through the platforms
     /// </summary>
-    [CreateAssetMenu(fileName = "Step", menuName = "Level/Platform/Step")]
-    public class Step : ScriptableObject
+    [Serializable]
+    public class Step
     {
         [Serializable]
         public class Data

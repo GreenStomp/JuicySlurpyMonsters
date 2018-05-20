@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
     public ReferenceFloat MovementSpeed;
     public ReferenceFloat SwitchLaneLerpSpeed;
 
-    public PlatformManager.Step Step;
+    public PlatformManager.Step Step = new PlatformManager.Step();
 
     public PlatformManager.Step.Data StepData = new PlatformManager.Step.Data();
 
