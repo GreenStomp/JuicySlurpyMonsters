@@ -18,7 +18,7 @@ TagManager:
   - Obstacle
   - ObstacleDestroyer
   - Coin
-  - Character
+  - ObjDestroyer
   - 
   - 
   - 

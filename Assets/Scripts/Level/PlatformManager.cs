@@ -1,9 +1,204 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(CoinManager))]
-public sealed class PlatformManager : MonoBehaviour
+[CreateAssetMenu(fileName = "PlatManager", menuName = "Level/Platform/Manager")]
+public class PlatformManager : ScriptableObject
 {
+    public Platform FirstPlatform { get { return firstPlatform; } }
+    public Platform LastPlatform { get { return lastPlatform; } }
+    public Level CurrentLevel
+    {
+        get
+        {
+            return currentLevel;
+        }
+        set
+        {
+            if (currentLevel != value)
+            {
+                ChangeLevel(value);
+            }
+        }
+    }
+    public SOVariablePlane DeathPlane;
+    public SOVariableVector3 DeathPoint;
+    public SOEvPlatform PlatformSpawned;
+    public ReferenceInt MaxActivePlatforms;
+
+    private Queue<Tuple<Platform, PoolPlatform>> platforms;
+
+    private Level currentLevel;
+    private Platform firstPlatform;
+    private Platform lastPlatform;
+    private uint platformsSurpassed;
+
+    public void UpdateActivePlatforms()
+    {
+        //controllo se il primo elemento della coda abbia superato la camera, in caso affermativo verrà rimosso
+        while (DeathPlane.Value.SameSide(firstPlatform.MiddleLaneEndPos, DeathPoint.Value))
+        {
+            platformsSurpassed++;
+
+            //prendo l'elemento da riciclare
+            Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+
+            //Riciclo l'elemento che ha superato la camera
+            tuple.Item2.Recycle(tuple.Item1);
+
+            //Prendo un nuovo platform date quelle richieste o dato normalPrefabID
+            tuple.Item2 = currentLevel.platforms.Elements[0];
+            tuple.Item1 = tuple.Item2.DirectGet();
+            tuple.Item1.Reposition(lastPlatform);
+            tuple.Item1.gameObject.SetActive(true);
+
+            //inserisco la platform alla fine della coda e setto il nuovo last
+            platforms.Enqueue(tuple);
+            lastPlatform = tuple.Item1;
+            firstPlatform = platforms.Peek().Item1;
+
+            PlatformSpawned.Raise(lastPlatform);
+        }
+    }
+    public void RestartCurrentLevel()
+    {
+        if (!currentLevel)
+            return;
+
+        int activePlat = MaxActivePlatforms.Value <= 0 ? 1 : MaxActivePlatforms.Value;
+
+        if (platforms != null)
+        {
+            while (platforms.Count > 0)
+            {
+                Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+                tuple.Item2.Recycle(tuple.Item1);
+                tuple.Item1 = null;
+                tuple.Item2 = null;
+                PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+            }
+        }
+        else
+        {
+            platforms = new Queue<Tuple<Platform, PoolPlatform>>(activePlat);
+        }
+
+        firstPlatform = null;
+        lastPlatform = null;
+
+
+        int poolsLength = currentLevel.platforms.Elements.Count;
+
+        while (platforms.Count < activePlat)
+        {
+            int index = UnityEngine.Random.Range(0, poolsLength - 1);
+            Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
+            tuple.Item2 = currentLevel.platforms.Elements[index];
+            tuple.Item1 = tuple.Item2.DirectGet();
+
+            if (!firstPlatform)
+            {
+                tuple.Item1.Reposition(Vector3.zero, Quaternion.identity);
+                firstPlatform = tuple.Item1;
+            }
+            else
+            {
+                tuple.Item1.Reposition(lastPlatform);
+            }
+
+            tuple.Item1.gameObject.SetActive(true);
+
+            lastPlatform = tuple.Item1;
+
+            platforms.Enqueue(tuple);
+        }
+    }
+    public void Clear(bool clearActivePlatforms = true, bool clearPools = true)
+    {
+        if (!currentLevel)
+            return;
+
+        if (clearActivePlatforms)
+        {
+            while (platforms.Count > 0)
+            {
+                Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+                tuple.Item2.Recycle(tuple.Item1);
+                tuple.Item1 = null;
+                tuple.Item2 = null;
+                PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+            }
+        }
+
+        if (clearPools)
+        {
+            for (int i = 0; i < currentLevel.platforms.Elements.Count; i++)
+            {
+                currentLevel.platforms.Elements[i].Clear();
+            }
+        }
+    }
+    public void ChangeLevel(Level newLevel, bool smoothChange = true, bool clearPreviousLevelPools = true)
+    {
+        int activePlat = MaxActivePlatforms.Value <= 0 ? 1 : MaxActivePlatforms.Value;
+
+        if (platforms != null)
+        {
+            if (!smoothChange)
+            {
+                while (platforms.Count > 0)
+                {
+                    Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+                    tuple.Item2.Recycle(tuple.Item1);
+                    tuple.Item1 = null;
+                    tuple.Item2 = null;
+                    PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+                }
+                firstPlatform = null;
+                lastPlatform = null;
+            }
+        }
+        else
+        {
+            platforms = new Queue<Tuple<Platform, PoolPlatform>>(activePlat);
+        }
+
+
+        if (clearPreviousLevelPools && currentLevel)
+        {
+            for (int i = 0; i < currentLevel.platforms.Elements.Count; i++)
+            {
+                currentLevel.platforms.Elements[i].Clear();
+            }
+        }
+
+        currentLevel = newLevel;
+
+        int poolsLength = currentLevel.platforms.Elements.Count;
+
+        while (platforms.Count < activePlat)
+        {
+            int index = UnityEngine.Random.Range(0, poolsLength - 1);
+            Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
+            tuple.Item2 = currentLevel.platforms.Elements[index];
+            tuple.Item1 = tuple.Item2.DirectGet();
+
+            if (!firstPlatform)
+            {
+                tuple.Item1.Reposition(Vector3.zero, Quaternion.identity);
+                firstPlatform = tuple.Item1;
+            }
+            else
+            {
+                tuple.Item1.Reposition(lastPlatform);
+            }
+
+            tuple.Item1.gameObject.SetActive(true);
+
+            lastPlatform = tuple.Item1;
+
+            platforms.Enqueue(tuple);
+        }
+    }
+    /*
     public static PlatformManager Instance { get; private set; }
 
     /// <summary>
@@ -53,6 +248,10 @@ public sealed class PlatformManager : MonoBehaviour
     private int platformsInScene = 10;
     [SerializeField]
     private int platformPoolPreallocation = 1;
+    [SerializeField]
+    private Level[] levels;
+
+    private Level currentLevel;
 
     private Queue<Platform> platforms;
     private Queue<Platform> platformsInQueue;
@@ -231,7 +430,7 @@ public sealed class PlatformManager : MonoBehaviour
             {
                 Platform toRecycle = platforms.Dequeue();
 
-                PoolManager.Recycle(toRecycle);
+                currentLevel.Recycle(toRecycle);
             }
         }
         platforms = new Queue<Platform>(platformsInScene);
@@ -522,5 +721,5 @@ public sealed class PlatformManager : MonoBehaviour
             TotalPlatformsPassed = 0;
             SpecialPlatformsPassed = 0;
         }
-    }
+    }*/
 }

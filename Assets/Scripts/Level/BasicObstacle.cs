@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 public class BasicObstacle : Obstacle
 {
     protected override void OnHumanTriggerEnter(Collider human)
@@ -30,4 +30,4 @@ public class BasicObstacle : Obstacle
     {
 
     }
-}
+}*/

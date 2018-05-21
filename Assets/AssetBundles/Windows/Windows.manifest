@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 2141175895
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: coin
+      Dependencies: {}

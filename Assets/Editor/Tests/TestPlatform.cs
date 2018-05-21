@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
@@ -705,4 +705,4 @@ public class TestPlatform
     //    Vector3 v1 = plat.CalculateBezierCurveMove(0.8f);
     //    Assert.That(v1.magnitude, Is.Not.GreaterThan(10));
     //}
-}
+}*/

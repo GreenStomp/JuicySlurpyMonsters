@@ -133,5 +133,7 @@ Character selection optimization   fix bug click scrollrect    anto
 
 Obiettivo : Demo livello base funzionante 
 ----------------------------------------------------------------------------------------------------------------
-12/05/2018   Meeting And Polishing Game 
+12/05/2018   Meeting And Polishing Game                   End 25/05/2018
+
+Refactoring
 

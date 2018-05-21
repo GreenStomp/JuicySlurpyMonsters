@@ -1,7 +1,7 @@
 ﻿public class Tuple<T, K>
 {
-    public T Item1 { get; set; }
-    public K Item2 { get; set; }
+    public T Item1;
+    public K Item2;
     public Tuple(T item1, K item2)
     {
         this.Item1 = item1;
@@ -14,9 +14,9 @@
 }
 public class Tuple<T, K, Z>
 {
-    public T Item1 { get; set; }
-    public K Item2 { get; set; }
-    public Z Item3 { get; set; }
+    public T Item1;
+    public K Item2;
+    public Z Item3;
     public Tuple(T item1, K item2, Z item3)
     {
         this.Item1 = item1;
@@ -30,10 +30,10 @@ public class Tuple<T, K, Z>
 }
 public class Tuple<T, K, Z, U>
 {
-    public T Item1 { get; set; }
-    public K Item2 { get; set; }
-    public Z Item3 { get; set; }
-    public U Item4 { get; set; }
+    public T Item1;
+    public K Item2;
+    public Z Item3;
+    public U Item4;
     public Tuple(T item1, K item2, Z item3, U item4)
     {
         this.Item1 = item1;
@@ -48,11 +48,11 @@ public class Tuple<T, K, Z, U>
 }
 public class Tuple<T, K, Z, U, Y>
 {
-    public T Item1 { get; set; }
-    public K Item2 { get; set; }
-    public Z Item3 { get; set; }
-    public U Item4 { get; set; }
-    public Y Item5 { get; set; }
+    public T Item1;
+    public K Item2;
+    public Z Item3;
+    public U Item4;
+    public Y Item5;
     public Tuple(T item1, K item2, Z item3, U item4, Y item5)
     {
         this.Item1 = item1;

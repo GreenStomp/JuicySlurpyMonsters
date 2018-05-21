@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using UnityEngine;
 public sealed class GameManager : MonoBehaviour
 {
@@ -81,3 +81,4 @@ public sealed class GameManager : MonoBehaviour
             Instance = null;
     }
 }
+*/

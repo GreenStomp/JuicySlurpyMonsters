@@ -1,14 +1,22 @@
-﻿public class RevertControls : SpecialPlatform
+﻿using UnityEngine;
+[CreateAssetMenu(fileName = "RevertControls", menuName = "Level/Platform/Special/RevertControls")]
+public class RevertControls : SpecialPlatform
 {
-    public override void OnEnter(PlatformManager.Step step)
+    public MobileInput Input;
+    public LayerHolder MonsterLayer;
+    public override void OnEnter(Transform entered, float currentPercentage)
     {
-        if (step.Owner.gameObject.layer == GameManager.MonsterLayer)
-            MobileInput.Instance.InvertedControls = !MobileInput.Instance.InvertedControls;
+        if (entered.gameObject.layer == MonsterLayer.LayerIndex)
+            this.Input.InvertedControls = !this.Input.InvertedControls;
     }
-    public override void OnExit(PlatformManager.Step step)
+
+    public override void OnExit(Transform exited, float prevPercentage)
     {
+
     }
-    public override void OnStepTaken(PlatformManager.Step step, float prevPercentage)
+
+    public override void OnStepTaken(Transform walker, float currentPercentage, float prevPercentage)
     {
+
     }
 }
