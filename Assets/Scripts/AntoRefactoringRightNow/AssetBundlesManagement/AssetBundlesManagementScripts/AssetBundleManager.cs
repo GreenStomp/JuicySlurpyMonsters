@@ -14,16 +14,11 @@ public class AssetBundleManager : ScriptableObject
 {
     public AssetBundleRootFolder AssetBundleRootFolder;
 
-    //[SerializeField]
-    //private string directory;
-
     //if Initialise() is called this will be always != null
-    [SerializeField]
     private AssetBundleManifest manifest;
 
     private Dictionary<string, AssetBundleData> loadedBundleByName = new Dictionary<string, AssetBundleData>(100);
 
-    [SerializeField]
     private bool isInitialised;
     private void Awake()
     {
@@ -44,7 +39,6 @@ public class AssetBundleManager : ScriptableObject
 
         Debug.LogFormat("AssetBundleManager initialised. AssetBundleManifest: '{0}'.", manifest);
     }
-
     public void LoadAssetBundle(string assetBundleName)
     {
         if (manifest == null && !isInitialised)
@@ -74,7 +68,37 @@ public class AssetBundleManager : ScriptableObject
             }
         }
     }
+    //public AssetsBundleUnloader LoadAssetBundleWithUnloader(string assetBundleName)
+    //{
+    //    if (manifest == null && !isInitialised)
+    //        Initialise();
 
+    //    AssetBundleData assetBundleData;
+
+    //    if (!loadedBundleByName.TryGetValue(assetBundleName, out assetBundleData))
+    //    {
+    //        string[] dependencies = manifest.GetAllDependencies(assetBundleName);
+
+    //        for (int i = 0; i < dependencies.Length; i++)
+    //        {
+    //            LoadAssetBundleInternal(dependencies[i]);
+    //        }
+
+    //        LoadAssetBundleInternal(assetBundleName, dependencies);
+    //    }
+    //    else
+    //    {
+    //        assetBundleData.ReferencesCount++;
+
+    //        for (int i = 0; i < assetBundleData.Dependencies.Length; i++)
+    //        {
+    //            string dependency = assetBundleData.Dependencies[i];
+    //            loadedBundleByName[dependency].ReferencesCount++;
+    //        }
+    //    }
+    //    AssetsBundleUnloader unloader = new AssetsBundleUnloader(assetBundleName, this);
+    //    return unloader;
+    //}
     public void UnloadAssetBundle(string assetBundleName)
     {
         AssetBundleData assetBundleData;
@@ -94,7 +118,6 @@ public class AssetBundleManager : ScriptableObject
             Debug.LogErrorFormat("AssetBundle '{0}' was not loaded", assetBundleName);
         }
     }
-
     public T LoadAsset<T>(string assetBundleName, string assetName) where T : UnityEngine.Object
     {
         T asset = null;
@@ -116,7 +139,6 @@ public class AssetBundleManager : ScriptableObject
 
         return asset;
     }
-
     private void LoadAssetBundleInternal(string assetBundleName, string[] dependencies = null)
     {
         AssetBundleData assetBundleData;
@@ -133,6 +155,7 @@ public class AssetBundleManager : ScriptableObject
                 Dependencies = dependencies == null
                                             ? manifest.GetAllDependencies(assetBundleName)
                                             : dependencies
+
             };
 
             loadedBundleByName.Add(assetBundleName, assetBundleData);
@@ -142,7 +165,6 @@ public class AssetBundleManager : ScriptableObject
             assetBundleData.ReferencesCount++;
         }
     }
-
     private void UnloadAssetBundleInternal(string assetBundleName)
     {
         AssetBundleData assetBundleData = loadedBundleByName[assetBundleName];
@@ -156,6 +178,6 @@ public class AssetBundleManager : ScriptableObject
             loadedBundleByName.Remove(assetBundleName);
         }
     }
-    
+
 }
 

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36a82f9537c1dc041a4602110b72dc5c, type: 3}
-  m_Name: Asset Bundle Manager
+  m_Name: AssetBundleManager
   m_EditorClassIdentifier: 
-  AssetBundleRootFolder: {fileID: 0}
-  manifest: {fileID: 0}
-  isInitialised: 1
+  AssetBundleRootFolder: {fileID: 11400000, guid: b5ebe96712a2add4dbcba5beed40b44d,
+    type: 2}
