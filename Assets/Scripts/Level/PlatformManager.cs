@@ -1,226 +1,203 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
 [CreateAssetMenu(fileName = "PlatManager", menuName = "Level/Platform/Manager")]
 public class PlatformManager : ScriptableObject
 {
-    private Queue<Platform> platforms;
-    /// <summary>
-    /// Class used to navigate correctly through the platforms
-    /// </summary>
-    [Serializable]
-    public class Step
+    public Platform FirstPlatform { get { return firstPlatform; } }
+    public Platform LastPlatform { get { return lastPlatform; } }
+    public Level CurrentLevel
     {
-        [Serializable]
-        public class Data
+        get
         {
-            [NonSerialized]
-            public Platform Plat;
-
-            public float Percentage;
-
-            public bool IsSwitchingLanes;
-            public int CurrentLane;
-            public float LaneLerpPercentage;
-            public int DestinationLane;
-
-            [NonSerialized]
-            public Vector3 LocalPosition;
-            [NonSerialized]
-            public Vector3 LocalForward;
-            [NonSerialized]
-            public Vector3 LocalUp;
-
-            public float ForwardPrecision;
-
-            public Data()
-            {
-                ForwardPrecision = 0.00001f;
-            }
+            return currentLevel;
         }
-
-        public PlatformManager Manager;
-
-        public SOVariableFloat TotalDistanceWalked;
-
-        public SOVariableUint TotalPlatformsPassed;
-
-        public SOVariableUint SpecialPlatformsPassed;
-
-        /// <summary>
-        /// Calculates next step data
-        /// </summary>
-        /// <param name="walker">obj that required step, used for SpecialPlatform callbacks</param>
-        /// <param name="totalMovement">total amount of movement to do</param>
-        /// <param name="data">data from which to start next step. Will be overwritten with updated values</param>
-        public void CalculateNextStep(Transform walker, float totalMovement, Data data)
+        set
         {
-            if (!data.Plat)
-                Reset(data);
-
-            if (data.IsSwitchingLanes && data.CurrentLane == data.DestinationLane)
+            if (currentLevel != value)
             {
-                data.IsSwitchingLanes = false;
-                data.LaneLerpPercentage = 0f;
+                ChangeLevel(value);
             }
-
-            if (data.IsSwitchingLanes)
-                SwitchingLaneNextStep(walker, totalMovement, data);
-            else
-                NormalNextStep(walker, totalMovement, data);
-        }
-        /// <summary>
-        /// Resets values of Step
-        /// </summary>
-        public void Reset(Data data, bool resetStepDataStructure = true, bool resetStats = true)
-        {
-            if (!data.Plat)
-            {
-                data.Plat = Manager.platforms.Peek();
-            }
-
-            if (resetStepDataStructure)
-            {
-                data.CurrentLane = data.Plat.Lanes.Length / 2;
-                data.DestinationLane = data.CurrentLane;
-                Lane lane = data.Plat.Lanes[data.CurrentLane];
-                data.LocalForward = lane.StartLocalDirection;
-                data.IsSwitchingLanes = false;
-                data.LaneLerpPercentage = 0f;
-                data.Percentage = 0f;
-                data.LocalPosition = lane.LocalCurve.Start;
-            }
-
-            if (resetStats)
-            {
-                TotalDistanceWalked.Value = 0f;
-                TotalPlatformsPassed.Value = 0;
-                SpecialPlatformsPassed.Value = 0;
-            }
-        }
-
-        private void NormalNextStep(Transform walker, float totalMovement, Data data)
-        {
-            Lane lane = data.Plat.Lanes[data.CurrentLane];
-
-            //converto la speedScaled in percentuale rispetto la lunghezza della curva
-            float movementPercentage = totalMovement * lane.LocalCurve.InverseLength;
-            //calcolo la percentuale risultante dal movimento
-            float newPercentage = data.Percentage + movementPercentage;
-
-            //Se la percentuale supera 1f significa che ho superato la piattaforma corrente, per cui setto lo step alla fine della piattaforma e richiedo alla prossima piattaforma di calcolare lo step rimanente
-            if (newPercentage > 1f)
-            {
-                //Richiamo evento Exit della special platform e update counters
-                if (data.Plat.SpecialEffect != null)
-                {
-                    SpecialPlatformsPassed.Value++;
-                    data.Plat.SpecialEffect.OnExit(walker, data.Percentage);
-                }
-                TotalPlatformsPassed.Value++;
-
-                newPercentage -= 1f;
-                data.Plat = data.Plat.Next;
-                data.Percentage = 0f;
-
-                float overMovement = newPercentage * lane.LocalCurve.Length;
-
-                //Update distance counter
-                TotalDistanceWalked.Value += totalMovement - overMovement;
-
-                //Richiamo evento Enter della special platform
-                if (data.Plat.SpecialEffect != null)
-                    data.Plat.SpecialEffect.OnEnter(walker, newPercentage);
-
-                CalculateNextStep(walker, overMovement, data);
-                return;
-            }
-
-            //Update distance counter
-            TotalDistanceWalked.Value += totalMovement;
-
-            //calcolo la posizione finale
-            Vector3 newCenter = lane.LocalCurve.GetPoint(newPercentage);
-
-            //calcolo la tangente dato il Center appena calcolato e il Center dello step precedente
-            Vector3 newTangent = (lane.LocalCurve.GetPoint(newPercentage + data.ForwardPrecision) - lane.LocalCurve.GetPoint(newPercentage - data.ForwardPrecision)).normalized;
-
-            float prevPercentage = data.Percentage;
-
-            //Setto i valori
-            data.LocalPosition = newCenter;
-            data.LocalForward = newTangent;
-            data.Percentage = newPercentage;
-            data.LocalUp = Vector3.Lerp(data.Plat.StartLocalUp, data.Plat.EndLocalUp, data.Percentage).normalized;
-
-            //Richiamo evento StepTaken della special platform
-            if (data.Plat.SpecialEffect != null)
-                data.Plat.SpecialEffect.OnStepTaken(walker, data.Percentage, prevPercentage);
-        }
-        private void SwitchingLaneNextStep(Transform walker, float totalMovement, Data data)
-        {
-            Lane firstLane = data.Plat.Lanes[data.CurrentLane];
-            Lane secondLane = data.Plat.Lanes[data.DestinationLane];
-
-            //converto la speedScaled in percentuale rispetto la lunghezza della curva9
-            float movementPercentage = totalMovement * Mathf.Lerp(firstLane.LocalCurve.InverseLength, secondLane.LocalCurve.InverseLength, data.LaneLerpPercentage);
-            //calcolo la percentuale risultante dal movimento
-            float newPercentage = data.Percentage + movementPercentage;
-
-            //Se la percentuale supera 1f significa che ho superato la piattaforma corrente, per cui setto lo step alla fine della piattaforma e richiedo alla prossima piattaforma di calcolare lo step rimanente
-            if (newPercentage > 1f)
-            {
-                //Richiamo evento Exit della special platform e update counters
-                if (data.Plat.SpecialEffect != null)
-                {
-                    SpecialPlatformsPassed.Value++;
-                    data.Plat.SpecialEffect.OnExit(walker, data.Percentage);
-                }
-                TotalPlatformsPassed.Value++;
-
-                newPercentage -= 1f;
-                data.Plat = data.Plat.Next;
-                data.Percentage = 0f;
-
-                float overMovement = newPercentage * Mathf.Lerp(firstLane.LocalCurve.Length, secondLane.LocalCurve.Length, data.LaneLerpPercentage); ;
-
-                //Update distance counter
-                TotalDistanceWalked.Value += totalMovement - overMovement;
-
-                //Richiamo evento Enter della special platform
-                if (data.Plat.SpecialEffect != null)
-                    data.Plat.SpecialEffect.OnEnter(walker, newPercentage);
-
-                CalculateNextStep(walker, overMovement, data);
-                return;
-            }
-
-            //Update distance counter
-            TotalDistanceWalked.Value += totalMovement;
-
-            //calcolo la posizione finale
-            Vector3 newCenter = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage), secondLane.LocalCurve.GetPoint(newPercentage), data.LaneLerpPercentage); ;
-
-            //calcolo la tangente dato il Center appena calcolato e il Center dello step precedente
-            Vector3 first = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage + data.ForwardPrecision), secondLane.LocalCurve.GetPoint(newPercentage + data.ForwardPrecision), data.LaneLerpPercentage);
-            Vector3 second = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage - data.ForwardPrecision), secondLane.LocalCurve.GetPoint(newPercentage - data.ForwardPrecision), data.LaneLerpPercentage);
-            Vector3 newTangent = (first - second).normalized;
-
-            float prevPercentage = data.Percentage;
-
-            //Setto i valori
-            data.LocalPosition = newCenter;
-            data.LocalForward = newTangent;
-            data.Percentage = newPercentage;
-            data.LocalUp = Vector3.Lerp(data.Plat.StartLocalUp, data.Plat.EndLocalUp, data.Percentage).normalized;
-
-            //Richiamo evento StepTaken della special platform
-            if (data.Plat.SpecialEffect != null)
-                data.Plat.SpecialEffect.OnStepTaken(walker, data.Percentage, prevPercentage);
         }
     }
+    public SOVariablePlane DeathPlane;
+    public SOVariableVector3 DeathPoint;
+    public SOEvPlatform PlatformSpawned;
+    public ReferenceInt MaxActivePlatforms;
+
+    private Queue<Tuple<Platform, PoolPlatform>> platforms;
+
+    private Level currentLevel;
+    private Platform firstPlatform;
+    private Platform lastPlatform;
+    private uint platformsSurpassed;
+
+    public void UpdateActivePlatforms()
+    {
+        //controllo se il primo elemento della coda abbia superato la camera, in caso affermativo verrà rimosso
+        while (DeathPlane.Value.SameSide(firstPlatform.MiddleLaneEndPos, DeathPoint.Value))
+        {
+            platformsSurpassed++;
+
+            //prendo l'elemento da riciclare
+            Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+
+            //Riciclo l'elemento che ha superato la camera
+            tuple.Item2.Recycle(tuple.Item1);
+
+            //Prendo un nuovo platform date quelle richieste o dato normalPrefabID
+            tuple.Item2 = currentLevel.platforms.Elements[0];
+            tuple.Item1 = tuple.Item2.DirectGet();
+            tuple.Item1.Reposition(lastPlatform);
+            tuple.Item1.gameObject.SetActive(true);
+
+            //inserisco la platform alla fine della coda e setto il nuovo last
+            platforms.Enqueue(tuple);
+            lastPlatform = tuple.Item1;
+            firstPlatform = platforms.Peek().Item1;
+
+            PlatformSpawned.Raise(lastPlatform);
+        }
+    }
+    public void RestartCurrentLevel()
+    {
+        if (!currentLevel)
+            return;
+
+        int activePlat = MaxActivePlatforms.Value <= 0 ? 1 : MaxActivePlatforms.Value;
+
+        if (platforms != null)
+        {
+            while (platforms.Count > 0)
+            {
+                Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+                tuple.Item2.Recycle(tuple.Item1);
+                tuple.Item1 = null;
+                tuple.Item2 = null;
+                PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+            }
+        }
+        else
+        {
+            platforms = new Queue<Tuple<Platform, PoolPlatform>>(activePlat);
+        }
+
+        firstPlatform = null;
+        lastPlatform = null;
 
 
+        int poolsLength = currentLevel.platforms.Elements.Count;
+
+        while (platforms.Count < activePlat)
+        {
+            int index = UnityEngine.Random.Range(0, poolsLength - 1);
+            Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
+            tuple.Item2 = currentLevel.platforms.Elements[index];
+            tuple.Item1 = tuple.Item2.DirectGet();
+
+            if (!firstPlatform)
+            {
+                tuple.Item1.Reposition(Vector3.zero, Quaternion.identity);
+                firstPlatform = tuple.Item1;
+            }
+            else
+            {
+                tuple.Item1.Reposition(lastPlatform);
+            }
+
+            tuple.Item1.gameObject.SetActive(true);
+
+            lastPlatform = tuple.Item1;
+
+            platforms.Enqueue(tuple);
+        }
+    }
+    public void Clear(bool clearActivePlatforms = true, bool clearPools = true)
+    {
+        if (!currentLevel)
+            return;
+
+        if (clearActivePlatforms)
+        {
+            while (platforms.Count > 0)
+            {
+                Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+                tuple.Item2.Recycle(tuple.Item1);
+                tuple.Item1 = null;
+                tuple.Item2 = null;
+                PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+            }
+        }
+
+        if (clearPools)
+        {
+            for (int i = 0; i < currentLevel.platforms.Elements.Count; i++)
+            {
+                currentLevel.platforms.Elements[i].Clear();
+            }
+        }
+    }
+    public void ChangeLevel(Level newLevel, bool smoothChange = true, bool clearPreviousLevelPools = true)
+    {
+        int activePlat = MaxActivePlatforms.Value <= 0 ? 1 : MaxActivePlatforms.Value;
+
+        if (platforms != null)
+        {
+            if (!smoothChange)
+            {
+                while (platforms.Count > 0)
+                {
+                    Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+                    tuple.Item2.Recycle(tuple.Item1);
+                    tuple.Item1 = null;
+                    tuple.Item2 = null;
+                    PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+                }
+                firstPlatform = null;
+                lastPlatform = null;
+            }
+        }
+        else
+        {
+            platforms = new Queue<Tuple<Platform, PoolPlatform>>(activePlat);
+        }
+
+
+        if (clearPreviousLevelPools && currentLevel)
+        {
+            for (int i = 0; i < currentLevel.platforms.Elements.Count; i++)
+            {
+                currentLevel.platforms.Elements[i].Clear();
+            }
+        }
+
+        currentLevel = newLevel;
+
+        int poolsLength = currentLevel.platforms.Elements.Count;
+
+        while (platforms.Count < activePlat)
+        {
+            int index = UnityEngine.Random.Range(0, poolsLength - 1);
+            Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
+            tuple.Item2 = currentLevel.platforms.Elements[index];
+            tuple.Item1 = tuple.Item2.DirectGet();
+
+            if (!firstPlatform)
+            {
+                tuple.Item1.Reposition(Vector3.zero, Quaternion.identity);
+                firstPlatform = tuple.Item1;
+            }
+            else
+            {
+                tuple.Item1.Reposition(lastPlatform);
+            }
+
+            tuple.Item1.gameObject.SetActive(true);
+
+            lastPlatform = tuple.Item1;
+
+            platforms.Enqueue(tuple);
+        }
+    }
     /*
     public static PlatformManager Instance { get; private set; }
 

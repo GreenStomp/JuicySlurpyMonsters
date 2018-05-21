@@ -4,9 +4,9 @@ public class PlayerController : MonoBehaviour
     public ReferenceFloat MovementSpeed;
     public ReferenceFloat SwitchLaneLerpSpeed;
 
-    public PlatformManager.Step Step = new PlatformManager.Step();
+    public Step Step = new Step();
 
-    public PlatformManager.Step.Data StepData = new PlatformManager.Step.Data();
+    public Step.Data StepData = new Step.Data();
 
     public MobileInput Input;
 
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         }
         public IState OnStateUpdate()
         {
-            PlatformManager.Step.Data data = owner.StepData;
+            Step.Data data = owner.StepData;
 
             data.LaneLerpPercentage += Time.deltaTime * owner.SwitchLaneLerpSpeed.Value;
 
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
         public IState OnStateUpdate()
         {
-            PlatformManager.Step.Data data = owner.StepData;
+            Step.Data data = owner.StepData;
             MobileInput input = this.owner.Input;
 
             if (input.SwipeLeft && data.CurrentLane > 0)

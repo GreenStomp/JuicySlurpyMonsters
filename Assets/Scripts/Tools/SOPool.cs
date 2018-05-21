@@ -16,6 +16,7 @@ public class SOPool<T> : ScriptableObject where T : Component
 
     [SerializeField]
     private T prefab;
+
     /// <summary>
     /// Recycles the given instance
     /// </summary>
@@ -24,6 +25,14 @@ public class SOPool<T> : ScriptableObject where T : Component
     {
         elements.Enqueue(toRecycle);
         toRecycle.gameObject.SetActive(false);
+    }
+    /// <summary>
+    /// Recycles the given instance. No further action will be performed on the object
+    /// </summary>
+    /// <param name="toRecycle">object to recycle</param>
+    public void DirectRecycle(T toRecycle)
+    {
+        elements.Enqueue(toRecycle);
     }
     /// <summary>
     /// Recycles the given instance
@@ -58,6 +67,14 @@ public class SOPool<T> : ScriptableObject where T : Component
         T res = elements.Count == 0 ? GameObject.Instantiate(prefab) : elements.Dequeue();
         res.gameObject.SetActive(true);
         return res;
+    }
+    /// <summary>
+    /// Requests an element from the pool. No further action will be performed on the object
+    /// </summary>
+    /// <returns>the requested element instance</returns>
+    public T DirectGet()
+    {
+        return elements.Count == 0 ? GameObject.Instantiate(prefab) : elements.Dequeue();
     }
     /// <summary>
     /// Requests an element from the pool.

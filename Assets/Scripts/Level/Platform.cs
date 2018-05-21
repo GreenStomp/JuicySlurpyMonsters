@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 public class Platform : MonoBehaviour
 {
-    public Platform Next;
-
-    public uint PlatformUniqueId;
+    public ReferenceUint PlatformUniqueId;
 
     public RenderingData SidesRendering;
     public RenderingData PlatformRendering;
@@ -14,6 +11,55 @@ public class Platform : MonoBehaviour
 
     public ReferenceVector3 StartLocalUp;
     public ReferenceVector3 EndLocalUp;
+
+    public Platform Next;
+
+    public Vector3 MiddleLaneEndPos;
+    public Vector3 MiddleLaneStartPos;
+    public Vector3 MiddleLaneStartUp;
+    public Vector3 MiddleLaneEndDir;
+    public Vector3 MiddleLaneEndUp;
+    public Vector3 MiddleLaneStartDir;
+
+    private Transform myTransform;
+
+    public void Reposition(Vector3 centralLanePosition, Quaternion direction)
+    {
+        Quaternion startToMainRotation = new Quaternion();
+        startToMainRotation.SetFromToRotation(MiddleLaneStartDir, myTransform.forward);
+
+        myTransform.rotation = direction * startToMainRotation;
+        myTransform.position = centralLanePosition + (myTransform.position - MiddleLaneStartPos);
+
+        this.Next = null;
+
+        UpdateMiddleLaneV3s();
+    }
+    public void Reposition(Platform previous)
+    {
+        Reposition(previous.MiddleLaneEndPos, Quaternion.LookRotation(previous.MiddleLaneEndDir, previous.MiddleLaneEndUp));
+
+        //Setto il next della piattaforma precedente
+        previous.Next = this;
+    }
+
+    public void UpdateMiddleLaneV3s()
+    {
+        Lane lane = Lanes[Lanes.Length / 2];
+        MiddleLaneEndPos = myTransform.TransformPoint(lane.EndLocalPosition.Value);
+        MiddleLaneStartPos = myTransform.TransformPoint(lane.StartLocalPosition.Value);
+        MiddleLaneEndDir = myTransform.TransformDirection(lane.EndLocalDirection.Value);
+        MiddleLaneStartDir = myTransform.TransformDirection(lane.StartLocalDirection.Value);
+        MiddleLaneEndUp = myTransform.TransformDirection(EndLocalUp);
+        MiddleLaneStartUp = myTransform.TransformDirection(StartLocalUp);
+    }
+
+    private void Awake()
+    {
+        myTransform = transform;
+
+        UpdateMiddleLaneV3s();
+    }
     /*
     public const float DefaultLanesDistance = 6f;
     public const uint DefaultLanesNumber = 3;

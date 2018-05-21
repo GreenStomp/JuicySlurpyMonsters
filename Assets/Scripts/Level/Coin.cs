@@ -7,12 +7,11 @@ public class Coin : MonoBehaviour
     public PoolCoin Pool;
 
     public LayerHolder CoinLayer;
+    public LayerHolder MonsterLayer;
+    public LayerHolder ObjDestroyerLayer;
 
     public ReferenceInt Value;
     public SOEvInt Event;
-
-    public LayerHolder MonsterLayer;
-    public LayerHolder ObjDestroyerLayer;
 
     public bool IsRecycled { get; private set; }
 
