@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using SOPRO;
 [CreateAssetMenu(fileName = "RevertControls", menuName = "Level/Platform/Special/RevertControls")]
 public class RevertControls : SpecialPlatform
 {

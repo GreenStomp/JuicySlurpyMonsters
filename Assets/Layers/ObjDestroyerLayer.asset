@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2fa0ab237e23f1408a8ef7dcef9ded4, type: 3}
+  m_Script: {fileID: -295101368, guid: a05ca6a208fcec54387562bc38096878, type: 3}
   m_Name: ObjDestroyerLayer
   m_EditorClassIdentifier: 
   LayerName:

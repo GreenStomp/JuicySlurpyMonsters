@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using SOPRO.Variables;
+using SOPRO.Events;
 [CreateAssetMenu(fileName = "PlatManager", menuName = "Level/Platform/Manager")]
 public class PlatformManager : ScriptableObject
 {

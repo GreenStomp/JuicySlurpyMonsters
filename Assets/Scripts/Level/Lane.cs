@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using SOPRO.Variables;
 [CreateAssetMenu(fileName = "Lane", menuName = "Level/Platform/Lane")]
 public class Lane : ScriptableObject
 {

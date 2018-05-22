@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+namespace SOPRO.Events
+{
     /// <summary>
     /// Listener for Scriptable Object event
     /// </summary>
@@ -16,18 +18,26 @@ using UnityEngine;
         /// <summary>
         /// Adds listener to event
         /// </summary>
-        protected virtual void OnEnable()
+        protected void RegisterToEvent()
         {
             Event.AddListener(this);
         }
         /// <summary>
         /// Removes listener from event
         /// </summary>
-        protected virtual void OnDisable()
+        protected void UnregisterToEvent()
         {
             Event.RemoveListener(this);
         }
-        /// <summary>
+				protected virtual void OnEnable()
+        {
+            Event.AddListener(this);
+        }
+		protected virtual void OnDisable()
+        {
+            Event.RemoveListener(this);
+        }
+		        /// <summary>
         /// Invokes unity event
         /// </summary>
         internal void OnEventRaised(int Value0)
@@ -35,3 +45,4 @@ using UnityEngine;
             Actions.Invoke(Value0);
         }
     }
+}

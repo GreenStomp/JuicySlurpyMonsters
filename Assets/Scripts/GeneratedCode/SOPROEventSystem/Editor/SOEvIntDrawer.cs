@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+namespace SOPRO.Events.Editor
+{
     /// <summary>
     /// Class that modifies SOEvent inspector view
     /// </summary>
@@ -20,3 +22,4 @@ using UnityEditor;
                 e.Raise(e.DEBUG_int_0);
         }
     }
+}

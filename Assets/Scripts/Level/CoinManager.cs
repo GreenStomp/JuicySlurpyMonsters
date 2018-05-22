@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using SOPRO.Containers;
 /// <summary>
 /// Class that holdes Coin pools and spawn logic
 /// </summary>
@@ -18,7 +19,7 @@ public class CoinManager : ScriptableObject
     /// <param name="maxCount">max number of coins to spawn</param>
     /// <param name="coinCount">effective number of coins spawned</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
-    public void SpawnCoins(V3Container positions, int maxCount, out int coinCount, int poolIndex = -1)
+    public void SpawnCoins(SOListVector3Container positions, int maxCount, out int coinCount, int poolIndex = -1)
     {
         coinCount = 0;
         if (CoinPools.Length == 0)
@@ -46,7 +47,7 @@ public class CoinManager : ScriptableObject
     /// <param name="spawnedCoinsStartIndex">array start index</param>
     /// <param name="coinCount">effective number of coins spawned</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
-    public void SpawnCoins(V3Container positions, int maxCount, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, out int coinCount, int poolIndex = -1)
+    public void SpawnCoins(SOListVector3Container positions, int maxCount, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, out int coinCount, int poolIndex = -1)
     {
         coinCount = 0;
         if (CoinPools.Length == 0 || spawnedCoins == null)
@@ -74,7 +75,7 @@ public class CoinManager : ScriptableObject
     /// <param name="spawnsPerFrame">Number of coins to spawn per frame</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
     /// <returns>enumerator holding the total number of coins that will be spawned</returns>
-    public IEnumerator<int> SpawnCoinsCoroutine(V3Container positions, int maxCount, int spawnsPerFrame, int poolIndex = -1)
+    public IEnumerator<int> SpawnCoinsCoroutine(SOListVector3Container positions, int maxCount, int spawnsPerFrame, int poolIndex = -1)
     {
         if (CoinPools.Length == 0 || spawnsPerFrame <= 0)
             yield break;
@@ -110,7 +111,7 @@ public class CoinManager : ScriptableObject
     /// <param name="spawnedCoinsStartIndex">array start index</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
     /// <returns>enumerator holding the total number of coins that will be spawned</returns>
-    public IEnumerator<int> SpawnCoinsCoroutine(V3Container positions, int maxCount, int spawnsPerFrame, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, int poolIndex = -1)
+    public IEnumerator<int> SpawnCoinsCoroutine(SOListVector3Container positions, int maxCount, int spawnsPerFrame, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, int poolIndex = -1)
     {
         if (CoinPools.Length == 0 || spawnsPerFrame <= 0 || spawnedCoins == null)
             yield break;

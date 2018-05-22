@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+namespace SOPRO.Events 
+{
     /// <summary>
     /// Scriptable Object event
     /// </summary>
@@ -40,3 +42,4 @@ using System;
             listeners.Remove(listener);
         }
     }
+}

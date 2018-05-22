@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using SOPRO;
 [CreateAssetMenu(fileName = "BulletTime", menuName = "Level/Platform/Special/BulletTime")]
 public class BulletTime : SpecialPlatform
 {

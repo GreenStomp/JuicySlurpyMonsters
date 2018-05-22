@@ -11,11 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 1883099301, guid: 07a8e06740142b14b8c737f2c5d429f2, type: 3}
   m_Name: SOPROEventsGenerator
   m_EditorClassIdentifier: 
-  generateCode: 0
-  types:
+  GenerateCode: 0
+  Types:
   - Platform
   - 
   - 
   - 
-  nameSpace: 
-  listenerMode: 2
+  ListenerMode: 2

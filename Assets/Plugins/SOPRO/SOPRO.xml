@@ -4,74 +4,163 @@
         <name>SOPRO</name>
     </assembly>
     <members>
-        <member name="T:SOPRO.SOContainer`1">
+        <member name="T:SOPRO.AnimatorPropertyHolder">
             <summary>
-            A generic class used to represent a shared list of objects
-            </summary>
-            <typeparam name="T">objs type</typeparam>
-        </member>
-        <member name="F:SOPRO.SOContainer`1.Elements">
-            <summary>
-            List of elements stored
+            Class that holds an animator property name and calculates its hash value at load time
             </summary>
         </member>
-        <member name="T:SOPRO.SORuntimeContainer`1">
+        <member name="F:SOPRO.AnimatorPropertyHolder.PropertyName">
             <summary>
-            A generic class used to represent a shared list of objects at runtime
-            </summary>
-            <typeparam name="T">objs type</typeparam>
-        </member>
-        <member name="F:SOPRO.SORuntimeContainer`1.Elements">
-            <summary>
-            List of elements stored
+            Property Name
             </summary>
         </member>
-        <member name="T:SOPRO.SOEvVoid">
+        <member name="F:SOPRO.AnimatorPropertyHolder.PropertyHash">
             <summary>
-            Scriptable Object event
+            Calculated property hash at load time
             </summary>
         </member>
-        <member name="M:SOPRO.SOEvVoid.Raise">
+        <member name="M:SOPRO.AnimatorPropertyHolder.op_Implicit(SOPRO.AnimatorPropertyHolder)~System.Int32">
             <summary>
-            Invokes all listeners of this event
+            Converts to calculated property hash value
+            </summary>
+            <param name="prop">property to convert</param>
+        </member>
+        <member name="M:SOPRO.AnimatorPropertyHolder.op_Implicit(SOPRO.AnimatorPropertyHolder)~System.String">
+            <summary>
+            Converts to property name value
+            </summary>
+            <param name="prop">property to convert</param>
+        </member>
+        <member name="T:SOPRO.LayerHolder">
+            <summary>
+            Class that holds a Layer name and calculates its index at Editor time
             </summary>
         </member>
-        <member name="M:SOPRO.SOEvVoid.AddListener(SOPRO.SOEvVoidListener)">
+        <member name="F:SOPRO.LayerHolder.LayerName">
             <summary>
-            Adds listener to the event
-            </summary>
-            <param name="listener">listener to add</param>
-        </member>
-        <member name="M:SOPRO.SOEvVoid.RemoveListener(SOPRO.SOEvVoidListener)">
-            <summary>
-            Removes listener from the event
-            </summary>
-            <param name="listener">listener to remove</param>
-        </member>
-        <member name="T:SOPRO.SOEvVoidListener">
-            <summary>
-            Listener for Scriptable Object event
+            Layer name
             </summary>
         </member>
-        <member name="M:SOPRO.SOEvVoidListener.OnEnable">
+        <member name="F:SOPRO.LayerHolder.LayerIndex">
             <summary>
-            Adds listener to event
+            Layer index calculated at Editor time
             </summary>
         </member>
-        <member name="M:SOPRO.SOEvVoidListener.OnDisable">
+        <member name="M:SOPRO.LayerHolder.op_Implicit(SOPRO.LayerHolder)~System.Int32">
             <summary>
-            Removes listener from event
+            Converts to calculated layer index value
+            </summary>
+            <param name="layer">layer to convert</param>
+        </member>
+        <member name="M:SOPRO.LayerHolder.op_Implicit(SOPRO.LayerHolder)~System.String">
+            <summary>
+            Converts to layer name value
+            </summary>
+            <param name="layer">layer to convert</param>
+        </member>
+        <member name="T:SOPRO.ShaderPropertyHolder">
+            <summary>
+            Class that holds a shader property name and calculates its id value at load time
             </summary>
         </member>
-        <member name="M:SOPRO.SOEvVoidListener.OnEventRaised">
+        <member name="F:SOPRO.ShaderPropertyHolder.PropertyName">
             <summary>
-            Invokes unity event
+            Property Name
             </summary>
         </member>
-        <member name="T:SOPRO.UnEvVoid">
+        <member name="F:SOPRO.ShaderPropertyHolder.PropertyID">
             <summary>
-            Wrapper for a unity event, usefull in order to see generic unityevent-T- in inspector
+            Calculated property id at load time
             </summary>
+        </member>
+        <member name="M:SOPRO.ShaderPropertyHolder.op_Implicit(SOPRO.ShaderPropertyHolder)~System.Int32">
+            <summary>
+            Converts to calculated property id value
+            </summary>
+            <param name="prop">property to convert</param>
+        </member>
+        <member name="M:SOPRO.ShaderPropertyHolder.op_Implicit(SOPRO.ShaderPropertyHolder)~System.String">
+            <summary>
+            Converts to property name value
+            </summary>
+            <param name="prop">property to convert</param>
+        </member>
+        <member name="T:SOPRO.Variables.ReferenceString">
+            <summary>
+            Class that holds a reference to a value
+            </summary>
+        </member>
+        <member name="P:SOPRO.Variables.ReferenceString.UseConstant">
+            <summary>
+            Determines whenever reference should use a given value or a Variable value
+            </summary>
+        </member>
+        <member name="P:SOPRO.Variables.ReferenceString.Variable">
+            <summary>
+            Variable currently stored
+            </summary>
+        </member>
+        <member name="P:SOPRO.Variables.ReferenceString.Value">
+            <summary>
+            Current value
+            </summary>
+        </member>
+        <member name="M:SOPRO.Variables.ReferenceString.#ctor">
+            <summary>
+            Construct a reference with default state
+            </summary>
+        </member>
+        <member name="M:SOPRO.Variables.ReferenceString.#ctor(System.String)">
+            <summary>
+            Construct reference given an initial value
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:SOPRO.Variables.ReferenceString.op_Implicit(SOPRO.Variables.ReferenceString)~System.String">
+            <summary>
+            Conversion between reference to underlying value
+            </summary>
+            <param name="reference">reference to convert</param>
+        </member>
+        <member name="T:SOPRO.Variables.SOVariableString">
+            <summary>
+            SO that holds a variable
+            </summary>
+        </member>
+        <member name="F:SOPRO.Variables.SOVariableString.Value">
+            <summary>
+            Value stored in the variable
+            </summary>
+        </member>
+        <member name="M:SOPRO.Variables.SOVariableString.SetValue(System.String)">
+            <summary>
+            Sets value to given value
+            </summary>
+            <param name="value">new value</param>
+        </member>
+        <member name="M:SOPRO.Variables.SOVariableString.SetValue(SOPRO.Variables.SOVariableString)">
+            <summary>
+            Sets value to given value
+            </summary>
+            <param name="value">new value</param>
+        </member>
+        <member name="M:SOPRO.Variables.SOVariableString.ApplyChange(System.String)">
+            <summary>
+            Increases value of given amount
+            </summary>
+            <param name="amount">increase amount</param>
+        </member>
+        <member name="M:SOPRO.Variables.SOVariableString.ApplyChange(SOPRO.Variables.SOVariableString)">
+            <summary>
+            Increases value of given amount
+            </summary>
+            <param name="amount">increase amount</param>
+        </member>
+        <member name="M:SOPRO.Variables.SOVariableString.op_Implicit(SOPRO.Variables.SOVariableString)~System.String">
+            <summary>
+            Conversion between variable to underlying value
+            </summary>
+            <param name="reference">variable to convert</param>
         </member>
     </members>
 </doc>

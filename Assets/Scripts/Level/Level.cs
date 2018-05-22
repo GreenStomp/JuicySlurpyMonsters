@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using SOPRO.Containers;
 [CreateAssetMenu(fileName = "Level", menuName = "Level/Level")]
 public class Level : ScriptableObject
 {
-    public PlatformPoolContainer platforms;
+    public SOListPoolPlatformContainer platforms;
 
 #if UNITY_EDITOR
     void OnDisable()

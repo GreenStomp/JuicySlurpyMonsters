@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System;
+using SOPRO;
+using SOPRO.Variables;
+using SOPRO.Events;
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class Coin : MonoBehaviour
 {
@@ -10,14 +13,14 @@ public class Coin : MonoBehaviour
     public LayerHolder MonsterLayer;
     public LayerHolder ObjDestroyerLayer;
 
-    public ReferenceInt Value;
+    public ReferenceInt CoinValue;
     public SOEvInt Event;
 
     public bool IsRecycled { get; private set; }
 
     public void Collected()
     {
-        this.Event.Raise(this.Value.Value);
+        this.Event.Raise(this.CoinValue.Value);
         this.Pool.Recycle(this);
     }
     void OnEnable()

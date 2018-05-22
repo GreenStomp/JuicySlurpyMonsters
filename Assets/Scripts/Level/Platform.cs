@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using SOPRO.Variables;
 public class Platform : MonoBehaviour
 {
     public ReferenceUint PlatformUniqueId;

@@ -1,5 +1,7 @@
 using UnityEditor;
 using UnityEngine;
+namespace SOPRO.Variables.Editor
+{
 	/// <summary>
     /// Class that displays properly a SOPRO.Reference on inspector
     /// </summary>
@@ -58,3 +60,4 @@ using UnityEngine;
             EditorGUI.EndProperty();
         }
     }
+}

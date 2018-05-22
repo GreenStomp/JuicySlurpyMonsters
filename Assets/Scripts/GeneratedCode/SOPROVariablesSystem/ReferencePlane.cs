@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+namespace SOPRO.Variables
+{
     /// <summary>
     /// Class that holds a reference to a value
     /// </summary>
@@ -59,3 +61,4 @@ using UnityEngine;
             return reference.Value;
         }
     }
+}
