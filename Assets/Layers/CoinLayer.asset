@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LayerName:
     useConstant: 1
-    constantValue: 
+    constantValue: Coin
     variable: {fileID: 0}
-  LayerIndex: 0
+  LayerIndex: 12

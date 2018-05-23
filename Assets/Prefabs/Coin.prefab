@@ -111,9 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b9102321397fa479bd1cf1242599e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinLayer: {fileID: 11400000, guid: 166ad3ea62e6c59409d7d214b9b3eb45, type: 2}
-  MonsterLayer: {fileID: 11400000, guid: 225979223df81d94cb688f5fed918041, type: 2}
-  ObjDestroyerLayer: {fileID: 11400000, guid: d361767025d5db74ba4f8e77d55b1d47, type: 2}
+  CoinLayer: {fileID: 11400000, guid: 7b7d4d48c6d05724b9869944e5206f05, type: 2}
+  MonsterLayer: {fileID: 11400000, guid: 10d5b1071ed4c83429756bb2e1de7738, type: 2}
+  ObjDestroyerLayer: {fileID: 11400000, guid: c4b40a94e7c51cc48bb8ab8d01b64d62, type: 2}
   CoinValue:
     useConstant: 1
     constantValue: 1
