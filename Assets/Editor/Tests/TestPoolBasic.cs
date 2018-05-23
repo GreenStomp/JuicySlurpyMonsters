@@ -3,128 +3,128 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 [Category("Pools")]
-[TestOf(typeof(PoolBasic<BezierCurve>))]
+[TestOf(typeof(PoolBasic<V3BezierCurve>))]
 public class TestPoolBasic
 {
     [TearDown]
     public void TearDownClearPool()
     {
-        PoolBasic<BezierCurve>.Clear();
+        PoolBasic<V3BezierCurve>.Clear();
     }
     [Test]
     public void TestGetNonNullStored()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve());
-        Assert.That(PoolBasic<BezierCurve>.Get(), Is.Not.Null);
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
+        Assert.That(PoolBasic<V3BezierCurve>.Get(), Is.Not.Null);
     }
     [Test]
     public void TestGetNonNullStoredRedLight()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve());
-        Assert.That(PoolBasic<BezierCurve>.Get(), !Is.Null);
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
+        Assert.That(PoolBasic<V3BezierCurve>.Get(), !Is.Null);
     }
     [Test]
     public void TestStoredCount()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve());
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.EqualTo(1));
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.EqualTo(1));
     }
     [Test]
     public void TestStoredCountRedLight()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve());
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.Not.EqualTo(0));
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.Not.EqualTo(0));
     }
     [Test]
     public void TestGetNonNullInstanciated()
     {
-        Assert.That(PoolBasic<BezierCurve>.Get(), Is.Not.Null);
+        Assert.That(PoolBasic<V3BezierCurve>.Get(), Is.Not.Null);
     }
     [Test]
     public void TestGetNonNullInstanciatedRedLight()
     {
-        Assert.That(PoolBasic<BezierCurve>.Get(), !Is.Null);
+        Assert.That(PoolBasic<V3BezierCurve>.Get(), !Is.Null);
     }
     [Test]
     public void TestGetValidInstanciated()
     {
-        Assert.That(PoolBasic<BezierCurve>.Get().ValidPoints, Is.EqualTo(BezierCurve.MinValidPoints));
+        Assert.That(PoolBasic<V3BezierCurve>.Get().ValidPoints, Is.EqualTo(V3BezierCurve.MinValidPoints));
     }
     [Test]
     public void TestGetValidInstanciatedRedLight()
     {
-        Assert.That(PoolBasic<BezierCurve>.Get().ValidPoints, Is.Not.EqualTo(0));
+        Assert.That(PoolBasic<V3BezierCurve>.Get().ValidPoints, Is.Not.EqualTo(0));
     }
     [Test]
     public void TestDifferenceStoredAndGetted()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve() { ValidPoints = 3 });
-        Assert.That(PoolBasic<BezierCurve>.Get().ValidPoints, Is.EqualTo(3));
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve() { ValidPoints = 3 });
+        Assert.That(PoolBasic<V3BezierCurve>.Get().ValidPoints, Is.EqualTo(3));
     }
     [Test]
     public void TestDifferenceStoredAndGettedRedLight()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve() { ValidPoints = 3 });
-        Assert.That(PoolBasic<BezierCurve>.Get().ValidPoints, Is.Not.EqualTo(BezierCurve.MinValidPoints));
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve() { ValidPoints = 3 });
+        Assert.That(PoolBasic<V3BezierCurve>.Get().ValidPoints, Is.Not.EqualTo(V3BezierCurve.MinValidPoints));
     }
     [Test]
     public void TestRecycleCountIncrease()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve());
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.EqualTo(1));
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.EqualTo(1));
     }
     [Test]
     public void TestRecycleCountIncreaseRedLight()
     {
-        PoolBasic<BezierCurve>.Recycle(new BezierCurve());
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.Not.EqualTo(0));
+        PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.Not.EqualTo(0));
     }
     [Test]
     public void TestClearCount()
     {
         for (int i = 0; i < 5; i++)
         {
-            PoolBasic<BezierCurve>.Recycle(new BezierCurve());
+            PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
         }
-        PoolBasic<BezierCurve>.Clear();
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.EqualTo(0));
+        PoolBasic<V3BezierCurve>.Clear();
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.EqualTo(0));
     }
     [Test]
     public void TestClearCountRedLight()
     {
         for (int i = 0; i < 5; i++)
         {
-            PoolBasic<BezierCurve>.Recycle(new BezierCurve());
+            PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
         }
-        PoolBasic<BezierCurve>.Clear();
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.Not.EqualTo(5));
+        PoolBasic<V3BezierCurve>.Clear();
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.Not.EqualTo(5));
     }
     [Test]
     public void TestClearCount2()
     {
         for (int i = 0; i < 5; i++)
         {
-            PoolBasic<BezierCurve>.Recycle(new BezierCurve());
+            PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
         }
-        PoolBasic<BezierCurve>.Clear((o) => { });
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.EqualTo(0));
+        PoolBasic<V3BezierCurve>.Clear((o) => { });
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.EqualTo(0));
     }
     [Test]
     public void TestClearCount2RedLight()
     {
         for (int i = 0; i < 5; i++)
         {
-            PoolBasic<BezierCurve>.Recycle(new BezierCurve());
+            PoolBasic<V3BezierCurve>.Recycle(new V3BezierCurve());
         }
-        PoolBasic<BezierCurve>.Clear((o) => { });
-        Assert.That(PoolBasic<BezierCurve>.ElementsStored, Is.Not.EqualTo(5));
+        PoolBasic<V3BezierCurve>.Clear((o) => { });
+        Assert.That(PoolBasic<V3BezierCurve>.ElementsStored, Is.Not.EqualTo(5));
     }
     [Test]
     public void TestClearOnDestroy()
     {
-        BezierCurve temp = new BezierCurve();
-        PoolBasic<BezierCurve>.Recycle(temp);
-        PoolBasic<BezierCurve>.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one, 2); });
+        V3BezierCurve temp = new V3BezierCurve();
+        PoolBasic<V3BezierCurve>.Recycle(temp);
+        PoolBasic<V3BezierCurve>.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one); });
         Assert.That(temp.Start.x, Is.EqualTo(100));
         Assert.That(temp.Start.y, Is.EqualTo(100));
         Assert.That(temp.Start.z, Is.EqualTo(100));
@@ -132,9 +132,9 @@ public class TestPoolBasic
     [Test]
     public void TestClearOnDestroyRedLight()
     {
-        BezierCurve temp = new BezierCurve();
-        PoolBasic<BezierCurve>.Recycle(temp);
-        PoolBasic<BezierCurve>.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one, 2); });
+        V3BezierCurve temp = new V3BezierCurve();
+        PoolBasic<V3BezierCurve>.Recycle(temp);
+        PoolBasic<V3BezierCurve>.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one); });
         Assert.That(temp.Start.x, Is.Not.EqualTo(1));
         Assert.That(temp.Start.y, Is.Not.EqualTo(1));
         Assert.That(temp.Start.z, Is.Not.EqualTo(1));

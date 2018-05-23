@@ -1,16 +1,18 @@
-﻿public class SpeedUp : SpecialPlatform
+﻿using UnityEngine;
+[CreateAssetMenu(fileName = "SpeedUp" , menuName = "Level/Platform/Special/SpeedUp")]
+public class SpeedUp : SpecialPlatform
 {
     public float SpeedMultiplier = 2f;
-    public override void OnEnter(PlatformManager.Step step)
+    public override void OnEnter(Transform entered, float currentPercentage)
     {
-        EntityStats user = step.Owner.GetComponent<EntityStats>();
+        EntityStats user = entered.GetComponent<EntityStats>();
         if (user != null)
             user.Speed *= SpeedMultiplier;
     }
-    public override void OnExit(PlatformManager.Step step)
+    public override void OnExit(Transform exited, float prevPercentage)
     {
     }
-    public override void OnStepTaken(PlatformManager.Step step, float prevPercentage)
+    public override void OnStepTaken(Transform walker, float currentPercentage, float prevPercentage)
     {
     }
 }

@@ -1,56 +1,23 @@
 ﻿using UnityEngine;
-public class PlayerController : SkillHolder
+using SOPRO.Variables;
+public class PlayerController : MonoBehaviour
 {
-    public float TotalDistanceWalked { get { return step.TotalDistanceWalked; } }
-    public uint TotalPlatformsPassed { get { return step.TotalPlatformsPassed; } }
-    public uint SpecialPlatformsPassed { get { return step.SpecialPlatformsPassed; } }
+    public ReferenceFloat MovementSpeed;
+    public ReferenceFloat SwitchLaneLerpSpeed;
 
-    public float SwipeSpeedMultiplier { get; set; }
+    public Step Step = new Step();
 
-    public string BaseLayerName = "Base Layer";
-    public string UpperBodyLayerName = "UpperBody";
-    public string SpeedParameter = "Speed";
-    public string HitParameter = "Hit";
-    public string IsDeadParameter = "IsDead";
-    public int BaseLayerIndex { get; private set; }
-    public int UpperBodyLayerIndex { get; private set; }
-    public int SpeedParameterHash { get; private set; }
-    public int HitParameterHash { get; private set; }
-    public int IsDeadParameterHash { get; private set; }
-    public Platform Current { get { return step.Current; } }
+    public Step.Data StepData = new Step.Data();
 
-    public override bool AreSkillsUsable
-    {
-        get { return false; }
-    }
-    private PlatformManager.Step step;
+    public MobileInput Input;
 
     private IState current;
 
-    //private Vector3 rootMotion;
-    //private Quaternion rootRotation;
-    private Vector3 newPosition;
+    private Transform myTransform;
 
-    private float swipePercentage;
-    private float targetPercentage;
-    private bool isLeftSwipe;
-
-    private int prevHealth;
-    private bool isDead = false;
-    protected override void Awake()
+    void Start()
     {
-        base.Awake();
-        SwipeSpeedMultiplier = 10f;
-    }
-    protected virtual void Start()
-    {
-        prevHealth = Stats.Health;
-
-        SpeedParameterHash = Animator.StringToHash(SpeedParameter);
-        HitParameterHash = Animator.StringToHash(HitParameter);
-        IsDeadParameterHash = Animator.StringToHash(IsDeadParameter);
-        //UpperBodyLayerIndex = Animator.GetLayerIndex(UpperBodyLayerName);
-        //BaseLayerIndex = Animator.GetLayerIndex(BaseLayerName);
+        myTransform = transform;
 
         Swiping swipe = new Swiping(this);
         Idle idle = new Idle(this);
@@ -62,69 +29,35 @@ public class PlayerController : SkillHolder
     }
     void Update()
     {
-        if (step == null)
-            step = new PlatformManager.Step(this.transform);
+        Step.CalculateNextStep(myTransform, Time.deltaTime * MovementSpeed.Value, StepData);
 
-        if (isDead)
-        {
-            //if (Animator.GetAnimatorTransitionInfo(BaseLayerIndex).IsUserName("CloseAnimator"))
-            //    Animator.enabled = false;
-            return;
-        }
+        Transform plat = StepData.Plat.transform;
 
-        step.CalculateNextStep(Time.deltaTime * Stats.Speed);
-
-        float lanes = step.Current.Lanes / 2;
-        swipePercentage = Mathf.Clamp(swipePercentage, -lanes, lanes);
-
-        this.transform.LookAt(step.TangentToCenter + this.transform.position, step.Up);
-
-        newPosition = step.Center + transform.right * swipePercentage * step.Current.DistanceBetweenLanes;
+        myTransform.LookAt(plat.TransformDirection(StepData.LocalForward) + myTransform.position, plat.TransformDirection(StepData.LocalUp));
 
         current = current.OnStateUpdate();
 
-        //Animator.SetFloat(SpeedParameterHash, Stats.Speed);
-
-        transform.position = newPosition;
-    }
-    void LateUpdate()
-    {
-        //if (prevHealth != Stats.Health)
-        //{
-        //    if (Stats.Health <= 0)
-        //    {
-        //        //Animator.SetTrigger(IsDeadParameterHash);
-        //        //Animator.SetFloat(SpeedParameterHash, 0f);
-        //        isDead = true;
-        //    }
-        //    else
-        //        Animator.SetTrigger(HitParameterHash);
-        //}
-
-        prevHealth = Stats.Health;
-    }
-    void OnAnimatorMove()
-    {
-        //rootMotion = Animator.deltaPosition;
-        //rootRotation = Animator.deltaRotation;
+        myTransform.position = plat.TransformPoint(StepData.LocalPosition);
     }
     private class Swiping : IState
     {
         private PlayerController owner;
-        public IState Idle { get; set; }
+        public IState Idle;
         public Swiping(PlayerController owner)
         {
             this.owner = owner;
         }
         public IState OnStateUpdate()
         {
-            float sign = owner.isLeftSwipe ? -1f : 1f;
+            Step.Data data = owner.StepData;
 
-            owner.swipePercentage += sign * Time.deltaTime * owner.SwipeSpeedMultiplier;
+            data.LaneLerpPercentage += Time.deltaTime * owner.SwitchLaneLerpSpeed.Value;
 
-            if ((sign < 0f && owner.swipePercentage <= owner.targetPercentage) || (sign > 0f && owner.swipePercentage >= owner.targetPercentage))
+            if (data.LaneLerpPercentage > 1f)
             {
-                owner.swipePercentage = owner.targetPercentage;
+                data.CurrentLane = data.DestinationLane;
+                data.IsSwitchingLanes = false;
+                data.LaneLerpPercentage = 0f;
                 return Idle;
             }
 
@@ -134,24 +67,28 @@ public class PlayerController : SkillHolder
     private class Idle : IState
     {
         private PlayerController owner;
-        public IState Swiping { get; set; }
+        public IState Swiping;
         public Idle(PlayerController owner)
         {
             this.owner = owner;
         }
         public IState OnStateUpdate()
         {
-            float lanes = owner.step.Current.Lanes / 2;
-            if (MobileInput.Instance.SwipeLeft && !Mathf.Approximately(-lanes, owner.swipePercentage))
+            Step.Data data = owner.StepData;
+            MobileInput input = this.owner.Input;
+
+            if (input.SwipeLeft && data.CurrentLane > 0)
             {
-                owner.isLeftSwipe = true;
-                owner.targetPercentage = owner.swipePercentage - 1f;
+                data.IsSwitchingLanes = true;
+                data.DestinationLane = data.CurrentLane - 1;
+                data.LaneLerpPercentage = 0f;
                 return Swiping;
             }
-            if (MobileInput.Instance.SwipeRight && !Mathf.Approximately(lanes, owner.swipePercentage))
+            else if (input.SwipeRight && data.CurrentLane < data.Plat.Lanes.Length)
             {
-                owner.isLeftSwipe = false;
-                owner.targetPercentage = owner.swipePercentage + 1f;
+                data.IsSwitchingLanes = true;
+                data.DestinationLane = data.CurrentLane + 1;
+                data.LaneLerpPercentage = 0f;
                 return Swiping;
             }
 

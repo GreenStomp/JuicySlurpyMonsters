@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-public abstract class SpecialPlatform : MonoBehaviour
+public abstract class SpecialPlatform : ScriptableObject
 {
-    public abstract void OnEnter(PlatformManager.Step step);
-    public abstract void OnExit(PlatformManager.Step step);
-    public abstract void OnStepTaken(PlatformManager.Step step, float prevPercentage);
+    public abstract void OnEnter(Transform entered , float currentPercentage);
+    public abstract void OnExit(Transform exited, float prevPrecentage);
+    public abstract void OnStepTaken(Transform walker, float currentPercentage, float prevPercentage);
 }

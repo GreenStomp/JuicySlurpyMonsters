@@ -1,19 +1,21 @@
-﻿public class GradualSpeedDown : SpecialPlatform
+﻿using UnityEngine;
+[CreateAssetMenu(fileName = "GradualSpeedDown", menuName = "Level/Platform/Special/GradualSpeedDown")]
+public class GradualSpeedDown : SpecialPlatform
 {
     public float SpeedDecrement = 20f;
-    public override void OnEnter(PlatformManager.Step step)
+    public override void OnEnter(Transform entered, float currentPercentage)
     {
     }
-    public override void OnExit(PlatformManager.Step step)
+    public override void OnExit(Transform exited, float prevPrecentage)
     {
-        EntityStats user = step.Owner.GetComponent<EntityStats>();
+        EntityStats user = exited.GetComponent<EntityStats>();
         if (user != null)
-            user.Speed -= (1f - step.Percentage) * SpeedDecrement;
+            user.Speed -= (1f - prevPrecentage) * SpeedDecrement;
     }
-    public override void OnStepTaken(PlatformManager.Step step, float prevPercentage)
+    public override void OnStepTaken(Transform walker, float currentPercentage, float prevPercentage)
     {
-        EntityStats user = step.Owner.GetComponent<EntityStats>();
+        EntityStats user = walker.GetComponent<EntityStats>();
         if (user != null)
-            user.Speed -= (step.Percentage - prevPercentage) * SpeedDecrement;
+            user.Speed -= (currentPercentage - prevPercentage) * SpeedDecrement;
     }
 }
