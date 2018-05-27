@@ -103,6 +103,10 @@ public static class Utils
         return x;
     }
     #endregion
+    public static bool IsApproximatelyEqualTo(this Vector3 first , Vector3 other)
+    {
+        return Mathf.Approximately(first.x, other.x) && Mathf.Approximately(first.y, other.y) && Mathf.Approximately(first.z, other.z);
+    }
     /// <summary>
     /// Algorithm used to calculate 2 control points of a Bezier curve given start + 2 point on curve + end + t1 and t2 values relative to the 2 known points
     /// </summary>
