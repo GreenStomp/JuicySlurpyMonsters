@@ -79,7 +79,7 @@ public class Step
             data.CurrentLane = data.Plat.Lanes.Length / 2;
             data.DestinationLane = data.CurrentLane;
             Lane lane = data.Plat.Lanes[data.CurrentLane];
-            data.LocalForward = lane.StartLocalDirection.Value;
+            data.LocalForward = lane.StartLocalDirection;
             data.IsSwitchingLanes = false;
             data.LaneLerpPercentage = 0f;
             data.Percentage = 0f;
