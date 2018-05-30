@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
                 data.LaneLerpPercentage = 0f;
                 return Swiping;
             }
-            else if (input.SwipeRight && data.CurrentLane < data.Plat.Lanes.Length)
+            else if (input.SwipeRight && data.CurrentLane < data.Plat.Lanes.Length - 1)
             {
                 data.IsSwitchingLanes = true;
                 data.DestinationLane = data.CurrentLane + 1;
