@@ -47,7 +47,7 @@ public class PlatformManager : ScriptableObject
             tuple.Item2.Recycle(tuple.Item1);
 
             //Prendo un nuovo platform date quelle richieste o dato normalPrefabID
-            tuple.Item2 = currentLevel.platforms.Elements[0];
+            tuple.Item2 = currentLevel.platforms.Elements[UnityEngine.Random.Range(0, currentLevel.platforms.Elements.Count)];
             tuple.Item1 = tuple.Item2.DirectGet();
             tuple.Item1.Reposition(lastPlatform);
             tuple.Item1.gameObject.SetActive(true);
@@ -91,7 +91,7 @@ public class PlatformManager : ScriptableObject
 
         while (platforms.Count < activePlat)
         {
-            int index = UnityEngine.Random.Range(0, poolsLength - 1);
+            int index = UnityEngine.Random.Range(0, poolsLength);
             Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
             tuple.Item2 = currentLevel.platforms.Elements[index];
             tuple.Item1 = tuple.Item2.DirectGet();
@@ -178,7 +178,7 @@ public class PlatformManager : ScriptableObject
 
         while (platforms.Count < activePlat)
         {
-            int index = UnityEngine.Random.Range(0, poolsLength - 1);
+            int index = UnityEngine.Random.Range(0, poolsLength);
             Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
             tuple.Item2 = currentLevel.platforms.Elements[index];
             tuple.Item1 = tuple.Item2.DirectGet();
