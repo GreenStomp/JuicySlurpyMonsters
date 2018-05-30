@@ -2,6 +2,7 @@
 using UnityEngine;
 using SOPRO.Variables;
 using SOPRO.Events;
+using SOPRO;
 [CreateAssetMenu(fileName = "PlatManager", menuName = "Level/Platform/Manager")]
 public class PlatformManager : ScriptableObject
 {
@@ -26,7 +27,7 @@ public class PlatformManager : ScriptableObject
     public SOEvPlatform PlatformSpawned;
     public ReferenceInt MaxActivePlatforms;
 
-    private Queue<Tuple<Platform, PoolPlatform>> platforms;
+    private Queue<Tuple<Platform, SOPool>> platforms;
 
     private Level currentLevel;
     private Platform firstPlatform;
@@ -41,14 +42,14 @@ public class PlatformManager : ScriptableObject
             platformsSurpassed++;
 
             //prendo l'elemento da riciclare
-            Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
+            Tuple<Platform, SOPool> tuple = platforms.Dequeue();
 
             //Riciclo l'elemento che ha superato la camera
-            tuple.Item2.Recycle(tuple.Item1);
+            tuple.Item2.Recycle(tuple.Item1.gameObject);
 
             //Prendo un nuovo platform date quelle richieste o dato normalPrefabID
-            tuple.Item2 = currentLevel.platforms.Elements[UnityEngine.Random.Range(0, currentLevel.platforms.Elements.Count)];
-            tuple.Item1 = tuple.Item2.DirectGet();
+            tuple.Item2 = currentLevel.platforms[UnityEngine.Random.Range(0, currentLevel.platforms.Count)];
+            tuple.Item1 = tuple.Item2.DirectGet().GetComponent<Platform>();
             tuple.Item1.Reposition(lastPlatform);
             tuple.Item1.gameObject.SetActive(true);
 
@@ -71,30 +72,30 @@ public class PlatformManager : ScriptableObject
         {
             while (platforms.Count > 0)
             {
-                Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
-                tuple.Item2.Recycle(tuple.Item1);
+                Tuple<Platform, SOPool> tuple = platforms.Dequeue();
+                tuple.Item2.Recycle(tuple.Item1.gameObject);
                 tuple.Item1 = null;
                 tuple.Item2 = null;
-                PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+                PoolBasic<Tuple<Platform, SOPool>>.Recycle(tuple);
             }
         }
         else
         {
-            platforms = new Queue<Tuple<Platform, PoolPlatform>>(activePlat);
+            platforms = new Queue<Tuple<Platform, SOPool>>(activePlat);
         }
 
         firstPlatform = null;
         lastPlatform = null;
 
 
-        int poolsLength = currentLevel.platforms.Elements.Count;
+        int poolsLength = currentLevel.platforms.Count;
 
         while (platforms.Count < activePlat)
         {
             int index = UnityEngine.Random.Range(0, poolsLength);
-            Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
-            tuple.Item2 = currentLevel.platforms.Elements[index];
-            tuple.Item1 = tuple.Item2.DirectGet();
+            Tuple<Platform, SOPool> tuple = PoolBasic<Tuple<Platform, SOPool>>.Get();
+            tuple.Item2 = currentLevel.platforms[index];
+            tuple.Item1 = tuple.Item2.DirectGet().GetComponent<Platform>();
 
             if (!firstPlatform)
             {
@@ -122,19 +123,19 @@ public class PlatformManager : ScriptableObject
         {
             while (platforms.Count > 0)
             {
-                Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
-                tuple.Item2.Recycle(tuple.Item1);
+                Tuple<Platform, SOPool> tuple = platforms.Dequeue();
+                tuple.Item2.Recycle(tuple.Item1.gameObject);
                 tuple.Item1 = null;
                 tuple.Item2 = null;
-                PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+                PoolBasic<Tuple<Platform, SOPool>>.Recycle(tuple);
             }
         }
 
         if (clearPools)
         {
-            for (int i = 0; i < currentLevel.platforms.Elements.Count; i++)
+            for (int i = 0; i < currentLevel.platforms.Count; i++)
             {
-                currentLevel.platforms.Elements[i].Clear();
+                currentLevel.platforms[i].Clear();
             }
         }
     }
@@ -148,11 +149,11 @@ public class PlatformManager : ScriptableObject
             {
                 while (platforms.Count > 0)
                 {
-                    Tuple<Platform, PoolPlatform> tuple = platforms.Dequeue();
-                    tuple.Item2.Recycle(tuple.Item1);
+                    Tuple<Platform, SOPool> tuple = platforms.Dequeue();
+                    tuple.Item2.Recycle(tuple.Item1.gameObject);
                     tuple.Item1 = null;
                     tuple.Item2 = null;
-                    PoolBasic<Tuple<Platform, PoolPlatform>>.Recycle(tuple);
+                    PoolBasic<Tuple<Platform, SOPool>>.Recycle(tuple);
                 }
                 firstPlatform = null;
                 lastPlatform = null;
@@ -160,28 +161,28 @@ public class PlatformManager : ScriptableObject
         }
         else
         {
-            platforms = new Queue<Tuple<Platform, PoolPlatform>>(activePlat);
+            platforms = new Queue<Tuple<Platform, SOPool>>(activePlat);
         }
 
 
         if (clearPreviousLevelPools && currentLevel)
         {
-            for (int i = 0; i < currentLevel.platforms.Elements.Count; i++)
+            for (int i = 0; i < currentLevel.platforms.Count; i++)
             {
-                currentLevel.platforms.Elements[i].Clear();
+                currentLevel.platforms[i].Clear();
             }
         }
 
         currentLevel = newLevel;
 
-        int poolsLength = currentLevel.platforms.Elements.Count;
+        int poolsLength = currentLevel.platforms.Count;
 
         while (platforms.Count < activePlat)
         {
             int index = UnityEngine.Random.Range(0, poolsLength);
-            Tuple<Platform, PoolPlatform> tuple = PoolBasic<Tuple<Platform, PoolPlatform>>.Get();
-            tuple.Item2 = currentLevel.platforms.Elements[index];
-            tuple.Item1 = tuple.Item2.DirectGet();
+            Tuple<Platform, SOPool> tuple = PoolBasic<Tuple<Platform, SOPool>>.Get();
+            tuple.Item2 = currentLevel.platforms[index];
+            tuple.Item1 = tuple.Item2.DirectGet().GetComponent<Platform>();
 
             if (!firstPlatform)
             {

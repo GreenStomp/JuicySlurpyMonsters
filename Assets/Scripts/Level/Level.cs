@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using SOPRO.Containers;
+using SOPRO;
 [CreateAssetMenu(fileName = "Level", menuName = "Level/Level")]
 public class Level : ScriptableObject
 {
-    public SOListPoolPlatformContainer platforms;
+    public List<SOPool> platforms;
 
 #if UNITY_EDITOR
     void OnDisable()
@@ -12,16 +12,16 @@ public class Level : ScriptableObject
         if (platforms == null)
             return;
 
-        List<PoolPlatform> pools = new List<PoolPlatform>();
-        for (int i = 0; i < platforms.Elements.Count; i++)
+        List<SOPool> pools = new List<SOPool>();
+        for (int i = 0; i < platforms.Count; i++)
         {
-            PoolPlatform p = platforms.Elements[i];
+            SOPool p = platforms[i];
             if (p != null)
             {
                 bool unique = true;
                 for (int j = 0; j < pools.Count; j++)
                 {
-                    PoolPlatform other = pools[j];
+                    SOPool other = pools[j];
                     if (other == p || other.Prefab.gameObject == p.Prefab.gameObject)
                         unique = false;
                 }
@@ -29,7 +29,7 @@ public class Level : ScriptableObject
                     pools.Add(p);
             }
         }
-        platforms.Elements = pools;
+        platforms = pools;
     }
 #endif
 }

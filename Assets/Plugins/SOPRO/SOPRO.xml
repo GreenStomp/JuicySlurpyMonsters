@@ -85,6 +85,115 @@
             </summary>
             <param name="prop">property to convert</param>
         </member>
+        <member name="T:SOPRO.SOPool">
+            <summary>
+            Gameobject pool
+            </summary>
+        </member>
+        <member name="P:SOPRO.SOPool.ElementsStored">
+            <summary>
+            Number of elements stored in the pool
+            </summary>
+        </member>
+        <member name="F:SOPRO.SOPool.Prefab">
+            <summary>
+            Prefab instance used by this pool
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOPool.Recycle(UnityEngine.GameObject)">
+            <summary>
+            Recycles the given instance
+            </summary>
+            <param name="toRecycle">object to recycle</param>
+        </member>
+        <member name="M:SOPRO.SOPool.DirectRecycle(UnityEngine.GameObject)">
+            <summary>
+            Recycles the given instance. No further action will be performed on the object
+            </summary>
+            <param name="toRecycle">object to recycle</param>
+        </member>
+        <member name="M:SOPRO.SOPool.Recycle(UnityEngine.GameObject,System.Action{UnityEngine.GameObject})">
+            <summary>
+            Recycles the given instance
+            </summary>
+            <param name="toRecycle">object to recycle</param>
+            <param name="onRecycle">action called on element after deactivation</param>
+        </member>
+        <member name="M:SOPRO.SOPool.Get(System.Action{UnityEngine.GameObject})">
+            <summary>
+            Requests an element from the pool.
+            </summary>
+            <param name="onGet">action called on element before activation</param>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.Get">
+            <summary>
+            Requests an element from the pool.
+            </summary>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.DirectGet">
+            <summary>
+            Requests an element from the pool. No further action will be performed on the object
+            </summary>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.Get(UnityEngine.Transform,System.Action{UnityEngine.GameObject})">
+            <summary>
+            Requests an element from the pool.
+            </summary>
+            <param name="parent">transform to use as the requested element parent. Used only on instantiated elements</param>
+            <param name="onGet">action called on element before activation</param>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.Get(UnityEngine.Transform)">
+            <summary>
+            Requests an element from the pool.
+            </summary>
+            <param name="parent">transform to use as the requested element parent. Used only on instantiated elements</param>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.Get(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion,System.Action{UnityEngine.GameObject})">
+            <summary>
+            Requests an element from the pool.
+            </summary>
+            <param name="parent">transform to use as the requested element parent. Used only on instantiated elements</param>
+            <param name="position">object position</param>
+            <param name="rotation">object rotation</param>
+            <param name="onGet">action called on element before activation</param>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.Get(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion)">
+            <summary>
+            Requests an element from the pool.
+            </summary>
+            <param name="parent">transform to use as the requested element parent. Used only on instantiated elements</param>
+            <param name="position">object position</param>
+            <param name="rotation">object rotation</param>
+            <returns>the requested element instance</returns>
+        </member>
+        <member name="M:SOPRO.SOPool.Clear(System.Action{UnityEngine.GameObject})">
+            <summary>
+            Clears the pool invoking an action on each element
+            </summary>
+            <param name="onDestroy">action invoked on each element in the pool</param>
+        </member>
+        <member name="M:SOPRO.SOPool.Clear">
+            <summary>
+            Clears the pool invoking an action on each element
+            </summary>
+        </member>
+        <member name="M:SOPRO.SOPool.ReSize(System.UInt32,System.Action{UnityEngine.GameObject},UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion,System.Action{UnityEngine.GameObject})">
+            <summary>
+            Resizes the pool to the given length, invoking an action on each destroyed element (if there are any) and each created element (if there are any)
+            </summary>
+            <param name="onDestroy">action invoked on each destroyed element in the pool</param>
+            <param name="parent">transform to use as the requested element parent. Used only on instantiated elements</param>
+            <param name="position">object position</param>
+            <param name="rotation">object rotation</param>
+            <param name="onRecycle">action called on element after deactivation</param>
+            <param name="value">target length</param>
+        </member>
         <member name="T:SOPRO.Variables.ReferenceString">
             <summary>
             Class that holds a reference to a value
