@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
         myTransform.LookAt(plat.TransformDirection(StepData.LocalForward) + myTransform.position, plat.TransformDirection(StepData.LocalUp));
 
-        current = current.OnStateUpdate();
+        //current = current.OnStateUpdate();
 
         myTransform.position = plat.TransformPoint(StepData.LocalPosition);
     }

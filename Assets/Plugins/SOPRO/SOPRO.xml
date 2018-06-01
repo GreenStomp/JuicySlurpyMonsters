@@ -58,6 +58,33 @@
             </summary>
             <param name="layer">layer to convert</param>
         </member>
+        <member name="T:SOPRO.LayerMaskHolder">
+            <summary>
+            Class that holds a set of layers and calculates its index at Editor time
+            </summary>
+        </member>
+        <member name="F:SOPRO.LayerMaskHolder.LayerMask">
+            <summary>
+            Layer mask
+            </summary>
+        </member>
+        <member name="F:SOPRO.LayerMaskHolder.LayerMaskIndex">
+            <summary>
+            Layer mask index calculated at Editor time
+            </summary>
+        </member>
+        <member name="M:SOPRO.LayerMaskHolder.op_Implicit(SOPRO.LayerMaskHolder)~System.Int32">
+            <summary>
+            Converts to calculated layer index value
+            </summary>
+            <param name="layer">layer to convert</param>
+        </member>
+        <member name="M:SOPRO.LayerMaskHolder.op_Implicit(SOPRO.LayerMaskHolder)~UnityEngine.LayerMask">
+            <summary>
+            Converts to layer mask
+            </summary>
+            <param name="layer">layer to convert</param>
+        </member>
         <member name="T:SOPRO.ShaderPropertyHolder">
             <summary>
             Class that holds a shader property name and calculates its id value at load time
