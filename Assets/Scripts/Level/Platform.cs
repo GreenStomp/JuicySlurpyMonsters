@@ -5,14 +5,11 @@ public class Platform : MonoBehaviour
 {
     public ReferenceUint PlatformUniqueId;
 
-    public RenderingData SidesRendering;
-    public RenderingData PlatformRendering;
-
     public Lane[] Lanes;
     public SpecialPlatform SpecialEffect;
 
-    public ReferenceVector3 StartLocalUp;
-    public ReferenceVector3 EndLocalUp;
+    public Vector3 StartLocalUp = Vector3.up;
+    public Vector3 EndLocalUp = Vector3.up;
 
     [NonSerialized]
     public Platform Next;

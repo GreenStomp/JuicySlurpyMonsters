@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1540768229444282}
+  m_RootGameObject: {fileID: 1810912553546742}
   m_IsPrefabParent: 1
---- !u!1 &1178615448482664
+--- !u!1 &1309773329141686
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4224786329007142}
-  - component: {fileID: 23261917374155736}
-  - component: {fileID: 33771218849448720}
+  - component: {fileID: 4683785730445436}
+  - component: {fileID: 23174291244576984}
+  - component: {fileID: 33831749695084026}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -28,15 +28,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1540768229444282
+--- !u!1 &1810912553546742
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4704475617169670}
-  - component: {fileID: 114413980116326156}
+  - component: {fileID: 4838160814516176}
+  - component: {fileID: 114066367346843132}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -44,39 +44,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4224786329007142
+--- !u!4 &4683785730445436
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1178615448482664}
+  m_GameObject: {fileID: 1309773329141686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalPosition: {x: 0, y: -0.5, z: 40}
   m_LocalScale: {x: 10, y: 1, z: 80}
   m_Children: []
-  m_Father: {fileID: 4704475617169670}
+  m_Father: {fileID: 4838160814516176}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4704475617169670
+--- !u!4 &4838160814516176
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540768229444282}
+  m_GameObject: {fileID: 1810912553546742}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4224786329007142}
+  - {fileID: 4683785730445436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23261917374155736
+--- !u!23 &23174291244576984
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1178615448482664}
+  m_GameObject: {fileID: 1309773329141686}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -105,38 +105,30 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33771218849448720
+--- !u!33 &33831749695084026
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1178615448482664}
+  m_GameObject: {fileID: 1309773329141686}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114413980116326156
+--- !u!114 &114066367346843132
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1540768229444282}
+  m_GameObject: {fileID: 1810912553546742}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 291b9daff981f4248a7dd32d79feeada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlatformUniqueId:
-    useConstant: 1
+    UseConstant: 1
+    Variable: {fileID: 0}
     constantValue: 0
-    variable: {fileID: 0}
-  SidesRendering: {fileID: 0}
-  PlatformRendering: {fileID: 0}
   Lanes:
-  - {fileID: 11400000, guid: a31e6073a63bc6a4aa10cfe7a499a790, type: 2}
+  - {fileID: 11400000, guid: 81fd22223f1107841b76efc9872262f8, type: 2}
   SpecialEffect: {fileID: 0}
-  StartLocalUp:
-    useConstant: 1
-    constantValue: {x: 0, y: 1, z: 0}
-    variable: {fileID: 0}
-  EndLocalUp:
-    useConstant: 1
-    constantValue: {x: 0, y: 1, z: 0}
-    variable: {fileID: 0}
+  StartLocalUp: {x: 0, y: 1, z: 0}
+  EndLocalUp: {x: 0, y: 1, z: 0}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -649,8 +649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720868c0602cfa64087d4e0ba43c1c91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Plane: {fileID: 11400000, guid: e93dd90be3928d444a500d28c82a3bd4, type: 2}
-  Point: {fileID: 11400000, guid: 3ebd565cff0ba8a45b8926cbea54dd4d, type: 2}
+  planeSide: {fileID: 11400000, guid: de597ff3e97f7a14f8289911ce48ae52, type: 2}
+  myTransform: {fileID: 1812859535}
 --- !u!114 &1812859537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,13 +663,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed:
-    useConstant: 1
+    UseConstant: 1
+    Variable: {fileID: 0}
     constantValue: 10
-    variable: {fileID: 0}
   SwitchLaneLerpSpeed:
-    useConstant: 1
+    UseConstant: 1
+    Variable: {fileID: 0}
     constantValue: 0.5
-    variable: {fileID: 0}
   Step:
     Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
     TotalDistanceWalked: {fileID: 11400000, guid: 4166dc8c14c04814c99ce8e7f2b85d41,

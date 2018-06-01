@@ -53,16 +53,16 @@ public class Step
     {
         Reset(data, false, false);
 
-        if (data.IsSwitchingLanes && data.CurrentLane == data.DestinationLane)
-        {
-            data.IsSwitchingLanes = false;
-            data.LaneLerpPercentage = 0f;
-        }
+        //if (data.IsSwitchingLanes && data.CurrentLane == data.DestinationLane)
+        //{
+        //    data.IsSwitchingLanes = false;
+        //    data.LaneLerpPercentage = 0f;
+        //}
 
-        if (data.IsSwitchingLanes)
-            SwitchingLaneNextStep(walker, totalMovement, data);
-        else
-            NormalNextStep(walker, totalMovement, data);
+        //if (data.IsSwitchingLanes)
+        //    SwitchingLaneNextStep(walker, totalMovement, data);
+        //else
+        NormalNextStep(walker, totalMovement, data);
     }
     /// <summary>
     /// Resets values of Step

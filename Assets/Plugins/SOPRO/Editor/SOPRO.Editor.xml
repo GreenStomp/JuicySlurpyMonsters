@@ -1119,18 +1119,5 @@
             Generates scripts for SO var system
             </summary>
         </member>
-        <member name="T:SOPRO.Variables.Editor.ReferenceStringDrawer">
-            <summary>
-            Class that displays properly a SOPRO.Reference on inspector
-            </summary>
-        </member>
-        <member name="F:SOPRO.Variables.Editor.ReferenceStringDrawer.popupOptions">
-            <summary>
-            Options to display in the popup to select constant or variable.
-            </summary>
-        </member>
-        <member name="F:SOPRO.Variables.Editor.ReferenceStringDrawer.popupStyle">
-            <summary> Cached style to use to draw the popup button. </summary>
-        </member>
     </members>
 </doc>

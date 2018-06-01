@@ -22,8 +22,7 @@ public class PlatformManager : ScriptableObject
             }
         }
     }
-    public SOVariablePlane DeathPlane;
-    public SOVariableVector3 DeathPoint;
+    public PlaneSide DeathPlane;
     public SOEvPlatform PlatformSpawned;
     public ReferenceInt MaxActivePlatforms;
 
@@ -37,7 +36,7 @@ public class PlatformManager : ScriptableObject
     public void UpdateActivePlatforms()
     {
         //controllo se il primo elemento della coda abbia superato la camera, in caso affermativo verrà rimosso
-        while (DeathPlane.Value.SameSide(firstPlatform.MiddleLaneEndPos, DeathPoint.Value))
+        while (DeathPlane.Plane.SameSide(firstPlatform.MiddleLaneEndPos, DeathPlane.Point))
         {
             platformsSurpassed++;
 
