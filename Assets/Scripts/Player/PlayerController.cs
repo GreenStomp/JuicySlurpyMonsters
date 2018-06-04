@@ -4,7 +4,6 @@ public class PlayerController : MonoBehaviour
 {
     public ReferenceFloat MovementSpeed;
     public ReferenceFloat SwitchLaneLerpSpeed;
-    public ReferenceFloat DEBUG_ResetCount;
 
     public Step Step = new Step();
 
@@ -28,16 +27,11 @@ public class PlayerController : MonoBehaviour
 
         current = idle;
 
-        DEBUG_ResetCount.Value = 0;
         Step.Reset(StepData);
     }
     void Update()
     {
-        if (StepData.Plat == null)
-        {
-            Step.Reset(StepData, false, false);
-        }
-        DEBUG_ResetCount.Value = Step.CalculateNextStep(myTransform, Time.deltaTime * MovementSpeed.Value, StepData) ? DEBUG_ResetCount.Value + 1.0000001f : DEBUG_ResetCount.Value;
+        Step.CalculateNextStep(myTransform, MovementSpeed * Time.deltaTime, StepData);
 
         Transform plat = StepData.Plat.transform;
 
