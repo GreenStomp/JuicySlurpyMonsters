@@ -1,25 +1,30 @@
 ﻿using UnityEngine;
+using System;
 using SOPRO.Variables;
 public class Platform : MonoBehaviour
 {
     public ReferenceUint PlatformUniqueId;
 
-    public RenderingData SidesRendering;
-    public RenderingData PlatformRendering;
-
     public Lane[] Lanes;
     public SpecialPlatform SpecialEffect;
 
-    public ReferenceVector3 StartLocalUp;
-    public ReferenceVector3 EndLocalUp;
+    public Vector3 StartLocalUp = Vector3.up;
+    public Vector3 EndLocalUp = Vector3.up;
 
+    [NonSerialized]
     public Platform Next;
 
+    [NonSerialized]
     public Vector3 MiddleLaneEndPos;
+    [NonSerialized]
     public Vector3 MiddleLaneStartPos;
+    [NonSerialized]
     public Vector3 MiddleLaneStartUp;
+    [NonSerialized]
     public Vector3 MiddleLaneEndDir;
+    [NonSerialized]
     public Vector3 MiddleLaneEndUp;
+    [NonSerialized]
     public Vector3 MiddleLaneStartDir;
 
     private Transform myTransform;
@@ -47,10 +52,10 @@ public class Platform : MonoBehaviour
     public void UpdateMiddleLaneV3s()
     {
         Lane lane = Lanes[Lanes.Length / 2];
-        MiddleLaneEndPos = myTransform.TransformPoint(lane.EndLocalPosition.Value);
-        MiddleLaneStartPos = myTransform.TransformPoint(lane.StartLocalPosition.Value);
-        MiddleLaneEndDir = myTransform.TransformDirection(lane.EndLocalDirection.Value);
-        MiddleLaneStartDir = myTransform.TransformDirection(lane.StartLocalDirection.Value);
+        MiddleLaneEndPos = myTransform.TransformPoint(lane.EndLocalPosition);
+        MiddleLaneStartPos = myTransform.TransformPoint(lane.StartLocalPosition);
+        MiddleLaneEndDir = myTransform.TransformDirection(lane.EndLocalDirection);
+        MiddleLaneStartDir = myTransform.TransformDirection(lane.StartLocalDirection);
         MiddleLaneEndUp = myTransform.TransformDirection(EndLocalUp);
         MiddleLaneStartUp = myTransform.TransformDirection(StartLocalUp);
     }

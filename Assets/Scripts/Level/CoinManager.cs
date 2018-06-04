@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using SOPRO.Containers;
+using SOPRO;
 /// <summary>
 /// Class that holdes Coin pools and spawn logic
 /// </summary>
@@ -10,7 +10,7 @@ public class CoinManager : ScriptableObject
     /// <summary>
     /// Pools used to spawn coins
     /// </summary>
-    public PoolCoin[] CoinPools = new PoolCoin[0];
+    public SOPool[] CoinPools = new SOPool[0];
 
     /// <summary>
     /// Spawns a set of coins
@@ -19,7 +19,7 @@ public class CoinManager : ScriptableObject
     /// <param name="maxCount">max number of coins to spawn</param>
     /// <param name="coinCount">effective number of coins spawned</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
-    public void SpawnCoins(SOListVector3Container positions, int maxCount, out int coinCount, int poolIndex = -1)
+    public void SpawnCoins(List<Vector3> positions, int maxCount, out int coinCount, int poolIndex = -1)
     {
         coinCount = 0;
         if (CoinPools.Length == 0)
@@ -27,15 +27,15 @@ public class CoinManager : ScriptableObject
 
         int index = poolIndex < 0 ? Random.Range(0, CoinPools.Length - 1) : poolIndex;
 
-        PoolCoin pool = CoinPools[index];
+        SOPool pool = CoinPools[index];
 
-        coinCount = Mathf.Min(positions.Elements.Count, maxCount);
+        coinCount = Mathf.Min(positions.Count, maxCount);
 
         for (int i = 0; i < coinCount; i++)
         {
-            Coin c = pool.Get();
+            Coin c = pool.Get().GetComponent<Coin>();
             c.Pool = pool;
-            c.transform.position = positions.Elements[i];
+            c.transform.position = positions[i];
         }
     }
     /// <summary>
@@ -47,7 +47,7 @@ public class CoinManager : ScriptableObject
     /// <param name="spawnedCoinsStartIndex">array start index</param>
     /// <param name="coinCount">effective number of coins spawned</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
-    public void SpawnCoins(SOListVector3Container positions, int maxCount, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, out int coinCount, int poolIndex = -1)
+    public void SpawnCoins(List<Vector3> positions, int maxCount, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, out int coinCount, int poolIndex = -1)
     {
         coinCount = 0;
         if (CoinPools.Length == 0 || spawnedCoins == null)
@@ -55,15 +55,15 @@ public class CoinManager : ScriptableObject
 
         int index = poolIndex < 0 ? Random.Range(0, CoinPools.Length - 1) : poolIndex;
 
-        PoolCoin pool = CoinPools[index];
+        SOPool pool = CoinPools[index];
 
-        coinCount = Mathf.Min(Mathf.Min(positions.Elements.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex), maxCount);
+        coinCount = Mathf.Min(Mathf.Min(positions.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex), maxCount);
 
         for (int i = 0; i < coinCount; i++)
         {
-            Coin c = pool.Get();
+            Coin c = pool.Get().GetComponent<Coin>();
             c.Pool = pool;
-            c.transform.position = positions.Elements[i];
+            c.transform.position = positions[i];
             spawnedCoins[i + (int)spawnedCoinsStartIndex] = c;
         }
     }
@@ -75,18 +75,18 @@ public class CoinManager : ScriptableObject
     /// <param name="spawnsPerFrame">Number of coins to spawn per frame</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
     /// <returns>enumerator holding the total number of coins that will be spawned</returns>
-    public IEnumerator<int> SpawnCoinsCoroutine(SOListVector3Container positions, int maxCount, int spawnsPerFrame, int poolIndex = -1)
+    public IEnumerator<int> SpawnCoinsCoroutine(List<Vector3> positions, int maxCount, int spawnsPerFrame, int poolIndex = -1)
     {
         if (CoinPools.Length == 0 || spawnsPerFrame <= 0)
             yield break;
 
         int index = poolIndex < 0 ? Random.Range(0, CoinPools.Length - 1) : poolIndex;
 
-        PoolCoin pool = CoinPools[index];
+        SOPool pool = CoinPools[index];
 
         int j = spawnsPerFrame;
 
-        int length = Mathf.Min(positions.Elements.Count, maxCount);
+        int length = Mathf.Min(positions.Count, maxCount);
 
         for (int i = 0; i < length; i++, j--)
         {
@@ -96,9 +96,9 @@ public class CoinManager : ScriptableObject
                 yield return length;
             }
 
-            Coin c = pool.Get();
+            Coin c = pool.Get().GetComponent<Coin>();
             c.Pool = pool;
-            c.transform.position = positions.Elements[i];
+            c.transform.position = positions[i];
         }
     }
     /// <summary>
@@ -111,18 +111,18 @@ public class CoinManager : ScriptableObject
     /// <param name="spawnedCoinsStartIndex">array start index</param>
     /// <param name="poolIndex">pool index used. If negative index will be chosen randomly</param>
     /// <returns>enumerator holding the total number of coins that will be spawned</returns>
-    public IEnumerator<int> SpawnCoinsCoroutine(SOListVector3Container positions, int maxCount, int spawnsPerFrame, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, int poolIndex = -1)
+    public IEnumerator<int> SpawnCoinsCoroutine(List<Vector3> positions, int maxCount, int spawnsPerFrame, Coin[] spawnedCoins, uint spawnedCoinsStartIndex, int poolIndex = -1)
     {
         if (CoinPools.Length == 0 || spawnsPerFrame <= 0 || spawnedCoins == null)
             yield break;
 
         int index = poolIndex < 0 ? Random.Range(0, CoinPools.Length - 1) : poolIndex;
 
-        PoolCoin pool = CoinPools[index];
+        SOPool pool = CoinPools[index];
 
         int j = spawnsPerFrame;
 
-        int length = Mathf.Min(Mathf.Min(positions.Elements.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex), maxCount);
+        int length = Mathf.Min(Mathf.Min(positions.Count, spawnedCoins.Length - (int)spawnedCoinsStartIndex), maxCount);
 
         for (int i = 0; i < length; i++, j--)
         {
@@ -132,9 +132,9 @@ public class CoinManager : ScriptableObject
                 yield return length;
             }
 
-            Coin c = pool.Get();
+            Coin c = pool.Get().GetComponent<Coin>();
             c.Pool = pool;
-            c.transform.position = positions.Elements[i];
+            c.transform.position = positions[i];
             spawnedCoins[i + (int)spawnedCoinsStartIndex] = c;
         }
     }

@@ -31,9 +31,9 @@ namespace SOPRO.Variables.Editor
             EditorGUI.BeginChangeCheck();
 
             // Get properties
-            SerializedProperty useConstant = property.FindPropertyRelative("useConstant");
+            SerializedProperty useConstant = property.FindPropertyRelative("UseConstant");
             SerializedProperty constantValue = property.FindPropertyRelative("constantValue");
-            SerializedProperty variable = property.FindPropertyRelative("variable");
+            SerializedProperty variable = property.FindPropertyRelative("Variable");
 
             // Calculate rect for configuration button
             Rect buttonRect = new Rect(position);
