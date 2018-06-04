@@ -42,37 +42,32 @@ public class Step
     public SOVariableUint TotalPlatformsPassed;
 
     public SOVariableUint SpecialPlatformsPassed;
-
     /// <summary>
     /// Calculates next step data
     /// </summary>
     /// <param name="walker">obj that required step, used for SpecialPlatform callbacks</param>
     /// <param name="totalMovement">total amount of movement to do</param>
     /// <param name="data">data from which to start next step. Will be overwritten with updated values</param>
-    public void CalculateNextStep(Transform walker, float totalMovement, Data data)
+    /// <returns>true if current platform has changed</returns>
+    public bool CalculateNextStep(Transform walker, float totalMovement, Data data)
     {
-        Reset(data, false, false);
+        if (data.IsSwitchingLanes && data.CurrentLane == data.DestinationLane)
+        {
+            data.IsSwitchingLanes = false;
+            data.LaneLerpPercentage = 0f;
+        }
 
-        //if (data.IsSwitchingLanes && data.CurrentLane == data.DestinationLane)
-        //{
-        //    data.IsSwitchingLanes = false;
-        //    data.LaneLerpPercentage = 0f;
-        //}
-
-        //if (data.IsSwitchingLanes)
-        //    SwitchingLaneNextStep(walker, totalMovement, data);
-        //else
-        NormalNextStep(walker, totalMovement, data);
+        if (data.IsSwitchingLanes)
+            return SwitchingLaneNextStep(walker, totalMovement, data);
+        else
+            return NormalNextStep(walker, totalMovement, data);
     }
     /// <summary>
     /// Resets values of Step
     /// </summary>
     public void Reset(Data data, bool resetStepDataStructure = true, bool resetStats = true)
     {
-        if (!data.Plat || !data.Plat.gameObject.activeSelf)
-        {
-            data.Plat = Manager.FirstPlatform;
-        }
+        data.Plat = Manager.FirstPlatform;
 
         if (resetStepDataStructure)
         {
@@ -94,9 +89,12 @@ public class Step
         }
     }
 
-    private void NormalNextStep(Transform walker, float totalMovement, Data data)
+    private bool NormalNextStep(Transform walker, float totalMovement, Data data)
     {
         Lane lane = data.Plat.Lanes[data.CurrentLane];
+
+        if (!Mathf.Approximately(0.0125f,lane.LocalCurve.InverseLength))
+           Application.Quit();
 
         //converto la speedScaled in percentuale rispetto la lunghezza della curva
         float movementPercentage = totalMovement * lane.LocalCurve.InverseLength;
@@ -128,7 +126,7 @@ public class Step
                 data.Plat.SpecialEffect.OnEnter(walker, newPercentage);
 
             CalculateNextStep(walker, overMovement, data);
-            return;
+            return true;
         }
 
         //Update distance counter
@@ -151,8 +149,10 @@ public class Step
         //Richiamo evento StepTaken della special platform
         if (data.Plat.SpecialEffect != null)
             data.Plat.SpecialEffect.OnStepTaken(walker, data.Percentage, prevPercentage);
+
+        return false;
     }
-    private void SwitchingLaneNextStep(Transform walker, float totalMovement, Data data)
+    private bool SwitchingLaneNextStep(Transform walker, float totalMovement, Data data)
     {
         Lane firstLane = data.Plat.Lanes[data.CurrentLane];
         Lane secondLane = data.Plat.Lanes[data.DestinationLane];
@@ -187,7 +187,7 @@ public class Step
                 data.Plat.SpecialEffect.OnEnter(walker, newPercentage);
 
             CalculateNextStep(walker, overMovement, data);
-            return;
+            return true;
         }
 
         //Update distance counter
@@ -212,5 +212,7 @@ public class Step
         //Richiamo evento StepTaken della special platform
         if (data.Plat.SpecialEffect != null)
             data.Plat.SpecialEffect.OnStepTaken(walker, data.Percentage, prevPercentage);
+
+        return false;
     }
 }

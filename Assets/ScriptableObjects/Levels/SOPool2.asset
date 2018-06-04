@@ -8,11 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -295101368, guid: 0350844b8a7bb1c46a7e4f5ad3918b3c, type: 3}
-  m_Name: CoinLayer
+  m_Script: {fileID: -1173331668, guid: 7d6b284e18a06314ea7b65d1fe4236f6, type: 3}
+  m_Name: SOPool2
   m_EditorClassIdentifier: 
-  LayerName:
-    useConstant: 1
-    constantValue: Coin
-    variable: {fileID: 0}
-  LayerIndex: 12
+  Prefab: {fileID: 1882402206584782, guid: 3f23f8e7b09f1c74dafcbbd324c06301, type: 2}

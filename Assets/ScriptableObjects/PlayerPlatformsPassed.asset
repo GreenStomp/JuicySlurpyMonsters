@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: PlayerPlatformsPassed
   m_EditorClassIdentifier: 
   DEBUG_DeveloperDescription: "Total number of platforms surpassed \nby the player"
-  Value: 1
+  Value: 0

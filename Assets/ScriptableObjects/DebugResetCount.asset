@@ -8,7 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1173331668, guid: 0350844b8a7bb1c46a7e4f5ad3918b3c, type: 3}
-  m_Name: Plat2Pool
+  m_Script: {fileID: 11500000, guid: bc6a98465902a0d4f9b5e73c782bb520, type: 3}
+  m_Name: DebugResetCount
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1882402206584782, guid: 3f23f8e7b09f1c74dafcbbd324c06301, type: 2}
+  DEBUG_DeveloperDescription: 
+  Value: 0

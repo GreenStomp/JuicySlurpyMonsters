@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: PlayerDistanceWalked
   m_EditorClassIdentifier: 
   DEBUG_DeveloperDescription: Total distance walked by the player
-  Value: 115.97946
+  Value: 0

@@ -165,6 +165,13 @@
             </summary>
             <returns>the requested element instance</returns>
         </member>
+        <member name="M:SOPRO.SOPool.DirectGet(UnityEngine.Transform)">
+            <summary>
+            Requests an element from the pool. No further action will be performed on the object
+            </summary>
+            <param name="parent">transform to use as the requested element parent. Used only on instantiated elements</param>
+            <returns>the requested element instance</returns>
+        </member>
         <member name="M:SOPRO.SOPool.Get(UnityEngine.Transform,System.Action{UnityEngine.GameObject})">
             <summary>
             Requests an element from the pool.

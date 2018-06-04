@@ -46,10 +46,6 @@ public abstract class BezierCurve<T> : ScriptableObject
     /// </summary>
     public abstract T End { get; protected set; }
 
-#if UNITY_EDITOR
-    public bool ForceUpdate = false;
-#endif
-
     [SerializeField]
     private float length;
     [SerializeField]
@@ -183,17 +179,6 @@ public abstract class BezierCurve<T> : ScriptableObject
         currentLenght += Distance(prevPoint, nextPoint);
         return currentLenght;
     }
-
-#if UNITY_EDITOR
-    void OnValidate()
-    {
-        if (ForceUpdate)
-        {
-            ForceUpdate = false;
-            ForceUpdateLenghts();
-        }
-    }
-#endif
 
     /// <summary>
     /// Calculates a point on the curve given all of the control points and a percentage

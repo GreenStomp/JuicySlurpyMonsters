@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cebc357502b7f54bbad6766eb768c83, type: 3}
   m_Name: PlaneSide
   m_EditorClassIdentifier: 
-  Point: {x: 0, y: 0, z: 114.81017}
+  Point: {x: 0, y: 0, z: 0}

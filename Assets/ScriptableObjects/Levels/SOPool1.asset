@@ -8,11 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -295101368, guid: 0350844b8a7bb1c46a7e4f5ad3918b3c, type: 3}
-  m_Name: MonsterLayer
+  m_Script: {fileID: -1173331668, guid: 7d6b284e18a06314ea7b65d1fe4236f6, type: 3}
+  m_Name: SOPool1
   m_EditorClassIdentifier: 
-  LayerName:
-    useConstant: 1
-    constantValue: Monster
-    variable: {fileID: 0}
-  LayerIndex: 8
+  Prefab: {fileID: 1810912553546742, guid: 83283bec18d909a4b88108ab08d6afb6, type: 2}
