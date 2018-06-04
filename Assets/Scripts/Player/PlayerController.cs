@@ -26,10 +26,12 @@ public class PlayerController : MonoBehaviour
         idle.Swiping = swipe;
 
         current = idle;
+
+        Step.Reset(StepData);
     }
     void Update()
     {
-        Step.CalculateNextStep(myTransform, Time.deltaTime * MovementSpeed.Value, StepData);
+        Step.CalculateNextStep(myTransform, MovementSpeed * Time.deltaTime, StepData);
 
         Transform plat = StepData.Plat.transform;
 
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
                 data.LaneLerpPercentage = 0f;
                 return Swiping;
             }
-            else if (input.SwipeRight && data.CurrentLane < data.Plat.Lanes.Length)
+            else if (input.SwipeRight && data.CurrentLane < data.Plat.Lanes.Length - 1)
             {
                 data.IsSwitchingLanes = true;
                 data.DestinationLane = data.CurrentLane + 1;

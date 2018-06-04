@@ -11,32 +11,28 @@ namespace SOPRO.Variables
         /// <summary>
         /// Determines whenever reference should use a given value or a Variable value
         /// </summary>
-        public bool UseConstant { get { return useConstant; } set { useConstant = variable; } }
+        public bool UseConstant;
         /// <summary>
         /// Variable currently stored
         /// </summary>
-        public SOVariableUint Variable { get { return variable; } set { variable = value; } }
+        public SOVariableUint Variable;
         /// <summary>
         /// Current value
         /// </summary>
         public uint Value
         {
-            get { return useConstant ? constantValue : variable.Value; }
+            get { return UseConstant ? constantValue : Variable.Value; }
 			set
 			{
-				if (useConstant)
+				if (UseConstant)
 				    constantValue = value;
 				else
-				    variable.Value = value;
+				    Variable.Value = value;
 			}
         }
 
         [SerializeField]
-        private bool useConstant = true;
-        [SerializeField]
         private uint constantValue;
-        [SerializeField]
-        private SOVariableUint variable;
         /// <summary>
         /// Construct a reference with default state
         /// </summary>
@@ -49,7 +45,7 @@ namespace SOPRO.Variables
         /// <param name="value"></param>
         public ReferenceUint(uint value)
         {
-            useConstant = true;
+            UseConstant = true;
             constantValue = value;
         }
         /// <summary>

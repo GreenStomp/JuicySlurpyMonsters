@@ -111,13 +111,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b9102321397fa479bd1cf1242599e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinLayer: {fileID: 11400000, guid: 7b7d4d48c6d05724b9869944e5206f05, type: 2}
-  MonsterLayer: {fileID: 11400000, guid: 10d5b1071ed4c83429756bb2e1de7738, type: 2}
-  ObjDestroyerLayer: {fileID: 11400000, guid: c4b40a94e7c51cc48bb8ab8d01b64d62, type: 2}
+  CoinLayer: {fileID: 11400000, guid: 01cacdf2ca048bb4494f3ee9e6116003, type: 2}
+  MonsterLayer: {fileID: 11400000, guid: 569991eec2a385447b294db61477a429, type: 2}
+  ObjDestroyerLayer: {fileID: 11400000, guid: 249776e9de9f0424c8376f445529ea15, type: 2}
   CoinValue:
-    useConstant: 1
+    UseConstant: 1
+    Variable: {fileID: 0}
     constantValue: 1
-    variable: {fileID: 0}
   Event: {fileID: 11400000, guid: 4237f6ca77004524fa606aae168d890f, type: 2}
 --- !u!136 &136962864053073276
 CapsuleCollider:

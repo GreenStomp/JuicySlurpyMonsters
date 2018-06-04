@@ -11,10 +11,8 @@ namespace SOPRO.Variables
         /// <summary>
         /// Description of the variable, available only in UNITY_EDITOR
         /// </summary>
-        public string DEBUG_DeveloperDescription { get { return developerDescription; } }
         [Multiline]
-        [SerializeField]
-        private string developerDescription = "";
+        public string DEBUG_DeveloperDescription = "";
 #endif
 		/// <summary>
         /// Value stored in the variable
@@ -37,26 +35,10 @@ namespace SOPRO.Variables
         {
             this.Value = value.Value;
         }
-        /// <summary>
-        /// Increases value of given amount
-        /// </summary>
-        /// <param name="amount">increase amount</param>
-        public void ApplyChange(int amount)
-        {
-            this.Value += amount;
-        }
-        /// <summary>
-        /// Increases value of given amount
-        /// </summary>
-        /// <param name="amount">increase amount</param>
-        public void ApplyChange(SOVariableInt amount)
-        {
-            this.Value += amount.Value;
-        }
 		/// <summary>
         /// Conversion between variable to underlying value
         /// </summary>
-        /// <param name="reference">variable to convert</param>
+        /// <param name="variable">variable to convert</param>
         public static implicit operator int(SOVariableInt variable)
         {
             return variable.Value;

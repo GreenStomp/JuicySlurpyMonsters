@@ -7,7 +7,7 @@ using SOPRO.Events;
 public class Coin : MonoBehaviour
 {
     [NonSerialized]
-    public PoolCoin Pool;
+    public SOPool Pool;
 
     public LayerHolder CoinLayer;
     public LayerHolder MonsterLayer;
@@ -18,10 +18,12 @@ public class Coin : MonoBehaviour
 
     public bool IsRecycled { get; private set; }
 
+    private GameObject myGameObject;
+
     public void Collected()
     {
         this.Event.Raise(this.CoinValue.Value);
-        this.Pool.Recycle(this);
+        this.Pool.Recycle(myGameObject);
     }
     void OnEnable()
     {
@@ -41,12 +43,13 @@ public class Coin : MonoBehaviour
         }
         else if (collidedLayer == this.ObjDestroyerLayer.LayerIndex)
         {
-            this.Pool.Recycle(this);
+            this.Pool.Recycle(myGameObject);
         }
     }
     void Start()
     {
         this.gameObject.layer = CoinLayer.LayerIndex;
+        myGameObject = gameObject;
     }
     void Reset()
     {
