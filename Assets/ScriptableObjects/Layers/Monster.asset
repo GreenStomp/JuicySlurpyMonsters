@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6a98465902a0d4f9b5e73c782bb520, type: 3}
-  m_Name: DebugResetCount
+  m_Script: {fileID: -295101368, guid: 7d6b284e18a06314ea7b65d1fe4236f6, type: 3}
+  m_Name: Monster
   m_EditorClassIdentifier: 
-  DEBUG_DeveloperDescription: 
-  Value: 0
+  LayerName: Monster
+  LayerIndex: 8

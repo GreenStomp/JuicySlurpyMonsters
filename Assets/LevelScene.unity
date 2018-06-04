@@ -598,7 +598,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 533894833}
-  - {fileID: 1642114350}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -607,109 +606,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1642114349
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1642114350}
-  - component: {fileID: 1642114352}
-  - component: {fileID: 1642114351}
-  - component: {fileID: 1642114353}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1642114350
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1642114349}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1465063235}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 100}
-  m_Pivot: {x: 0, y: 0}
---- !u!114 &1642114351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1642114349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
---- !u!222 &1642114352
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1642114349}
---- !u!114 &1642114353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1642114349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b3e070dbb41706499260dcb5f5b416b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DistanceWalked:
-    UseConstant: 0
-    Variable: {fileID: 11400000, guid: 4166dc8c14c04814c99ce8e7f2b85d41, type: 2}
-    constantValue: 0
-  PlatformsPassed:
-    UseConstant: 0
-    Variable: {fileID: 11400000, guid: 2682dc6345aabda49aecfac1d479b539, type: 2}
-    constantValue: 0
-  SpecialPlatformsPassed:
-    UseConstant: 0
-    Variable: {fileID: 11400000, guid: 0fed7d80e9f681540a83a8b895ab528a, type: 2}
-    constantValue: 0
-  DEBUG_Count:
-    UseConstant: 0
-    Variable: {fileID: 11400000, guid: cd83cc107b2e81045bd444557edfdc93, type: 2}
-    constantValue: 0
-  Player: {fileID: 1812859535}
 --- !u!1 &1812859534
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,17 +663,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed:
-    UseConstant: 0
-    Variable: {fileID: 11400000, guid: 7aebcb2b32912ff469a3be9bb201d087, type: 2}
-    constantValue: 10
+    UseConstant: 1
+    Variable: {fileID: 0}
+    constantValue: 80
   SwitchLaneLerpSpeed:
     UseConstant: 1
     Variable: {fileID: 0}
     constantValue: 0.5
-  DEBUG_ResetCount:
-    UseConstant: 0
-    Variable: {fileID: 11400000, guid: cd83cc107b2e81045bd444557edfdc93, type: 2}
-    constantValue: 0
   Step:
     Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
     TotalDistanceWalked: {fileID: 11400000, guid: 4166dc8c14c04814c99ce8e7f2b85d41,
