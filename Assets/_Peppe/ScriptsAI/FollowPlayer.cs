@@ -41,25 +41,32 @@ public class FollowPlayer : MonoBehaviour
     //        return indexer;
     //    }
     //}
+    //[HideInInspector]
+    //public List<GameObject> EndPointsToAdd;
     #endregion
-
-    private NavMeshAgent navMesh;
-    [HideInInspector]
-    public List<GameObject> EndPointsToAdd;
-
-    private Transform navMeshBuilder;
 
     public Vector3 NavMeshBuilderPosition;
     public Vector3 SizeNavMeshBuilder;
+    public float OffsetX;
+    public float OffsetY;
+    public float OffsetZ;
+
+    private Transform navMeshBuilder;
+    private float DistToGround = 5f;
+    private EndPoint CurrentTarget;
+    private NavMeshAgent navMesh;
+
+    public float DistanceToGround;
 
 
-    private void Awake()
-    {
-        EndPointsToAdd = new List<GameObject>();
-        Debug.Log("Awake");
-    }
+    //private void Awake()
+    //{
+    //    EndPointsToAdd = new List<GameObject>();
+    //    Debug.Log("Awake");
+    //}
 
     // Use this for initialization
+
     void Start()
     {
         #region WithMatteoScript
@@ -71,7 +78,6 @@ public class FollowPlayer : MonoBehaviour
 
         navMesh = GetComponent<NavMeshAgent>();
         navMesh.updateRotation = true;
-        Debug.Log("Start");
         navMeshBuilder = this.transform.GetChild(0);
         navMeshBuilder.position = NavMeshBuilderPosition;
         navMeshBuilder.localScale = SizeNavMeshBuilder;
@@ -142,7 +148,7 @@ public class FollowPlayer : MonoBehaviour
         //}
         #endregion
         //currentState();
-
+        CheckGroundStatus();
         MoveState();
     }
 
@@ -153,28 +159,32 @@ public class FollowPlayer : MonoBehaviour
     //    else
     //        return false;
     //}
- 
-
     //void StartState()
     //{
-
-        //if (navMesh.isOnNavMesh)
-        //{
-        //    navMesh.destination = NextPos.position;
-
-        //    //*****
-        //    //1)FindObjectOfType<SpawnPoint>() => SOLO QUANDO raggiunge la destinazione e non ad ogni frame.
-        //    //2)SphereCast=>
-        //}
-
-        //if (DestinationReached())
-        //    currentState = ArrivedState;
+    //if (navMesh.isOnNavMesh)
+    //{
+    //    navMesh.destination = NextPos.position;
+    //    //*****
+    //    //1)FindObjectOfType<SpawnPoint>() => SOLO QUANDO raggiunge la destinazione e non ad ogni frame.
+    //    //2)SphereCast=>
+    //}
+    //if (DestinationReached())
+    //    currentState = ArrivedState;
     //}
 
     void MoveState()
     {
-        if (navMesh.isOnNavMesh /*&& navMesh.hasPath*/)
-            navMesh.destination = EndPointsToAdd[1].transform.position;//NextPos.position;
+        //RaycastHit hit;
+        //Ray ray = new Ray(transform.position + new Vector3(0f, Offset, 0f), new Vector3(-Vector3.up.x, -Vector3.up.y, -Vector3.up.z + 5f));
+
+        //if (Physics.Raycast(ray.origin, ray.direction, out hit, DistToGround + 0.1f /*transform.position, -Vector3.up, out hit, DistToGround + 0.1f*/))
+        //    CurrentTarget = hit.collider.gameObject.transform.parent.GetComponentInChildren<EndPoint>();
+
+        ////Debug.DrawRay(transform.position, -Vector3.up * DistToGround, Color.magenta);
+        //Debug.DrawRay(transform.position + new Vector3(0f, Offset, 0f), new Vector3(-Vector3.up.x, -Vector3.up.y, -Vector3.up.z + 5f) * DistToGround, Color.red);
+
+        if (navMesh.isOnNavMesh &&  CurrentTarget!=null)
+            navMesh.destination = CurrentTarget.transform.position;//NextPos.position;
 
         #region WithMatteoScript
         //if (DestinationReached())
@@ -182,12 +192,29 @@ public class FollowPlayer : MonoBehaviour
         #endregion
     }
 
+    void CheckGroundStatus()
+    {
+        RaycastHit hit;
+        Ray ray2 = new Ray(transform.position + new Vector3(0f, OffsetX, 0f), new Vector3(-Vector3.up.x, -Vector3.up.y, -Vector3.up.z ));
+        Ray ray = new Ray(transform.position, -Vector3.up);
+
+        if (Physics.Raycast(ray2.origin, ray2.direction, out hit, DistToGround  /*transform.position, -Vector3.up, out hit, DistToGround + 0.1f*/))
+            CurrentTarget = hit.collider.gameObject.transform.parent.GetComponentInChildren<EndPoint>();
+
+        //if (Physics.Raycast(ray2.origin, ray2.direction, out hit, DistanceToGround + 0.1f /*transform.position, -Vector3.up, out hit, DistToGround + 0.1f*/))
+           // Debug.Log("Hit");
+
+            //Debug.DrawRay(transform.position, -Vector3.up * DistToGround, Color.magenta);
+            Debug.DrawRay(transform.position + new Vector3(OffsetX, OffsetY, OffsetZ), new Vector3(-Vector3.up.x, -Vector3.up.y, -Vector3.up.z + 5f) * DistanceToGround, Color.red);
+
+    }
+
     //public void ArrivedState()
     //{
-        //FirstPlatform = FirstPlatform.Next;
-        //NextPos = FirstPlatform.EndLocation;
-        //index++;
-        //currentState = MoveState;
+    //FirstPlatform = FirstPlatform.Next;
+    //NextPos = FirstPlatform.EndLocation;
+    //index++;
+    //currentState = MoveState;
     //}
 
     //public GameObject AddEndPoint(GameObject itemToAdd)
