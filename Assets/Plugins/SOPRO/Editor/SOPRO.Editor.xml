@@ -949,114 +949,24 @@
             Helper to produce culture-oriented representation of an object as a string
             </summary>
         </member>
-        <member name="T:SOPRO.Editor.SOPROContainerSystemGenerator">
+        <member name="T:SOPRO.Editor.GeneratorEditorWindow">
             <summary>
-            Class that generates SO container system code
+            EditorWindow class that generates SOPRO code
             </summary>
         </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.TargetFolderPath">
+        <member name="F:SOPRO.Editor.GeneratorEditorWindow.EventTypesNumber">
             <summary>
-            Folder path under Assets
+            Number of types required by event generation
             </summary>
         </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.DefaultNamespace">
+        <member name="F:SOPRO.Editor.GeneratorEditorWindow.DefaultNamespace">
             <summary>
-            Namespace used by default
+            Default namespace used
             </summary>
         </member>
-        <member name="P:SOPRO.Editor.SOPROContainerSystemGenerator.FullTargetFolderPath">
+        <member name="F:SOPRO.Editor.GeneratorEditorWindow.DefaultFolderPath">
             <summary>
-            Target folder for the output
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.UseArray">
-            <summary>
-            If true an array of the underlying type will be used as a container
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.ArraySize">
-            <summary>
-            If UseArray is true this value will be the array size
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.ContainerType">
-            <summary>
-            Container Type used. Examble : List
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.UnderlyingType">
-            <summary>
-            Underlying Type used
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.FullContainerType">
-            <summary>
-            Full container Type used . Example : <see cref="T:System.Collections.Generic.List`1"/> with typeName instead of T
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.GenerateIndexers">
-            <summary>
-            If true containers will be generated with an indexer to the underlying type
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROContainerSystemGenerator.GenerateCode">
-            <summary>
-            True to generate code
-            </summary>
-        </member>
-        <member name="M:SOPRO.Editor.SOPROContainerSystemGenerator.GenerateVariableCode">
-            <summary>
-            Generates scripts for SO container system
-            </summary>
-        </member>
-        <member name="T:SOPRO.Editor.SOPROEventSystemGenerator">
-            <summary>
-            Class that generates event code
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.MaxTypes">
-            <summary>
-            Max number of types allowed
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.TargetFolderPath">
-            <summary>
-            Folder path under Assets
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.DefaultNamespace">
-            <summary>
-            Namespace used by default
-            </summary>
-        </member>
-        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.FullTargetFolderPath">
-            <summary>
-            Target folder for the output
-            </summary>
-        </member>
-        <member name="P:SOPRO.Editor.SOPROEventSystemGenerator.FullTargetEditorFolderPath">
-            <summary>
-            Target Editor folder for the output
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.GenerateCode">
-            <summary>
-            Set to true in order to generate code
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.Types">
-            <summary>
-            Types used in the next code generation
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROEventSystemGenerator.ListenerMode">
-            <summary>
-            Listener mode for the next code generation
-            </summary>
-        </member>
-        <member name="M:SOPRO.Editor.SOPROEventSystemGenerator.GenerateEventCode">
-            <summary>
-            Generate all event code
+            Default folder path
             </summary>
         </member>
         <member name="T:SOPRO.Editor.SOPROListenerGenMode">
@@ -1079,44 +989,29 @@
             Listener will register/unregister on OnEnable/OnDisable
             </summary>
         </member>
-        <member name="T:SOPRO.Editor.SOPROVariableSystemGenerator">
+        <member name="T:SOPROGeneratorType">
             <summary>
-            Class that generates SO var system code
+            List of generator types available
             </summary>
         </member>
-        <member name="F:SOPRO.Editor.SOPROVariableSystemGenerator.TargetFolderPath">
+        <member name="F:SOPROGeneratorType.None">
             <summary>
-            Folder path under Assets
+            No generator
             </summary>
         </member>
-        <member name="F:SOPRO.Editor.SOPROVariableSystemGenerator.DefaultNamespace">
+        <member name="F:SOPROGeneratorType.Containers">
             <summary>
-            Namespace used by default
+            Basic containers generator
             </summary>
         </member>
-        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.FullTargetFolderPath">
+        <member name="F:SOPROGeneratorType.Events">
             <summary>
-            Target folder for the output
+            Events generator
             </summary>
         </member>
-        <member name="P:SOPRO.Editor.SOPROVariableSystemGenerator.FullTargetEditorFolderPath">
+        <member name="F:SOPROGeneratorType.Variables">
             <summary>
-            Target Editor folder for the output
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROVariableSystemGenerator.Type">
-            <summary>
-            Type used
-            </summary>
-        </member>
-        <member name="F:SOPRO.Editor.SOPROVariableSystemGenerator.GenerateCode">
-            <summary>
-            True to generate code
-            </summary>
-        </member>
-        <member name="M:SOPRO.Editor.SOPROVariableSystemGenerator.GenerateVariableCode">
-            <summary>
-            Generates scripts for SO var system
+            Variables generator
             </summary>
         </member>
     </members>

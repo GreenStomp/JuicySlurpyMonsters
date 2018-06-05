@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using SOPRO.Variables;
+using SOPRO;
 /// <summary>
 /// Class used to navigate correctly through the platform manager's platforms
 /// </summary>

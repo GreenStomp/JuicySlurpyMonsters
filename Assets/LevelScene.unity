@@ -672,11 +672,11 @@ MonoBehaviour:
     constantValue: 0.5
   Step:
     Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
-    TotalDistanceWalked: {fileID: 11400000, guid: 4166dc8c14c04814c99ce8e7f2b85d41,
+    TotalDistanceWalked: {fileID: 11400000, guid: a20038cfeeca6db4c81f3a3795c2b3b1,
       type: 2}
-    TotalPlatformsPassed: {fileID: 11400000, guid: 2682dc6345aabda49aecfac1d479b539,
+    TotalPlatformsPassed: {fileID: 11400000, guid: 08a06fcf5cddee2409dbfc4b534b3291,
       type: 2}
-    SpecialPlatformsPassed: {fileID: 11400000, guid: 0fed7d80e9f681540a83a8b895ab528a,
+    SpecialPlatformsPassed: {fileID: 11400000, guid: f897a57442dd8374abd2c37daf52c19e,
       type: 2}
   StepData:
     Percentage: 0
