@@ -15,7 +15,7 @@ MonoBehaviour:
   length: 80
   inverseLength: 0.0125
   validPoints: 2
-  start: {x: 0, y: 0, z: 0}
+  start: {x: 0, y: 0.5, z: 0}
   p1: {x: 0, y: 0, z: 0}
   p2: {x: 0, y: 0, z: 0}
-  end: {x: 0, y: 0, z: 80}
+  end: {x: 0, y: 0.5, z: 80}
