@@ -5,6 +5,7 @@ using UnityEngine;
 public class MagnetCoin : PowerUp, IPowerUp
 {
     public string DisplayName = "Magnet Coin";
+
     public float MagnetRange = 45f;
     public float MinDistance = 1f;
     private Collider[] coins;
@@ -90,6 +91,7 @@ public class MagnetCoin : PowerUp, IPowerUp
             //Destroy(gameObject);
         }
     }
+
     void DoPowerUp()
     {
         // do the actual powerup stuff here.

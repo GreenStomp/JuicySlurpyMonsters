@@ -56,7 +56,7 @@ public class LocalNavMeshBuilder : MonoBehaviour
     private void LateUpdate()
     {
         //Mesh.transform.LookAt(followPlayer.WayPoints[followPlayer.Indexer].transform.localPosition);
-        Mesh.transform.LookAt(followPlayer.EndPointsToAdd[1].transform.localPosition);
+        //Mesh.transform.LookAt(followPlayer.EndPointsToAdd[1].transform.localPosition);
     }
 
     void UpdateNavMesh(bool asyncUpdate = false)
