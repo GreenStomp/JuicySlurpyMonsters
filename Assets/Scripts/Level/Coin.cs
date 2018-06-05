@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using SOPRO;
-using SOPRO.Variables;
-using SOPRO.Events;
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class Coin : MonoBehaviour
 {

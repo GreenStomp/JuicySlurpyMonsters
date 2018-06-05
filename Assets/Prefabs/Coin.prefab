@@ -118,7 +118,7 @@ MonoBehaviour:
     UseConstant: 1
     Variable: {fileID: 0}
     constantValue: 1
-  Event: {fileID: 11400000, guid: 4237f6ca77004524fa606aae168d890f, type: 2}
+  Event: {fileID: 11400000, guid: d49a7c18b6ba71440b0ec97f821bec4a, type: 2}
 --- !u!136 &136962864053073276
 CapsuleCollider:
   m_ObjectHideFlags: 1

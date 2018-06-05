@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using SOPRO.Variables;
+using SOPRO;
 public class PlayerController : MonoBehaviour
 {
     public ReferenceFloat MovementSpeed;
