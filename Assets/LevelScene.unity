@@ -664,7 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed:
     useConstant: 1
-    constantValue: 10
+    constantValue: 1
     variable: {fileID: 0}
   SwitchLaneLerpSpeed:
     useConstant: 1

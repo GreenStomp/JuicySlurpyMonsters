@@ -5,9 +5,10 @@ public class MonoBehaviourVIUnoPuntoZero : MonoBehaviour {
     public SOVariablePlane Plane;
     public SOVariableVector3 Point;
     Transform myTransform;
-    void Start()
+    private void Awake()
     {
         myTransform = transform;
+        Update();
     }
     void Update ()
     {
