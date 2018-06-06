@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d17878cb111e6640b6ccadf54fa34d0, type: 3}
   m_Name: DistanceWalked
   m_EditorClassIdentifier: 
-  DEBUG_DeveloperDescription: 
-  Value: 0
+  DEBUG_DeveloperDescription: Distance walked by the player
+  Value: 132.9997

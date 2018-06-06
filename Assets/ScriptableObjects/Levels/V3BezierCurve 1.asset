@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6daddc3266e277e4ba47d688b048c48b, type: 3}
-  m_Name: V3BezierCurve
+  m_Name: V3BezierCurve 1
   m_EditorClassIdentifier: 
   length: 80
   inverseLength: 0.0125
   validPoints: 2
-  start: {x: 0, y: 0, z: 0}
+  start: {x: -5, y: 0, z: 0}
   p1: {x: 0, y: 0, z: 0}
   p2: {x: 0, y: 0, z: 0}
-  end: {x: 0, y: 0, z: 80}
+  end: {x: -5, y: 0, z: 80}

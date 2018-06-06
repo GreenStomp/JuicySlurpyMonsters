@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af59db37c5f0334695fc0f9dde2d8ac, type: 3}
   m_Name: SpecialPlatformsPassed
   m_EditorClassIdentifier: 
-  DEBUG_DeveloperDescription: 
+  DEBUG_DeveloperDescription: "Special platforms passed by \nthe player"
   Value: 0
