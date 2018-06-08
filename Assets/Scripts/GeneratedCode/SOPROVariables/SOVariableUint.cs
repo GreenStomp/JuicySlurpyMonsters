@@ -12,7 +12,8 @@ namespace SOPRO
         /// Description of the variable, available only in UNITY_EDITOR
         /// </summary>
         [Multiline]
-        public string DEBUG_DeveloperDescription = "";
+		[SerializeField]
+        private string DEBUG_DeveloperDescription = "";
 #endif
 		/// <summary>
         /// Value stored in the variable

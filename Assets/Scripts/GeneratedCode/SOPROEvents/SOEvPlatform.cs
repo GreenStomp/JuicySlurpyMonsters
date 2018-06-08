@@ -10,6 +10,15 @@ namespace SOPRO
     [Serializable]
     public class SOEvPlatform : ScriptableObject
     {
+#if UNITY_EDITOR
+        /// <summary>
+        /// Description of the event, available only in UNITY_EDITOR
+        /// </summary>
+        [Multiline]
+		[SerializeField]
+        private string DEBUG_DeveloperDescription = "";
+#endif
+
 				#if UNITY_EDITOR
 		 				public Platform DEBUG_Platform_0 = default(Platform);
 				#endif
