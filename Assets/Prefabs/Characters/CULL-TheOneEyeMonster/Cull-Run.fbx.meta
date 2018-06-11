@@ -1,0 +1,293 @@
+fileFormatVersion: 2
+guid: ab8d526a6efdbf445843c5cbfc34ed2f
+timeCreated: 1528535535
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: back_low_bind
+    100002: back_mid_bind
+    100004: bigTooth_geo
+    100006: body_geo
+    100008: ct_antennaLtEnd_trash
+    100010: ct_antennaLtMid_bind
+    100012: ct_antennaLtRoot_bind2
+    100014: ct_antennaMainEnd_trash
+    100016: ct_antennaMainMid_bind
+    100018: ct_antennaMainRoot_bind
+    100020: ct_antennaRtEnd_trash
+    100022: ct_antennaRtMid_bind
+    100024: ct_antennaRtRoot_bind
+    100026: ct_DownEyelid_bind
+    100028: ct_eye_bind
+    100030: ct_UpEyelid_bind
+    100032: //RootNode
+    100034: extra_geo_grp
+    100036: eye_geo
+    100038: geo_grp
+    100040: head_bind
+    100042: head_end_bind
+    100044: hips_bind
+    100046: jaw_bind
+    100048: joint_grp
+    100050: lowerEyelid_geo
+    100052: lt_ankle_bind
+    100054: lt_antenna01End_trash
+    100056: lt_antenna01Mid_bind
+    100058: lt_antenna01Root_bind
+    100060: lt_antenna02End_trash
+    100062: lt_antenna02Mid_bind
+    100064: lt_antenna02Root_bind
+    100066: lt_antenna03End_trash
+    100068: lt_antenna03Mid_bind
+    100070: lt_antenna03Root_bind
+    100072: lt_armRoot_bind
+    100074: lt_ball_bind
+    100076: lt_clavicle
+    100078: lt_elbow_bind
+    100080: lt_hand_trash
+    100082: lt_knee_bind
+    100084: lt_legRoot_bind
+    100086: lt_toe_bind
+    100088: lt_wing_geo
+    100090: lt_wingEnd_trash
+    100092: lt_wingMid1_bind
+    100094: lt_wingMid2_bind
+    100096: lt_wingRoot_bind
+    100098: lt_wrist_bind
+    100100: neck_root_bind
+    100102: rt_ankle_bind
+    100104: rt_antenna01End_trash
+    100106: rt_antenna01Mid_bind
+    100108: rt_antenna01Root_bind
+    100110: rt_antenna02End_trash
+    100112: rt_antenna02Mid_bind
+    100114: rt_antenna02Root_bind
+    100116: rt_antenna03End_trash
+    100118: rt_antenna03Mid_bind
+    100120: rt_antenna03Root_bind
+    100122: rt_armRoot_bind
+    100124: rt_ball_bind
+    100126: rt_clavicle
+    100128: rt_elbow_bind
+    100130: rt_hand_trash
+    100132: rt_knee_bind
+    100134: rt_legRoot_bind
+    100136: rt_toe_bind
+    100138: rt_wing_geo
+    100140: rt_wingEnd_trash
+    100142: rt_wingMid1_bind
+    100144: rt_wingMid2_bind
+    100146: rt_wingRoot_bind
+    100148: rt_wrist_bind
+    100150: smallTooth_geo
+    100152: upperEyelid_geo
+    400000: back_low_bind
+    400002: back_mid_bind
+    400004: bigTooth_geo
+    400006: body_geo
+    400008: ct_antennaLtEnd_trash
+    400010: ct_antennaLtMid_bind
+    400012: ct_antennaLtRoot_bind2
+    400014: ct_antennaMainEnd_trash
+    400016: ct_antennaMainMid_bind
+    400018: ct_antennaMainRoot_bind
+    400020: ct_antennaRtEnd_trash
+    400022: ct_antennaRtMid_bind
+    400024: ct_antennaRtRoot_bind
+    400026: ct_DownEyelid_bind
+    400028: ct_eye_bind
+    400030: ct_UpEyelid_bind
+    400032: //RootNode
+    400034: extra_geo_grp
+    400036: eye_geo
+    400038: geo_grp
+    400040: head_bind
+    400042: head_end_bind
+    400044: hips_bind
+    400046: jaw_bind
+    400048: joint_grp
+    400050: lowerEyelid_geo
+    400052: lt_ankle_bind
+    400054: lt_antenna01End_trash
+    400056: lt_antenna01Mid_bind
+    400058: lt_antenna01Root_bind
+    400060: lt_antenna02End_trash
+    400062: lt_antenna02Mid_bind
+    400064: lt_antenna02Root_bind
+    400066: lt_antenna03End_trash
+    400068: lt_antenna03Mid_bind
+    400070: lt_antenna03Root_bind
+    400072: lt_armRoot_bind
+    400074: lt_ball_bind
+    400076: lt_clavicle
+    400078: lt_elbow_bind
+    400080: lt_hand_trash
+    400082: lt_knee_bind
+    400084: lt_legRoot_bind
+    400086: lt_toe_bind
+    400088: lt_wing_geo
+    400090: lt_wingEnd_trash
+    400092: lt_wingMid1_bind
+    400094: lt_wingMid2_bind
+    400096: lt_wingRoot_bind
+    400098: lt_wrist_bind
+    400100: neck_root_bind
+    400102: rt_ankle_bind
+    400104: rt_antenna01End_trash
+    400106: rt_antenna01Mid_bind
+    400108: rt_antenna01Root_bind
+    400110: rt_antenna02End_trash
+    400112: rt_antenna02Mid_bind
+    400114: rt_antenna02Root_bind
+    400116: rt_antenna03End_trash
+    400118: rt_antenna03Mid_bind
+    400120: rt_antenna03Root_bind
+    400122: rt_armRoot_bind
+    400124: rt_ball_bind
+    400126: rt_clavicle
+    400128: rt_elbow_bind
+    400130: rt_hand_trash
+    400132: rt_knee_bind
+    400134: rt_legRoot_bind
+    400136: rt_toe_bind
+    400138: rt_wing_geo
+    400140: rt_wingEnd_trash
+    400142: rt_wingMid1_bind
+    400144: rt_wingMid2_bind
+    400146: rt_wingRoot_bind
+    400148: rt_wrist_bind
+    400150: smallTooth_geo
+    400152: upperEyelid_geo
+    2100000: M_cull
+    4300000: body_geo
+    4300002: eye_geo
+    4300004: upperEyelid_geo
+    4300006: lowerEyelid_geo
+    4300008: lt_wing_geo
+    4300010: rt_wing_geo
+    4300012: smallTooth_geo
+    4300014: bigTooth_geo
+    7400000: Cull_run
+    9500000: //RootNode
+    13700000: bigTooth_geo
+    13700002: body_geo
+    13700004: eye_geo
+    13700006: lowerEyelid_geo
+    13700008: lt_wing_geo
+    13700010: rt_wing_geo
+    13700012: smallTooth_geo
+    13700014: upperEyelid_geo
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_cull
+    second: {fileID: 2100000, guid: 404d98cf2d6aae24091b9bbfa9298b35, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Cull_run
+      takeName: Cull_run
+      firstFrame: 125
+      lastFrame: 141
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

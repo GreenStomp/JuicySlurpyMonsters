@@ -14,4 +14,8 @@ public class GlobalEvents : ScriptableObject
     {
         SceneManager.LoadScene(name);
     }
+    public void SetTimeScale(float value)
+    {
+        Time.timeScale = value;
+    }
 }
