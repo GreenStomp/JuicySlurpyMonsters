@@ -15,7 +15,7 @@ public class NavMeshMovement : MonoBehaviour
     [SerializeField]
     private LayerMaskHolder layerMask;
     [SerializeField]
-    private NavMeshAreaHolder areaLayer;
+    private NavMeshAreaMaskHolder areaLayer;
 
     private Transform toMove;
     void OnEnable()

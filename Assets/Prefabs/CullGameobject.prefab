@@ -706,7 +706,6 @@ GameObject:
   - component: {fileID: 4354456454153090}
   - component: {fileID: 114886257810439708}
   - component: {fileID: 114610030103575586}
-  - component: {fileID: 114912363130199560}
   m_Layer: 0
   m_Name: CullGameobject
   m_TagString: Untagged
@@ -2453,20 +2452,6 @@ MonoBehaviour:
     DestinationLane: 0
     ForwardPrecision: 0.00001
   Input: {fileID: 11400000, guid: 8efac99ec03e1f84bba7599a2d07611f, type: 2}
---- !u!114 &114912363130199560
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606614993029288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a17d8605006549d4aadd8029e018aee0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boundsToUpdate: {fileID: 11400000, guid: 3824b9db747ef784a93592ea1282ea31, type: 2}
-  positionToUpdate: {fileID: 11400000, guid: 784c0a2abd37da2458ff7941e8a4c8bd, type: 2}
-  transformToUse: {fileID: 4347121878846990}
 --- !u!124 &124835296095708052
 Behaviour:
   m_ObjectHideFlags: 1

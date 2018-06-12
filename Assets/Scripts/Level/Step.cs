@@ -51,6 +51,9 @@ public class Step
     /// <returns>true if current platform has changed</returns>
     public bool CalculateNextStep(Transform walker, float totalMovement, Data data)
     {
+        if (!data.Plat)
+            data.Plat = Manager.FirstPlatform;
+
         if (data.IsSwitchingLanes && data.CurrentLane == data.DestinationLane)
         {
             data.IsSwitchingLanes = false;

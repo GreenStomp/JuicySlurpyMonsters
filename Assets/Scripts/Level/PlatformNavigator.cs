@@ -11,12 +11,14 @@ public class PlatformNavigator : MonoBehaviour
 
     public Step.Data StepData = new Step.Data();
 
+    public bool ResetDataStructureOnEnable = false;
+
     [SerializeField]
     private Transform myTransform;
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
-        Step.Reset(StepData, true, true);
+        Step.Reset(StepData, ResetDataStructureOnEnable, ResetDataStructureOnEnable);
     }
 
     // Update is called once per frame

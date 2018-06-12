@@ -179,7 +179,7 @@ MonoBehaviour:
     constantValue: 1
   agent: {fileID: 195119229673153822}
   layerMask: {fileID: 11400000, guid: 1edbb44dc976e104091c1685959933ca, type: 2}
-  areaLayer: {fileID: 11400000, guid: 4a78fdce10c0f5f45a4a342ee9960f38, type: 2}
+  areaLayer: {fileID: 11400000, guid: 1e3620de78fe1534ca41822977d199be, type: 2}
 --- !u!135 &135171611708897096
 SphereCollider:
   m_ObjectHideFlags: 1
