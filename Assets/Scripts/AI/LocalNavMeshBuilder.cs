@@ -27,13 +27,9 @@ public class LocalNavMeshBuilder : MonoBehaviour
     NavMeshDataInstance m_Instance;
     List<NavMeshBuildSource> m_Sources = new List<NavMeshBuildSource>();
 
-    IEnumerator Start()
+    void Update()
     {
-        while (true)
-        {
-            UpdateNavMesh(true);
-            yield return m_Operation;
-        }
+        UpdateNavMesh(false);
     }
 
     void OnEnable()
@@ -56,8 +52,8 @@ public class LocalNavMeshBuilder : MonoBehaviour
     void UpdateNavMesh(bool asyncUpdate = false)
     {
         NavMeshSourceTag.Collect(ref m_Sources);
-        var defaultBuildSettings = NavMesh.GetSettingsByID(0);
-        var bounds = QuantizedBounds();
+        NavMeshBuildSettings defaultBuildSettings = NavMesh.GetSettingsByID(0);
+        Bounds bounds = QuantizedBounds();
 
         if (asyncUpdate)
             m_Operation = NavMeshBuilder.UpdateNavMeshDataAsync(m_NavMesh, defaultBuildSettings, m_Sources, Mesh.bounds);
@@ -75,25 +71,25 @@ public class LocalNavMeshBuilder : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    static Quaternion RotSize(Quaternion v,Quaternion quant)
+    static Quaternion RotSize(Quaternion v, Quaternion quant)
     {
         float x = quant.x * Mathf.Floor(v.x / quant.x);
         float y = quant.y * Mathf.Floor(v.y / quant.y);
         float z = quant.z * Mathf.Floor(v.z / quant.z);
         float w = quant.w * Mathf.Floor(v.w / quant.w);
-        return new Quaternion(x, y, z,w);
+        return new Quaternion(x, y, z, w);
     }
 
     Bounds QuantizedBounds()
     {
         // Quantize the bounds to update only when theres a 10% change in size
-        var center = m_Tracked ? m_Tracked.position : transform.position;
+        Vector3 center = m_Tracked ? m_Tracked.position : transform.position;
         return new Bounds(Quantize(center, 0.1f * m_Size), m_Size);
     }
 
     BoundingSphere RotSize()
     {
         Vector3 center = m_Tracked ? m_Tracked.localEulerAngles : transform.localEulerAngles;
-        return new BoundingSphere(center*0.2f, 10f);
+        return new BoundingSphere(center * 0.2f, 10f);
     }
 }

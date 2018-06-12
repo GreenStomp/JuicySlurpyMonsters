@@ -33,7 +33,8 @@ public class CoinManager : ScriptableObject
 
         for (int i = 0; i < coinCount; i++)
         {
-            Coin c = pool.Get().GetComponent<Coin>();
+            int nullObjsRemovedFromPool;
+            Coin c = pool.Get(out nullObjsRemovedFromPool).GetComponent<Coin>();
             c.Pool = pool;
             c.transform.position = positions[i];
         }
@@ -61,7 +62,8 @@ public class CoinManager : ScriptableObject
 
         for (int i = 0; i < coinCount; i++)
         {
-            Coin c = pool.Get().GetComponent<Coin>();
+            int nullObjsRemovedFromPool;
+            Coin c = pool.Get(out nullObjsRemovedFromPool).GetComponent<Coin>();
             c.Pool = pool;
             c.transform.position = positions[i];
             spawnedCoins[i + (int)spawnedCoinsStartIndex] = c;
@@ -96,7 +98,8 @@ public class CoinManager : ScriptableObject
                 yield return length;
             }
 
-            Coin c = pool.Get().GetComponent<Coin>();
+            int nullObjsRemovedFromPool;
+            Coin c = pool.Get(out nullObjsRemovedFromPool).GetComponent<Coin>();
             c.Pool = pool;
             c.transform.position = positions[i];
         }
@@ -132,7 +135,8 @@ public class CoinManager : ScriptableObject
                 yield return length;
             }
 
-            Coin c = pool.Get().GetComponent<Coin>();
+            int nullObjsRemovedFromPool;
+            Coin c = pool.Get(out nullObjsRemovedFromPool).GetComponent<Coin>();
             c.Pool = pool;
             c.transform.position = positions[i];
             spawnedCoins[i + (int)spawnedCoinsStartIndex] = c;
