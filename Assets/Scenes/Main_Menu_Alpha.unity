@@ -333,13 +333,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 1278d2747b06ecc48ae2d384d99667f8, type: 2}
-        m_MethodName: SetTimeScale
-        m_Mode: 4
+      - m_Target: {fileID: 1086929628}
+        m_MethodName: ActivateCurrentCavas
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 1
           m_StringArgument: 
           m_BoolArgument: 0
@@ -973,6 +973,21 @@ Prefab:
     - target: {fileID: 1536340008637382, guid: fa7d882177cc88a46a96a1c30e38cb84, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114164476222899390, guid: fa7d882177cc88a46a96a1c30e38cb84,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1086929628}
+    - target: {fileID: 114164476222899390, guid: fa7d882177cc88a46a96a1c30e38cb84,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateCurrentCavas
+      objectReference: {fileID: 0}
+    - target: {fileID: 114164476222899390, guid: fa7d882177cc88a46a96a1c30e38cb84,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa7d882177cc88a46a96a1c30e38cb84, type: 2}
