@@ -53,7 +53,8 @@ public class PlatformManager : ScriptableObject
             {
                 //Prendo un nuovo platform date quelle richieste o dato normalPrefabID
                 tuple.Item2 = currentLevel.platforms[UnityEngine.Random.Range(0, currentLevel.platforms.Count)];
-                tuple.Item1 = tuple.Item2.DirectGet().GetComponent<Platform>();
+                int nullObjsRemovedFromPool;
+                tuple.Item1 = tuple.Item2.DirectGet(out nullObjsRemovedFromPool).GetComponent<Platform>();
                 tuple.Item1.Reposition(lastPlatform);
                 tuple.Item1.gameObject.SetActive(true);
 
@@ -99,7 +100,8 @@ public class PlatformManager : ScriptableObject
             int index = UnityEngine.Random.Range(0, poolsLength);
             Tuple<Platform, SOPool> tuple = PoolBasic<Tuple<Platform, SOPool>>.Get();
             tuple.Item2 = currentLevel.platforms[index];
-            tuple.Item1 = tuple.Item2.DirectGet().GetComponent<Platform>();
+            int nullObjsRemovedFromPool;
+            tuple.Item1 = tuple.Item2.DirectGet(out nullObjsRemovedFromPool).GetComponent<Platform>();
 
             if (!firstPlatform)
             {
@@ -192,7 +194,8 @@ public class PlatformManager : ScriptableObject
             int index = UnityEngine.Random.Range(0, poolsLength);
             Tuple<Platform, SOPool> tuple = PoolBasic<Tuple<Platform, SOPool>>.Get();
             tuple.Item2 = currentLevel.platforms[index];
-            tuple.Item1 = tuple.Item2.DirectGet().GetComponent<Platform>();
+            int nullObjsRemovedFromPool;
+            tuple.Item1 = tuple.Item2.DirectGet(out nullObjsRemovedFromPool).GetComponent<Platform>();
 
             if (!firstPlatform)
             {
