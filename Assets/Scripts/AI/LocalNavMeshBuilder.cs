@@ -3,24 +3,24 @@ using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
-
+using SOPRO;
 // Build and update a localized navmesh from the sources marked by NavMeshSourceTag
 [DefaultExecutionOrder(-500)]
 public class LocalNavMeshBuilder : MonoBehaviour
 {
     // The center of the build
-    public Transform m_Tracked;
+    public ReferenceVector3 Center;
+    //public Transform m_Tracked;
 
     // The size of the build bounds
-    public Vector3 m_Size = new Vector3(80.0f, 20.0f, 80.0f);
+    public ReferenceVector3 m_Size;
 
-    //the rotation of the build bounds
-    public Transform Player;
-    public Quaternion Rot;
-    public Vector3 Rot1;
-    public float Radius;
-    public MeshRenderer Mesh;
-    public FollowPlayer followPlayer;
+    [SerializeField]
+    private ReferenceBounds Bounds;
+    [SerializeField]
+    private SOLinkedListMeshFilterContainer meshes;
+    [SerializeField]
+    private SOLinkedListTerrainContainer terrains;
 
     NavMeshData m_NavMesh;
     AsyncOperation m_Operation;
@@ -37,8 +37,8 @@ public class LocalNavMeshBuilder : MonoBehaviour
         // Construct and add navmesh
         m_NavMesh = new NavMeshData();
         m_Instance = NavMesh.AddNavMeshData(m_NavMesh);
-        if (m_Tracked == null)
-            m_Tracked = transform;
+        //if (m_Tracked == null)
+        //    m_Tracked = transform;
 
         UpdateNavMesh(false);
     }
@@ -51,14 +51,14 @@ public class LocalNavMeshBuilder : MonoBehaviour
 
     void UpdateNavMesh(bool asyncUpdate = false)
     {
-        NavMeshSourceTag.Collect(ref m_Sources);
+        NavMeshSourceTag.Collect(ref m_Sources, meshes, terrains);
         NavMeshBuildSettings defaultBuildSettings = NavMesh.GetSettingsByID(0);
         Bounds bounds = QuantizedBounds();
 
         if (asyncUpdate)
-            m_Operation = NavMeshBuilder.UpdateNavMeshDataAsync(m_NavMesh, defaultBuildSettings, m_Sources, Mesh.bounds);
+            m_Operation = NavMeshBuilder.UpdateNavMeshDataAsync(m_NavMesh, defaultBuildSettings, m_Sources, Bounds);
         else
-            NavMeshBuilder.UpdateNavMeshData(m_NavMesh, defaultBuildSettings, m_Sources, Mesh.bounds);
+            NavMeshBuilder.UpdateNavMeshData(m_NavMesh, defaultBuildSettings, m_Sources, Bounds);
 
         //NavMeshBuilder.UpdateNavMeshData()
     }
@@ -71,25 +71,25 @@ public class LocalNavMeshBuilder : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    static Quaternion RotSize(Quaternion v, Quaternion quant)
-    {
-        float x = quant.x * Mathf.Floor(v.x / quant.x);
-        float y = quant.y * Mathf.Floor(v.y / quant.y);
-        float z = quant.z * Mathf.Floor(v.z / quant.z);
-        float w = quant.w * Mathf.Floor(v.w / quant.w);
-        return new Quaternion(x, y, z, w);
-    }
+    //static Quaternion RotSize(Quaternion v, Quaternion quant)
+    //{
+    //    float x = quant.x * Mathf.Floor(v.x / quant.x);
+    //    float y = quant.y * Mathf.Floor(v.y / quant.y);
+    //    float z = quant.z * Mathf.Floor(v.z / quant.z);
+    //    float w = quant.w * Mathf.Floor(v.w / quant.w);
+    //    return new Quaternion(x, y, z, w);
+    //}
 
     Bounds QuantizedBounds()
     {
         // Quantize the bounds to update only when theres a 10% change in size
-        Vector3 center = m_Tracked ? m_Tracked.position : transform.position;
-        return new Bounds(Quantize(center, 0.1f * m_Size), m_Size);
+        //Vector3 center = m_Tracked ? m_Tracked.position : transform.position;
+        return new Bounds(Quantize(Center, 0.1f * m_Size.Value), m_Size);
     }
 
-    BoundingSphere RotSize()
-    {
-        Vector3 center = m_Tracked ? m_Tracked.localEulerAngles : transform.localEulerAngles;
-        return new BoundingSphere(center * 0.2f, 10f);
-    }
+    //BoundingSphere RotSize()
+    //{
+    //    Vector3 center = m_Tracked ? m_Tracked.localEulerAngles : transform.localEulerAngles;
+    //    return new BoundingSphere(center * 0.2f, 10f);
+    //}
 }

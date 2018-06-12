@@ -83,9 +83,12 @@ public class Step
 
         if (resetStats)
         {
-            TotalDistanceWalked.Value = 0f;
-            TotalPlatformsPassed.Value = 0;
-            SpecialPlatformsPassed.Value = 0;
+            if (TotalDistanceWalked)
+                TotalDistanceWalked.Value = 0f;
+            if (TotalPlatformsPassed)
+                TotalPlatformsPassed.Value = 0;
+            if (SpecialPlatformsPassed)
+                SpecialPlatformsPassed.Value = 0;
         }
     }
 
@@ -93,8 +96,8 @@ public class Step
     {
         Lane lane = data.Plat.Lanes[data.CurrentLane];
 
-        if (!Mathf.Approximately(0.0125f,lane.LocalCurve.InverseLength))
-           Application.Quit();
+        if (!Mathf.Approximately(0.0125f, lane.LocalCurve.InverseLength))
+            Application.Quit();
 
         //converto la speedScaled in percentuale rispetto la lunghezza della curva
         float movementPercentage = totalMovement * lane.LocalCurve.InverseLength;
@@ -107,10 +110,12 @@ public class Step
             //Richiamo evento Exit della special platform e update counters
             if (data.Plat.SpecialEffect != null)
             {
-                SpecialPlatformsPassed.Value++;
+                if (SpecialPlatformsPassed)
+                    SpecialPlatformsPassed.Value++;
                 data.Plat.SpecialEffect.OnExit(walker, data.Percentage);
             }
-            TotalPlatformsPassed.Value++;
+            if (TotalPlatformsPassed)
+                TotalPlatformsPassed.Value++;
 
             newPercentage -= 1f;
             data.Plat = data.Plat.Next;
@@ -119,7 +124,8 @@ public class Step
             float overMovement = newPercentage * lane.LocalCurve.Length;
 
             //Update distance counter
-            TotalDistanceWalked.Value += totalMovement - overMovement;
+            if (TotalDistanceWalked)
+                TotalDistanceWalked.Value += totalMovement - overMovement;
 
             //Richiamo evento Enter della special platform
             if (data.Plat.SpecialEffect != null)
@@ -130,7 +136,8 @@ public class Step
         }
 
         //Update distance counter
-        TotalDistanceWalked.Value += totalMovement;
+        if (TotalDistanceWalked)
+            TotalDistanceWalked.Value += totalMovement;
 
         //calcolo la posizione finale
         Vector3 newCenter = lane.LocalCurve.GetPoint(newPercentage);
@@ -168,10 +175,12 @@ public class Step
             //Richiamo evento Exit della special platform e update counters
             if (data.Plat.SpecialEffect != null)
             {
-                SpecialPlatformsPassed.Value++;
+                if (SpecialPlatformsPassed)
+                    SpecialPlatformsPassed.Value++;
                 data.Plat.SpecialEffect.OnExit(walker, data.Percentage);
             }
-            TotalPlatformsPassed.Value++;
+            if (TotalPlatformsPassed)
+                TotalPlatformsPassed.Value++;
 
             newPercentage -= 1f;
             data.Plat = data.Plat.Next;
@@ -180,7 +189,8 @@ public class Step
             float overMovement = newPercentage * Mathf.Lerp(firstLane.LocalCurve.Length, secondLane.LocalCurve.Length, data.LaneLerpPercentage); ;
 
             //Update distance counter
-            TotalDistanceWalked.Value += totalMovement - overMovement;
+            if (TotalDistanceWalked)
+                TotalDistanceWalked.Value += totalMovement - overMovement;
 
             //Richiamo evento Enter della special platform
             if (data.Plat.SpecialEffect != null)
@@ -191,7 +201,8 @@ public class Step
         }
 
         //Update distance counter
-        TotalDistanceWalked.Value += totalMovement;
+        if (TotalDistanceWalked)
+            TotalDistanceWalked.Value += totalMovement;
 
         //calcolo la posizione finale
         Vector3 newCenter = Vector3.Lerp(firstLane.LocalCurve.GetPoint(newPercentage), secondLane.LocalCurve.GetPoint(newPercentage), data.LaneLerpPercentage); ;
