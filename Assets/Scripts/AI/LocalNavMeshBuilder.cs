@@ -53,12 +53,6 @@ public class LocalNavMeshBuilder : MonoBehaviour
         m_Instance.Remove();
     }
 
-    private void LateUpdate()
-    {
-        //Mesh.transform.LookAt(followPlayer.WayPoints[followPlayer.Indexer].transform.localPosition);
-        //Mesh.transform.LookAt(followPlayer.EndPointsToAdd[1].transform.localPosition);
-    }
-
     void UpdateNavMesh(bool asyncUpdate = false)
     {
         NavMeshSourceTag.Collect(ref m_Sources);
@@ -101,28 +95,5 @@ public class LocalNavMeshBuilder : MonoBehaviour
     {
         Vector3 center = m_Tracked ? m_Tracked.localEulerAngles : transform.localEulerAngles;
         return new BoundingSphere(center*0.2f, 10f);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        //if (m_NavMesh)
-        //{
-        //    Gizmos.color = Color.green;
-        //    Gizmos.DrawWireCube(m_NavMesh.sourceBounds.center, m_NavMesh.sourceBounds.size);
-        //    //Gizmos.DrawWireSphere(m_NavMesh.sourceBounds.center, 100f);
-        //}
-
-        //var bounds = QuantizedBounds();
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireCube(bounds.center, bounds.size);
-
-
-        //var spherBounds = RotSize();
-        //Gizmos.color = Color.magenta;
-        //Gizmos.DrawWireSphere(spherBounds.position, spherBounds.radius);
-
-        //Gizmos.color = Color.green;
-        //var center = m_Tracked ? m_Tracked.position : transform.position;
-        //Gizmos.DrawWireCube(center, m_Size);
     }
 }
