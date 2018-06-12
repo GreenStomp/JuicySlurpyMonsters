@@ -16,9 +16,9 @@ public class PlatManStart : MonoBehaviour
     {
         while (true)
         {
+            yield return wait;
             Manager.UpdateActivePlatforms();
 
-            yield return wait;
         }
     }
 }
