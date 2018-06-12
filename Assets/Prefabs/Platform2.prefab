@@ -617,6 +617,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a14d50d9eea5e46b40052d9780ea90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Meshes: {fileID: 11400000, guid: 697f09585e61afc41b1c67d4fc7fd245, type: 2}
+  m_Terrains: {fileID: 11400000, guid: 42fd45e7d68f9ed48b20d0f0b9f547a7, type: 2}
+  filter: {fileID: 33871335363780276}
+  terrain: {fileID: 0}
 --- !u!114 &114211892160870060
 MonoBehaviour:
   m_ObjectHideFlags: 1
