@@ -48,13 +48,13 @@ public class NavMeshSourceTag : MonoBehaviour
 
         for (var i = 0; i < m_Meshes.Count; ++i)
         {
-            var mf = m_Meshes[i];
+            MeshFilter mf = m_Meshes[i];
             if (mf == null) continue;
 
-            var m = mf.sharedMesh;
+            Mesh m = mf.sharedMesh;
             if (m == null) continue;
 
-            var s = new NavMeshBuildSource();
+            NavMeshBuildSource s = new NavMeshBuildSource();
             s.shape = NavMeshBuildSourceShape.Mesh;
             s.sourceObject = m;
             s.transform = mf.transform.localToWorldMatrix;
