@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
         current = idle;
 
-        Step.Reset(StepData);
+        Step.Reset(StepData, Step.Manager.FirstPlatform);
     }
     void Update()
     {

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23300115071424730}
   - component: {fileID: 195119229673153822}
   - component: {fileID: 114601039057586296}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AI Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 33042692765837090}
   - component: {fileID: 135171611708897096}
   - component: {fileID: 23160137300161394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -102,6 +102,8 @@ MonoBehaviour:
     UseConstant: 1
     Variable: {fileID: 0}
     constantValue: 10
+  UseTranfrom: 0
+  ResetDataStructureOnEnable: 0
   Step:
     Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
     TotalDistanceWalked: {fileID: 0}
@@ -114,5 +116,4 @@ MonoBehaviour:
     LaneLerpPercentage: 0
     DestinationLane: 0
     ForwardPrecision: 0.00001
-  ResetDataStructureOnEnable: 0
   myTransform: {fileID: 4819302175131228}
