@@ -30,9 +30,11 @@ public class CoinSpawner : MonoBehaviour
     {
         step.Reset(data, plat, true, false);
 
+        data.CurrentLane = Random.Range(0, plat.Lanes.Length);
+
         Transform platT = plat.transform;
         int length = spawnPoints.Length;
-        float stepPercSize = 1.000001f / length;
+        float stepPercSize = 1.000001f / (length + 1);
         Lane lane = plat.Lanes[data.CurrentLane];
         int maxCount;
         for (maxCount = 0; maxCount < length; maxCount++)
