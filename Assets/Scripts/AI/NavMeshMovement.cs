@@ -27,6 +27,7 @@ public class NavMeshMovement : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(toMove.position, out hit, 1f, areaLayer))
         {
+            Debug.Log("warped");
             agent.Warp(hit.position);
         }
         agent.speed = maxSpeed;
