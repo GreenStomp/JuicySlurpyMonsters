@@ -485,6 +485,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1431523811}
   - component: {fileID: 1431523810}
+  - component: {fileID: 1431523812}
+  - component: {fileID: 1431523813}
   m_Layer: 0
   m_Name: PlatManagerStart
   m_TagString: Untagged
@@ -518,6 +520,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1431523812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1431523809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce95c78c71e0c4c4681b6229306b13d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinManager: {fileID: 11400000, guid: 3d5d55ba86be788469ae9421d0c795ea, type: 2}
+  PlatManager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
+  PlatformCreated: {fileID: 11400000, guid: 017667780d53ac14ba3ccdb9d66a9e56, type: 2}
+  CoinsToSpawnPerPlatform:
+    UseConstant: 1
+    Variable: {fileID: 0}
+    constantValue: 10
+  CoinParent: {fileID: 1431523811}
+--- !u!114 &1431523813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1431523809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf168a2e87452a348956592ff5596522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoinsPicked: {fileID: 11400000, guid: 6ddbe04807c771e4382cfcd6420bc2c0, type: 2}
+  CoinsMissed: {fileID: 11400000, guid: 489262e8de6a943458aec59f4caf5e8f, type: 2}
+  CoinsPickedValue: {fileID: 11400000, guid: 7395ca973684ac040ab9945459be2936, type: 2}
+  CoinsMissedValue: {fileID: 11400000, guid: 1668bcc4787a5de4da6747e63c828050, type: 2}
 --- !u!1 &1465063231
 GameObject:
   m_ObjectHideFlags: 0

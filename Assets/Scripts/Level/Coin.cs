@@ -7,12 +7,16 @@ public class Coin : MonoBehaviour
     [NonSerialized]
     public SOPool Pool;
 
+    public SOVariableUint CoinsPickedCounter;
+    public SOVariableUint CoinsMissedCounter;
+    public SOVariableUint CoinsPickedValueCounter;
+    public SOVariableUint CoinsMissedValueCounter;
+
     public LayerHolder CoinLayer;
     public LayerHolder MonsterLayer;
     public LayerHolder ObjDestroyerLayer;
 
-    public ReferenceInt CoinValue;
-    public SOEvInt Event;
+    public ReferenceUint CoinValue;
 
     public bool IsRecycled { get; private set; }
 
@@ -20,7 +24,8 @@ public class Coin : MonoBehaviour
 
     public void Collected()
     {
-        this.Event.Raise(this.CoinValue.Value);
+        CoinsPickedCounter.Value++;
+        CoinsPickedValueCounter.Value += CoinValue.Value;
         this.Pool.Recycle(myGameObject);
     }
     void OnEnable()
@@ -41,6 +46,8 @@ public class Coin : MonoBehaviour
         }
         else if (collidedLayer == this.ObjDestroyerLayer.LayerIndex)
         {
+            CoinsMissedCounter.Value++;
+            CoinsMissedValueCounter.Value += CoinValue.Value;
             this.Pool.Recycle(myGameObject);
         }
     }

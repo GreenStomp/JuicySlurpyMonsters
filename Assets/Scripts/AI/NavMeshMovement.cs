@@ -15,7 +15,7 @@ public class NavMeshMovement : MonoBehaviour
     [SerializeField]
     private LayerMaskHolder layerMask;
     [SerializeField]
-    private NavMeshAreaHolder areaLayer;
+    private NavMeshAreaMaskHolder areaLayer;
 
     private Transform toMove;
     void OnEnable()
@@ -27,6 +27,7 @@ public class NavMeshMovement : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(toMove.position, out hit, 1f, areaLayer))
         {
+            Debug.Log("warped");
             agent.Warp(hit.position);
         }
         agent.speed = maxSpeed;

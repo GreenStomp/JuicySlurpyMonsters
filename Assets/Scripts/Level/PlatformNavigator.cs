@@ -7,6 +7,10 @@ public class PlatformNavigator : MonoBehaviour
     public ReferenceFloat MovementSpeed;
     public ReferenceFloat SwitchLaneLerpSpeed;
 
+    public bool UseTranfrom = true;
+
+    public bool ResetDataStructureOnEnable = false;
+
     public Step Step = new Step();
 
     public Step.Data StepData = new Step.Data();
@@ -14,15 +18,18 @@ public class PlatformNavigator : MonoBehaviour
     [SerializeField]
     private Transform myTransform;
     // Use this for initialization
-    void Start()
+    void OnEnable()
     {
-        Step.Reset(StepData, true, true);
+        Step.Reset(StepData, Step.Manager.FirstPlatform, ResetDataStructureOnEnable, ResetDataStructureOnEnable);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Step.CalculateNextStep(myTransform, MovementSpeed * Time.deltaTime, StepData);
+        if (UseTranfrom)
+            Step.CalculateNextStep(myTransform, MovementSpeed * Time.deltaTime, StepData);
+        else
+            Step.CalculateNextStep(MovementSpeed * Time.deltaTime, StepData);
 
         Transform plat = StepData.Plat.transform;
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using SOPRO;
 namespace SOPRO 
 {
     /// <summary>
@@ -8,7 +9,7 @@ namespace SOPRO
     /// </summary>
     [CreateAssetMenu(fileName = "Event", menuName = "SOPRO/Events/Platform")]
     [Serializable]
-    public class SOEvPlatform : ScriptableObject
+    public class SOEvPlatform : BaseSOEvPlatform
     {
 #if UNITY_EDITOR
         /// <summary>
@@ -20,7 +21,10 @@ namespace SOPRO
 #endif
 
 				#if UNITY_EDITOR
-		 				public Platform DEBUG_Platform_0 = default(Platform);
+		 				/// <summary>
+				/// Debug field for inspector view, available only in UNITY_EDITOR
+				/// </summary>
+				public Platform DEBUG_Platform_0 = default(Platform);
 				#endif
 		        [SerializeField]
         private readonly List<SOEvPlatformListener> listeners = new List<SOEvPlatformListener>();
@@ -28,7 +32,7 @@ namespace SOPRO
         /// <summary>
         /// Invokes all listeners of this event
         /// </summary>
-        public void Raise(Platform Value0)
+        public override void Raise(Platform Value0)
         {
             for (int i = listeners.Count - 1; i >= 0; i--)
                 listeners[i].OnEventRaised(Value0);

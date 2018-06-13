@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SOPRO
 {
-    /// <summary>
+	/// <summary>
     /// A class used to represent a shared container of objects
     /// </summary>
     [Serializable]
-    [CreateAssetMenu(fileName = "Container", menuName = "SOPRO/Containers/SOLinkedListTerrainContainer")]
+	[CreateAssetMenu(fileName = "Container", menuName = "SOPRO/Containers/SOLinkedListTerrainContainer")]
     public class SOLinkedListTerrainContainer : ScriptableObject
     {
 #if UNITY_EDITOR
@@ -15,12 +15,12 @@ namespace SOPRO
         /// Description of the container, available only in UNITY_EDITOR
         /// </summary>
         [Multiline]
-        [SerializeField]
+		[SerializeField]
         private string DEBUG_DeveloperDescription = "";
 #endif
         /// <summary>
         /// List of elements stored
         /// </summary>
         public LinkedList<Terrain> Elements = new LinkedList<Terrain>();
-    }
+		    }
 }

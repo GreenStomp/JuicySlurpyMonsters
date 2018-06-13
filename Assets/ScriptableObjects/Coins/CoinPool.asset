@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: -1173331668, guid: 7d6b284e18a06314ea7b65d1fe4236f6, type: 3}
   m_Name: CoinPool
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1081241224753802, guid: dc3e8b896d69d6442b2112c697aaffa8, type: 2}
+  Prefab: {fileID: 1129449413099136, guid: dc3e8b896d69d6442b2112c697aaffa8, type: 2}
   PersistentPoolInScenes: 1

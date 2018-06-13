@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4819302175131228}
   - component: {fileID: 114332593524685090}
   - component: {fileID: 114355108421967882}
+  - component: {fileID: 114272403663352456}
   m_Layer: 0
   m_Name: NavMeshBuilder
   m_TagString: Untagged
@@ -36,11 +37,25 @@ Transform:
   m_GameObject: {fileID: 1986658886363924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 40, z: 200}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114272403663352456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1986658886363924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a17d8605006549d4aadd8029e018aee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundsToUpdate: {fileID: 11400000, guid: 3824b9db747ef784a93592ea1282ea31, type: 2}
+  positionToUpdate: {fileID: 11400000, guid: 784c0a2abd37da2458ff7941e8a4c8bd, type: 2}
+  transformToUse: {fileID: 4819302175131228}
 --- !u!114 &114332593524685090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +74,7 @@ MonoBehaviour:
   m_Size:
     UseConstant: 1
     Variable: {fileID: 0}
-    constantValue: {x: 200, y: 80, z: 200}
+    constantValue: {x: 100, y: 40, z: 200}
   Bounds:
     UseConstant: 0
     Variable: {fileID: 11400000, guid: 3824b9db747ef784a93592ea1282ea31, type: 2}
@@ -87,13 +102,15 @@ MonoBehaviour:
     UseConstant: 1
     Variable: {fileID: 0}
     constantValue: 10
+  UseTranfrom: 0
+  ResetDataStructureOnEnable: 0
   Step:
     Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
     TotalDistanceWalked: {fileID: 0}
     TotalPlatformsPassed: {fileID: 0}
     SpecialPlatformsPassed: {fileID: 0}
   StepData:
-    Percentage: 0.5
+    Percentage: 1
     IsSwitchingLanes: 0
     CurrentLane: 0
     LaneLerpPercentage: 0
