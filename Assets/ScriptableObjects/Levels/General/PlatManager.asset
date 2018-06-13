@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: PlatManager
   m_EditorClassIdentifier: 
   DeathPlane: {fileID: 11400000, guid: de597ff3e97f7a14f8289911ce48ae52, type: 2}
-  PlatformSpawned: {fileID: 11400000, guid: 839f6969369904745b844d9562739748, type: 2}
+  PlatformSpawned: {fileID: 11400000, guid: 017667780d53ac14ba3ccdb9d66a9e56, type: 2}
   MaxActivePlatforms:
     UseConstant: 1
     Variable: {fileID: 0}

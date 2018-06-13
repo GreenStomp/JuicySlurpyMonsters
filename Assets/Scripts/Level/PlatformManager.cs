@@ -22,7 +22,7 @@ public class PlatformManager : ScriptableObject
     }
     public bool IsActive { get { return isActive; } }
     public PlaneSide DeathPlane;
-    public SOEvPlatform PlatformSpawned;
+    public SOBasicEvPlatform PlatformSpawned;
     public ReferenceInt MaxActivePlatforms;
 
     private Queue<Tuple<Platform, SOPool>> platforms;
@@ -117,6 +117,8 @@ public class PlatformManager : ScriptableObject
 
             lastPlatform = tuple.Item1;
 
+            PlatformSpawned.Raise(lastPlatform);
+
             platforms.Enqueue(tuple);
         }
     }
@@ -210,6 +212,8 @@ public class PlatformManager : ScriptableObject
             tuple.Item1.gameObject.SetActive(true);
 
             lastPlatform = tuple.Item1;
+
+            PlatformSpawned.Raise(lastPlatform);
 
             platforms.Enqueue(tuple);
         }

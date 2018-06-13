@@ -5,10 +5,10 @@ namespace SOPRO.Editor
     /// <summary>
     /// Class that modifies SOEvent inspector view
     /// </summary>
-    [CustomEditor(typeof(SOEvInt))]
-    public class SOEvIntDrawer : UnityEditor.Editor
+    [CustomEditor(typeof(SOBasicEvPlatform))]
+    public class SOBasicEvPlatformDrawer : UnityEditor.Editor
     {
-		private SOEvInt obj;
+		private SOBasicEvPlatform obj;
         /// <summary>
         /// Method that modifies SOEvent inspector view
         /// </summary>
@@ -19,11 +19,11 @@ namespace SOPRO.Editor
             GUI.enabled = Application.isPlaying;
 
             if (GUILayout.Button("Raise"))
-                obj.Raise(obj.DEBUG_int_0);
+                obj.Raise(obj.DEBUG_Platform_0);
         }
 		void OnEnable()
 		{
-			this.obj = target as SOEvInt;
+			this.obj = target as SOBasicEvPlatform;
 		}
     }
 }
