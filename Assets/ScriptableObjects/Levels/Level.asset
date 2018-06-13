@@ -14,3 +14,6 @@ MonoBehaviour:
   platforms:
   - {fileID: 11400000, guid: 1143854bda46bad42acb80308837461a, type: 2}
   - {fileID: 11400000, guid: 6de2ac3452f05104fb185f0703863301, type: 2}
+  - {fileID: 11400000, guid: dd955a5b39976cf4cbe1cd44385d4901, type: 2}
+  - {fileID: 11400000, guid: 1116aec4ccee3af4983458816b68efa4, type: 2}
+  - {fileID: 11400000, guid: 670607d25dd5e4449b7d9c2d9ec14402, type: 2}
