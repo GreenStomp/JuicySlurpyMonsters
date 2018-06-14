@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using SOPRO;
-[RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class Coin : MonoBehaviour
 {
     [NonSerialized]
@@ -19,6 +18,11 @@ public class Coin : MonoBehaviour
     public ReferenceUint CoinValue;
 
     public bool IsRecycled { get; private set; }
+
+    [SerializeField]
+    private Rigidbody bd;
+    [SerializeField]
+    private Collider coll;
 
     private GameObject myGameObject;
 
@@ -58,10 +62,9 @@ public class Coin : MonoBehaviour
     }
     void Reset()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.isKinematic = true;
-        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-        GetComponent<Collider>().isTrigger = true;
+        bd.useGravity = false;
+        bd.isKinematic = true;
+        bd.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        coll.isTrigger = true;
     }
 }
