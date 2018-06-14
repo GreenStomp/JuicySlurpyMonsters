@@ -11,7 +11,7 @@ public class Lane : ScriptableObject
 #if UNITY_EDITOR
     [Range(0.00001f, 0.01f)]
     public float EDITOR_Precision = 0.00001f;
-    void OnValidate()
+    public void OnValidate()
     {
         if (!LocalCurve)
             return;
@@ -34,8 +34,8 @@ public class Lane : ScriptableObject
             dir.z = 0f;
         EndLocalDirection = dir.normalized;
 
-        EndLocalPosition = LocalCurve.GetPoint(1f);
-        StartLocalPosition = LocalCurve.GetPoint(0);
+        EndLocalPosition = LocalCurve.GetPoint(1.00000000000000000000f);
+        StartLocalPosition = LocalCurve.GetPoint(0.00000000000000000000f);
     }
 #endif
 }

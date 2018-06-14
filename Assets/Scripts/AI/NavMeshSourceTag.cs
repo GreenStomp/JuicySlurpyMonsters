@@ -8,44 +8,40 @@ using SOPRO;
 public class NavMeshSourceTag : MonoBehaviour
 {
     // Global containers for all active mesh/terrain tags
-    [SerializeField]
-    private SOLinkedListMeshFilterContainer m_Meshes;
-    [SerializeField]
-    private SOLinkedListTerrainContainer m_Terrains;
+    public SOLinkedListMeshFilterContainer M_Meshes;
+    public SOLinkedListTerrainContainer M_Terrains;
 
-    [SerializeField]
-    private MeshFilter filter;
+    public MeshFilter Filter;
     private LinkedListNode<MeshFilter> meshNode;
 
-    [SerializeField]
-    private Terrain terrain;
+    public Terrain Terrain;
     private LinkedListNode<Terrain> terrainNode;
 
     private void Awake()
     {
-        if (!filter)
-            filter = GetComponent<MeshFilter>();
+        if (!Filter)
+            Filter = GetComponent<MeshFilter>();
 
-        if (!terrain)
-            terrain = GetComponent<Terrain>();
+        if (!Terrain)
+            Terrain = GetComponent<Terrain>();
     }
 
     void OnEnable()
     {
-        if (filter)
-            meshNode = m_Meshes.Elements.AddLast(filter);
+        if (Filter)
+            meshNode = M_Meshes.Elements.AddLast(Filter);
 
-        if (terrain)
-            terrainNode = m_Terrains.Elements.AddLast(terrain);
+        if (Terrain)
+            terrainNode = M_Terrains.Elements.AddLast(Terrain);
     }
 
     void OnDisable()
     {
         if (meshNode != null)
-            m_Meshes.Elements.Remove(meshNode);
+            M_Meshes.Elements.Remove(meshNode);
 
         if (terrainNode != null)
-            m_Terrains.Elements.Remove(terrainNode);
+            M_Terrains.Elements.Remove(terrainNode);
     }
 
     // Collect all the navmesh build sources for enabled objects tagged by this component

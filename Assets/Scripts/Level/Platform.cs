@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System;
-using SOPRO;
 public class Platform : MonoBehaviour
 {
-    public ReferenceUint PlatformUniqueId;
+    public uint PlatformUniqueId;
 
     public Lane[] Lanes;
     public SpecialPlatform SpecialEffect;

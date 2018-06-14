@@ -17,14 +17,13 @@ public class PlatformNavigator : MonoBehaviour
 
     [SerializeField]
     private Transform myTransform;
-    // Use this for initialization
+
     void OnEnable()
     {
         Step.Reset(StepData, Step.Manager.FirstPlatform, ResetDataStructureOnEnable, ResetDataStructureOnEnable);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (UseTranfrom)
             Step.CalculateNextStep(myTransform, MovementSpeed * Time.deltaTime, StepData);

@@ -38,8 +38,8 @@ GameObject:
   - component: {fileID: 4234455175663636}
   - component: {fileID: 33378435497171572}
   - component: {fileID: 23174818332014224}
-  - component: {fileID: 65536592423424572}
   - component: {fileID: 114919058849611604}
+  - component: {fileID: 65551192580622846}
   m_Layer: 14
   m_Name: GameObject
   m_TagString: Untagged
@@ -130,14 +130,14 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65536592423424572
+--- !u!65 &65551192580622846
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1233822441023132}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 25, z: 100.00003}
@@ -153,10 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291b9daff981f4248a7dd32d79feeada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlatformUniqueId:
-    UseConstant: 1
-    Variable: {fileID: 0}
-    constantValue: 3
+  PlatformUniqueId: 0
   Lanes:
   - {fileID: 11400000, guid: aab80539e97305045be5f15063a78b6b, type: 2}
   - {fileID: 11400000, guid: e549d51c0286e8a4faf45585bfc58720, type: 2}
@@ -175,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a14d50d9eea5e46b40052d9780ea90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Meshes: {fileID: 11400000, guid: 697f09585e61afc41b1c67d4fc7fd245, type: 2}
-  m_Terrains: {fileID: 11400000, guid: 42fd45e7d68f9ed48b20d0f0b9f547a7, type: 2}
-  filter: {fileID: 33378435497171572}
-  terrain: {fileID: 0}
+  M_Meshes: {fileID: 11400000, guid: 697f09585e61afc41b1c67d4fc7fd245, type: 2}
+  M_Terrains: {fileID: 11400000, guid: 42fd45e7d68f9ed48b20d0f0b9f547a7, type: 2}
+  Filter: {fileID: 33378435497171572}
+  Terrain: {fileID: 0}

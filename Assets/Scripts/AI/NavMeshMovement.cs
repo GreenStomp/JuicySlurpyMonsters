@@ -64,7 +64,8 @@ public class NavMeshMovement : MonoBehaviour
             {
                 NavMeshHit navMeshHit;
                 if (NavMesh.FindClosestEdge(destination, out navMeshHit, areaLayer))
-                    agent.SetDestination(navMeshHit.position);
+                    if (!agent.SetDestination(navMeshHit.position))
+                        agent.Warp(navMeshHit.position);
             }
         }
     }
