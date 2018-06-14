@@ -71,6 +71,8 @@ public class PlatformManager : ScriptableObject
         if (!currentLevel)
             return;
 
+        isActive = true;
+
         int activePlat = MaxActivePlatforms.Value <= 0 ? 1 : MaxActivePlatforms.Value;
 
         if (platforms != null)
@@ -122,16 +124,12 @@ public class PlatformManager : ScriptableObject
             platforms.Enqueue(tuple);
         }
     }
-    public void StopLevel(bool smoothStop = true)
+    public void StopLevel(bool clearActivePlatforms = true, bool clearPools = true)
     {
         if (!currentLevel)
             return;
-        throw new System.NotImplementedException();
-    }
-    public void Clear(bool clearActivePlatforms = true, bool clearPools = true)
-    {
-        if (!currentLevel)
-            return;
+
+        isActive = false;
 
         if (clearActivePlatforms)
         {
@@ -155,6 +153,8 @@ public class PlatformManager : ScriptableObject
     }
     public void ChangeLevel(Level newLevel, bool smoothChange = true, bool clearPreviousLevelPools = true)
     {
+        isActive = true;
+
         int activePlat = MaxActivePlatforms.Value <= 0 ? 1 : MaxActivePlatforms.Value;
 
         if (platforms != null)
