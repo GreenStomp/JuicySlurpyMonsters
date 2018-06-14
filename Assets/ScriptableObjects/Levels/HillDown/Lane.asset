@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b7ff518470192489d3fb9d710915ad, type: 3}
+  m_Name: Lane
+  m_EditorClassIdentifier: 
+  LocalCurve: {fileID: 11400000, guid: ba40f08ba1c6d1345a4603a643694918, type: 2}
+  StartLocalDirection: {x: 0, y: 0, z: 1}
+  StartLocalPosition: {x: 0, y: 0, z: 0}
+  EndLocalDirection: {x: 0, y: 0, z: 1}
+  EndLocalPosition: {x: 0, y: -20, z: 100}
+  EDITOR_Precision: 0.00001

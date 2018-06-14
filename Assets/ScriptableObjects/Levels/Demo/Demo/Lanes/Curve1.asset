@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daddc3266e277e4ba47d688b048c48b, type: 3}
+  m_Name: Curve1
+  m_EditorClassIdentifier: 
+  length: 61.462616
+  inverseLength: 0.016270053
+  validPoints: 4
+  start: {x: 0, y: 0, z: 0}
+  p1: {x: 10, y: 0, z: 20}
+  p2: {x: -10, y: 0, z: 40}
+  end: {x: 0, y: 0, z: 60}

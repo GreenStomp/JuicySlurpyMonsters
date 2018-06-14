@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1173331668, guid: 7d6b284e18a06314ea7b65d1fe4236f6, type: 3}
+  m_Name: SOPoolStraight2
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 1882402206584782, guid: 3f23f8e7b09f1c74dafcbbd324c06301, type: 2}
+  PersistentPoolInScenes: 1

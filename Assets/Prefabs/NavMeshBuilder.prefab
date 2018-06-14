@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 1986658886363924}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 40, z: 200}
+  m_LocalScale: {x: 250, y: 40, z: 300}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Size:
     UseConstant: 1
     Variable: {fileID: 0}
-    constantValue: {x: 100, y: 40, z: 200}
+    constantValue: {x: 250, y: 40, z: 300}
   Bounds:
     UseConstant: 0
     Variable: {fileID: 11400000, guid: 3824b9db747ef784a93592ea1282ea31, type: 2}
@@ -97,7 +97,7 @@ MonoBehaviour:
   MovementSpeed:
     UseConstant: 1
     Variable: {fileID: 0}
-    constantValue: 10
+    constantValue: 20
   SwitchLaneLerpSpeed:
     UseConstant: 1
     Variable: {fileID: 0}
@@ -110,9 +110,9 @@ MonoBehaviour:
     TotalPlatformsPassed: {fileID: 0}
     SpecialPlatformsPassed: {fileID: 0}
   StepData:
-    Percentage: 1
+    Percentage: 0.8
     IsSwitchingLanes: 0
-    CurrentLane: 0
+    CurrentLane: 1
     LaneLerpPercentage: 0
     DestinationLane: 0
     ForwardPrecision: 0.00001
