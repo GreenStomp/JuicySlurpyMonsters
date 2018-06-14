@@ -9,14 +9,15 @@ public class PlatformToolEditorWindow : EditorWindow
     public SOLinkedListTerrainContainer Terrains;
     public LayerHolder PlatformLayer;
     public LayerHolder SidePlatformLayer;
-    public string PlatformPath = Path.Combine(Path.Combine("ScriptableObjects", "Levels"), "Demo");
+    public string FolderTarget = "Demo";
     public int ValidPoints = V3BezierCurve.MinValidPoints;
     public int LaneCount = 3;
     public float MeshPrecision = 1f;
     public float LaneDistance = 5f;
-    public Vector2 PlatformSize, StepSize;
-    public float SidePlatformSize;
+    public Vector2 PlatformSize = new Vector2(20, 5), StepSize = new Vector2(5, 0.5f);
+    public float SidePlatformSize = 40f;
     public bool ShowLines = false;
+    public Material DefaultMaterial;
 
     private Transform startPoint;
     private Transform p1Point;
@@ -54,6 +55,13 @@ public class PlatformToolEditorWindow : EditorWindow
             for (int i = 0; i < lines.Length; i++)
                 DestroyImmediate(lines[i].gameObject);
         lines = null;
+        if (lanes != null)
+            for (int i = 0; i < lanes.Length; i++)
+            {
+                DestroyImmediate(lanes[i].LocalCurve);
+                DestroyImmediate(lanes[i]);
+            }
+        lanes = null;
         if (platformRoot)
             DestroyImmediate(platformRoot);
     }
@@ -103,11 +111,12 @@ public class PlatformToolEditorWindow : EditorWindow
         Terrains = EditorGUILayout.ObjectField("Terrains container", Terrains, typeof(SOLinkedListTerrainContainer), false) as SOLinkedListTerrainContainer;
         PlatformLayer = EditorGUILayout.ObjectField("Platform Layer", PlatformLayer, typeof(LayerHolder), false) as LayerHolder;
         SidePlatformLayer = EditorGUILayout.ObjectField("Side Platform Layer", SidePlatformLayer, typeof(LayerHolder), false) as LayerHolder;
-        PlatformPath = EditorGUILayout.TextField("Platform path in Assets", PlatformPath);
+        DefaultMaterial = EditorGUILayout.ObjectField("Platform renderer material", DefaultMaterial, typeof(Material), false) as Material;
+        FolderTarget = EditorGUILayout.TextField("Platform folder in Assets", FolderTarget);
 
         EditorGUILayout.Space();
 
-        if (!MeshFilters || !Terrains || !PlatformLayer || !SidePlatformLayer || PlatformPath == null)
+        if (!MeshFilters || !Terrains || !PlatformLayer || !SidePlatformLayer || !DefaultMaterial || FolderTarget == null)
         {
             EditorGUILayout.HelpBox("Not all necessary fields are setted correctly", MessageType.Error);
             return;
@@ -169,6 +178,32 @@ public class PlatformToolEditorWindow : EditorWindow
             lines = null;
         }
 
+        int midLane = lanes.Length / 2;
+
+        for (int i = 0; i < lanes.Length; i++)
+        {
+            float distanceToCenter = i == midLane ? 0.0000000f : (i - midLane) * LaneDistance;
+            Lane ln = lanes[i];
+            ln.LocalCurve.Set(startPoint.position + startPoint.right * distanceToCenter, p1Point.position + p1Point.right * distanceToCenter, p2Point.position + p2Point.right * distanceToCenter, endPoint.position + endPoint.right * distanceToCenter, ValidPoints);
+            ln.LocalCurve.ForceUpdateLenghts();
+            ln.OnValidate();
+
+            if (ShowLines)
+            {
+                LineRenderer line = lines[i];
+                points[0] = ln.StartLocalPosition;
+                points[99] = ln.EndLocalPosition;
+                float intervall = 1f / 99f;
+                for (int j = 1; j < points.Length - 1; j++)
+                {
+                    points[i] = ValidPoints == 2 ? ln.LocalCurve.CalculateBezierFirst(intervall * i) : (ValidPoints == 3 ? ln.LocalCurve.CalculateQuadraticBezier(intervall * i) : ln.LocalCurve.CalculateCubicBezier(intervall * i));
+                }
+                line.SetPositions(points);
+            }
+        }
+
+        if (lanes[midLane].LocalCurve.Length <= 0f)
+            return;
 
         using (new GUILayout.HorizontalScope())
         {
@@ -177,40 +212,56 @@ public class PlatformToolEditorWindow : EditorWindow
                 if (platformRoot)
                     DestroyImmediate(platformRoot);
 
-                int midLane = lanes.Length / 2;
-
-                for (int i = 0; i < lanes.Length; i++)
-                {
-                    float distanceToCenter = i == midLane ? 0.0000000f : (i - midLane) * LaneDistance;
-                    Lane ln = lanes[i];
-                    ln.LocalCurve.Set(startPoint.position + startPoint.right * distanceToCenter, p1Point.position + p1Point.right * distanceToCenter, p2Point.position + p2Point.right * distanceToCenter, endPoint.position + endPoint.right * distanceToCenter, ValidPoints);
-                    ln.LocalCurve.ForceUpdateLenghts();
-                    ln.OnValidate();
-
-                    if (ShowLines)
-                    {
-                        LineRenderer line = lines[i];
-                        points[0] = ln.StartLocalPosition;
-                        points[99] = ln.EndLocalPosition;
-                        float intervall = 1f / 99f;
-                        for (int j = 1; j < points.Length - 1; j++)
-                        {
-                            points[i] = ValidPoints == 2 ? ln.LocalCurve.CalculateBezierFirst(intervall * i) : (ValidPoints == 3 ? ln.LocalCurve.CalculateQuadraticBezier(intervall * i) : ln.LocalCurve.CalculateCubicBezier(intervall * i));
-                        }
-                        line.SetPositions(points);
-                    }
-                }
-
                 Tuple<Mesh, Mesh> terrains = GenerateMeshes(lanes[midLane]);
 
                 platformRoot = SpawnPlatAndGetRoot(terrains.Item1, terrains.Item2, lanes, startPoint.up, endPoint.up);
             }
-            if (GUILayout.Button("Save generated platform"))
-            {
 
+            if (platformRoot && GUILayout.Button("Save generated platform"))
+            {
+                string folderPath = "Assets/";
+                folderPath = Directory.Exists(Path.Combine(folderPath, "ScriptableObjects")) ? Path.Combine(folderPath, "ScriptableObjects") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder("Assets", "ScriptableObjects"));
+                folderPath = Directory.Exists(Path.Combine(folderPath, "Levels")) ? Path.Combine(folderPath, "Levels") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, "Levels"));
+                if (FolderTarget.Length > 0)
+                    folderPath = Directory.Exists(Path.Combine(folderPath, FolderTarget)) ? Path.Combine(folderPath, FolderTarget) : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, FolderTarget));
+
+                string meshesPath = Directory.Exists(Path.Combine(folderPath, "Meshes")) ? Path.Combine(folderPath, "Meshes") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, "Meshes"));
+
+                MeshFilter[] filters = platformRoot.GetComponentsInChildren<MeshFilter>(true);
+                for (int i = 0; i < filters.Length; i++)
+                {
+                    //AssetDatabase.CreateAsset(filters[i].mesh, Path.Combine(meshesPath, "Mesh" + i));
+                    AssetDatabase.CreateAsset(filters[i].sharedMesh, meshesPath + "Mesh" + i + ".asset");
+                }
+
+                string laneFolder = Directory.Exists(Path.Combine(folderPath, "Lanes")) ? Path.Combine(folderPath, "Lanes") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, "Lanes"));
+
+                for (int i = 0; i < lanes.Length; i++)
+                {
+                    Lane current = lanes[i];
+                    //AssetDatabase.CreateAsset(current.LocalCurve, Path.Combine(laneFolder, current.LocalCurve.name + ".asset"));
+                    //AssetDatabase.CreateAsset(current, Path.Combine(laneFolder, current.name + ".asset"));
+                    AssetDatabase.CreateAsset(current.LocalCurve, laneFolder + current.LocalCurve.name + ".asset");
+                    AssetDatabase.CreateAsset(current, laneFolder + current.name + ".asset");
+                }
+
+                platformRoot.name = "Platform";
+                GameObject go = PrefabUtility.CreatePrefab(folderPath + "Platform.prefab", platformRoot);
+                SOPool pool = ScriptableObject.CreateInstance<SOPool>();
+                pool.name = "Pool";
+                pool.Prefab = go;
+                //AssetDatabase.CreateAsset(pool, Path.Combine(folderPath, "Pool"));
+                AssetDatabase.CreateAsset(pool, folderPath + "Pool.asset");
+
+                lanes = null;
+
+                OnDisable();
+                OnEnable();
             }
         }
     }
+
+    #region Generation
     private Tuple<Mesh, Mesh> GenerateMeshes(Lane centralLane)
     {
         Mesh meshTerrain = new Mesh();
@@ -391,7 +442,7 @@ public class PlatformToolEditorWindow : EditorWindow
         child.transform.parent = res.transform;
         child.layer = PlatformLayer;
         child.AddComponent<MeshFilter>().mesh = mesh;
-        child.AddComponent<MeshRenderer>();
+        child.AddComponent<MeshRenderer>().material = DefaultMaterial;
         child.AddComponent<BoxCollider>().isTrigger = true;
         child.name = "Terrain";
         NavMeshSourceTag tag = child.AddComponent<NavMeshSourceTag>();
@@ -403,7 +454,7 @@ public class PlatformToolEditorWindow : EditorWindow
         child.transform.parent = res.transform;
         child.layer = SidePlatformLayer;
         child.AddComponent<MeshFilter>().mesh = sideMesh;
-        child.AddComponent<MeshRenderer>();
+        child.AddComponent<MeshRenderer>().material = DefaultMaterial;
         child.AddComponent<BoxCollider>().isTrigger = true;
         child.name = "SideTerrain";
         tag = child.AddComponent<NavMeshSourceTag>();
@@ -412,6 +463,7 @@ public class PlatformToolEditorWindow : EditorWindow
         tag.Filter = child.GetComponent<MeshFilter>();
         return res;
     }
+    #endregion
 
     #region UtilityClasses
     [SerializeField]
