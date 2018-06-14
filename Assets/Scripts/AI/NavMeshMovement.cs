@@ -18,7 +18,6 @@ public class NavMeshMovement : MonoBehaviour
     private NavMeshAreaMaskHolder areaLayer;
 
     private Transform toMove;
-    private Platform current;
     void OnEnable()
     {
         if (!toMove)
@@ -58,15 +57,14 @@ public class NavMeshMovement : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(toMove.position + up, Vector3.Lerp(toMove.forward, -up, 0.5f).normalized);
 
-        Platform prev = current;
 
         if (Physics.Raycast(ray, out hit, 10f, layerMask))
         {
-            current = hit.collider.transform.root.GetComponentInChildren<Platform>();
-            if (current == prev)
-                current = current.Next;
+            Platform plat = hit.collider.transform.root.GetComponentInChildren<Platform>();
+            Vector3 destination = plat.MiddleLaneEndPos;
+            if ((destination - toMove.position).sqrMagnitude < recalculateDistance * recalculateDistance * 2f)
+                destination = plat.Next.MiddleLaneEndPos;
 
-            Vector3 destination = current.MiddleLaneEndPos;
             if (!agent.SetDestination(destination))
             {
                 NavMeshHit navMeshHit;
@@ -74,6 +72,12 @@ public class NavMeshMovement : MonoBehaviour
                     if (!agent.SetDestination(navMeshHit.position))
                         agent.Warp(navMeshHit.position);
             }
+        }
+        else
+        {
+            NavMeshHit navMeshHit;
+            if (NavMesh.FindClosestEdge(toMove.position, out navMeshHit, areaLayer))
+                agent.Warp(navMeshHit.position);
         }
     }
 }
