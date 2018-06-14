@@ -172,7 +172,7 @@ MonoBehaviour:
   maxSpeed:
     UseConstant: 1
     Variable: {fileID: 0}
-    constantValue: 10
+    constantValue: 20
   recalculateDistance:
     UseConstant: 1
     Variable: {fileID: 0}

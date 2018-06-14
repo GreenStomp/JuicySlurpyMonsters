@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1173331668, guid: 7d6b284e18a06314ea7b65d1fe4236f6, type: 3}
-  m_Name: Assets_ScriptableObjects_Levels_Demo_Pool
+  m_Name: Pool
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1242066321339442, guid: 205281029dc89194592bf733edd41fdc, type: 2}
+  Prefab: {fileID: 1308297113442882, guid: 83ac2ec36adce774e9b6945fdc420ffa, type: 2}
   PersistentPoolInScenes: 1

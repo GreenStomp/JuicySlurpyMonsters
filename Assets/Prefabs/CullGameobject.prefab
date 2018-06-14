@@ -2506,7 +2506,7 @@ MonoBehaviour:
   MovementSpeed:
     UseConstant: 1
     Variable: {fileID: 0}
-    constantValue: 10
+    constantValue: 20
   SwitchLaneLerpSpeed:
     UseConstant: 1
     Variable: {fileID: 0}

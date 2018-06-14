@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41b7ff518470192489d3fb9d710915ad, type: 3}
-  m_Name: LanesLane1
+  m_Name: Lane1
   m_EditorClassIdentifier: 
-  LocalCurve: {fileID: 11400000, guid: ab73a8bd2e51c5c45ac87ea63c55ce22, type: 2}
-  StartLocalDirection: {x: 0, y: 0, z: 1}
+  LocalCurve: {fileID: 11400000, guid: e5f62d15df1898344890e5d6bfe6fa3f, type: 2}
+  StartLocalDirection: {x: 0.4472136, y: 0, z: 0.8944272}
   StartLocalPosition: {x: 0, y: 0, z: 0}
-  EndLocalDirection: {x: 0, y: 0, z: 1}
-  EndLocalPosition: {x: 0, y: 0, z: 13.9}
+  EndLocalDirection: {x: 0.44835192, y: 0, z: 0.8938571}
+  EndLocalPosition: {x: 0, y: 0, z: 60}
   EDITOR_Precision: 0.00001

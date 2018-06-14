@@ -10,6 +10,7 @@ public class PlatformToolEditorWindow : EditorWindow
     public LayerHolder PlatformLayer;
     public LayerHolder SidePlatformLayer;
     public string FolderTarget = "Demo";
+    public string LevelName = "Demo";
     public int ValidPoints = V3BezierCurve.MinValidPoints;
     public int LaneCount = 3;
     public float MeshPrecision = 1f;
@@ -113,10 +114,11 @@ public class PlatformToolEditorWindow : EditorWindow
         SidePlatformLayer = EditorGUILayout.ObjectField("Side Platform Layer", SidePlatformLayer, typeof(LayerHolder), false) as LayerHolder;
         DefaultMaterial = EditorGUILayout.ObjectField("Platform renderer material", DefaultMaterial, typeof(Material), false) as Material;
         FolderTarget = EditorGUILayout.TextField("Platform folder in Assets", FolderTarget);
+        LevelName = EditorGUILayout.TextField("Level name", LevelName);
 
         EditorGUILayout.Space();
 
-        if (!MeshFilters || !Terrains || !PlatformLayer || !SidePlatformLayer || !DefaultMaterial || FolderTarget == null)
+        if (!MeshFilters || !Terrains || !PlatformLayer || !SidePlatformLayer || !DefaultMaterial || LevelName == null || LevelName.Length <= 0 || FolderTarget == null)
         {
             EditorGUILayout.HelpBox("Not all necessary fields are setted correctly", MessageType.Error);
             return;
@@ -222,6 +224,7 @@ public class PlatformToolEditorWindow : EditorWindow
                 string folderPath = "Assets/";
                 folderPath = Directory.Exists(Path.Combine(folderPath, "ScriptableObjects")) ? Path.Combine(folderPath, "ScriptableObjects") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder("Assets", "ScriptableObjects"));
                 folderPath = Directory.Exists(Path.Combine(folderPath, "Levels")) ? Path.Combine(folderPath, "Levels") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, "Levels"));
+                folderPath = Directory.Exists(Path.Combine(folderPath, LevelName)) ? Path.Combine(folderPath, LevelName) : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, LevelName));
                 if (FolderTarget.Length > 0)
                     folderPath = Directory.Exists(Path.Combine(folderPath, FolderTarget)) ? Path.Combine(folderPath, FolderTarget) : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, FolderTarget));
 
@@ -231,7 +234,7 @@ public class PlatformToolEditorWindow : EditorWindow
                 for (int i = 0; i < filters.Length; i++)
                 {
                     //AssetDatabase.CreateAsset(filters[i].mesh, Path.Combine(meshesPath, "Mesh" + i));
-                    AssetDatabase.CreateAsset(filters[i].sharedMesh, meshesPath + "Mesh" + i + ".asset");
+                    AssetDatabase.CreateAsset(filters[i].sharedMesh, meshesPath + "/Mesh" + i + ".asset");
                 }
 
                 string laneFolder = Directory.Exists(Path.Combine(folderPath, "Lanes")) ? Path.Combine(folderPath, "Lanes") : AssetDatabase.GUIDToAssetPath(AssetDatabase.CreateFolder(folderPath, "Lanes"));
@@ -241,17 +244,17 @@ public class PlatformToolEditorWindow : EditorWindow
                     Lane current = lanes[i];
                     //AssetDatabase.CreateAsset(current.LocalCurve, Path.Combine(laneFolder, current.LocalCurve.name + ".asset"));
                     //AssetDatabase.CreateAsset(current, Path.Combine(laneFolder, current.name + ".asset"));
-                    AssetDatabase.CreateAsset(current.LocalCurve, laneFolder + current.LocalCurve.name + ".asset");
-                    AssetDatabase.CreateAsset(current, laneFolder + current.name + ".asset");
+                    AssetDatabase.CreateAsset(current.LocalCurve, laneFolder + "/" + current.LocalCurve.name + ".asset");
+                    AssetDatabase.CreateAsset(current, laneFolder + "/" + current.name + ".asset");
                 }
 
                 platformRoot.name = "Platform";
-                GameObject go = PrefabUtility.CreatePrefab(folderPath + "Platform.prefab", platformRoot);
+                GameObject go = PrefabUtility.CreatePrefab(folderPath + "/Platform.prefab", platformRoot);
                 SOPool pool = ScriptableObject.CreateInstance<SOPool>();
                 pool.name = "Pool";
                 pool.Prefab = go;
                 //AssetDatabase.CreateAsset(pool, Path.Combine(folderPath, "Pool"));
-                AssetDatabase.CreateAsset(pool, folderPath + "Pool.asset");
+                AssetDatabase.CreateAsset(pool, folderPath + "/Pool.asset");
 
                 lanes = null;
 
