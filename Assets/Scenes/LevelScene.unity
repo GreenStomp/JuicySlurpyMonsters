@@ -532,7 +532,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CoinManager: {fileID: 11400000, guid: 3d5d55ba86be788469ae9421d0c795ea, type: 2}
-  PlatManager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
   PlatformCreated: {fileID: 11400000, guid: 017667780d53ac14ba3ccdb9d66a9e56, type: 2}
   CoinsToSpawnPerPlatform:
     UseConstant: 1
