@@ -2,23 +2,17 @@
 using SOPRO;
 public class PlayerController : MonoBehaviour
 {
-    public ReferenceFloat MovementSpeed;
-    public ReferenceFloat SwitchLaneLerpSpeed;
-
-    public Step Step = new Step();
-
-    public Step.Data StepData = new Step.Data();
-
     public MobileInput Input;
+
+    public PlatformNavigator Navigator;
+
+    public AnimatorPropertyHolder Speed;
+    public Animator Animator;
 
     private IState current;
 
-    private Transform myTransform;
-
     void Start()
     {
-        myTransform = transform;
-
         Swiping swipe = new Swiping(this);
         Idle idle = new Idle(this);
 
@@ -26,20 +20,11 @@ public class PlayerController : MonoBehaviour
         idle.Swiping = swipe;
 
         current = idle;
-
-        Step.Reset(StepData, Step.Manager.FirstPlatform);
     }
     void Update()
     {
-        Step.CalculateNextStep(myTransform, MovementSpeed * Time.deltaTime, StepData);
-
-        Transform plat = StepData.Plat.transform;
-
-        myTransform.LookAt(plat.TransformDirection(StepData.LocalForward) + myTransform.position, plat.TransformDirection(StepData.LocalUp));
-
         current = current.OnStateUpdate();
-
-        myTransform.position = plat.TransformPoint(StepData.LocalPosition);
+        SOPRO.AnimatorUtility.SetFloat(Animator, Speed, Navigator.MovementSpeed);
     }
     private class Swiping : IState
     {
@@ -51,9 +36,9 @@ public class PlayerController : MonoBehaviour
         }
         public IState OnStateUpdate()
         {
-            Step.Data data = owner.StepData;
+            Step.Data data = owner.Navigator.StepData;
 
-            data.LaneLerpPercentage += Time.deltaTime * owner.SwitchLaneLerpSpeed.Value;
+            data.LaneLerpPercentage += Time.deltaTime * owner.Navigator.SwitchLaneLerpSpeed.Value;
 
             if (data.LaneLerpPercentage > 1f)
             {
@@ -76,7 +61,7 @@ public class PlayerController : MonoBehaviour
         }
         public IState OnStateUpdate()
         {
-            Step.Data data = owner.StepData;
+            Step.Data data = owner.Navigator.StepData;
             MobileInput input = this.owner.Input;
 
             if (input.SwipeLeft && data.CurrentLane > 0)
