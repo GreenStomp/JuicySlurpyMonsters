@@ -55,7 +55,7 @@ public class Coin : MonoBehaviour
             this.Pool.Recycle(myGameObject);
         }
     }
-    void Start()
+    void Awake()
     {
         this.gameObject.layer = CoinLayer.LayerIndex;
         myGameObject = gameObject;
