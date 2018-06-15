@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 114610030103575586}
   - component: {fileID: 54832349615081552}
   - component: {fileID: 136043385139638128}
+  - component: {fileID: 114474737867717634}
   m_Layer: 8
   m_Name: CullGameobject
   m_TagString: Untagged
@@ -2479,6 +2480,43 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114474737867717634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1606614993029288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707d3b68b158298429b51875a1b9c36f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementSpeed:
+    UseConstant: 1
+    Variable: {fileID: 0}
+    constantValue: 20
+  SwitchLaneLerpSpeed:
+    UseConstant: 1
+    Variable: {fileID: 0}
+    constantValue: 10
+  UseTranfrom: 1
+  ResetDataStructureOnEnable: 1
+  Step:
+    Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
+    TotalDistanceWalked: {fileID: 11400000, guid: a20038cfeeca6db4c81f3a3795c2b3b1,
+      type: 2}
+    TotalPlatformsPassed: {fileID: 11400000, guid: 08a06fcf5cddee2409dbfc4b534b3291,
+      type: 2}
+    SpecialPlatformsPassed: {fileID: 11400000, guid: f897a57442dd8374abd2c37daf52c19e,
+      type: 2}
+  StepData:
+    Percentage: 0
+    IsSwitchingLanes: 0
+    CurrentLane: 0
+    LaneLerpPercentage: 0
+    DestinationLane: 0
+    ForwardPrecision: 0.00001
+  myTransform: {fileID: 4354456454153090}
 --- !u!114 &114610030103575586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2503,30 +2541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7261536506ce8e47bd790202c1bc02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed:
-    UseConstant: 1
-    Variable: {fileID: 0}
-    constantValue: 20
-  SwitchLaneLerpSpeed:
-    UseConstant: 1
-    Variable: {fileID: 0}
-    constantValue: 10
-  Step:
-    Manager: {fileID: 11400000, guid: 1219fc534533aa54fa2b95657437fc8a, type: 2}
-    TotalDistanceWalked: {fileID: 11400000, guid: a20038cfeeca6db4c81f3a3795c2b3b1,
-      type: 2}
-    TotalPlatformsPassed: {fileID: 11400000, guid: 08a06fcf5cddee2409dbfc4b534b3291,
-      type: 2}
-    SpecialPlatformsPassed: {fileID: 11400000, guid: f897a57442dd8374abd2c37daf52c19e,
-      type: 2}
-  StepData:
-    Percentage: 0
-    IsSwitchingLanes: 0
-    CurrentLane: 0
-    LaneLerpPercentage: 0
-    DestinationLane: 0
-    ForwardPrecision: 0.00001
   Input: {fileID: 11400000, guid: 8efac99ec03e1f84bba7599a2d07611f, type: 2}
+  Navigator: {fileID: 114474737867717634}
+  Speed: {fileID: 11400000, guid: 470a7c58b00a4ea4b8a87bfb68a737a1, type: 2}
+  Animator: {fileID: 95783629138463206}
 --- !u!124 &124835296095708052
 Behaviour:
   m_ObjectHideFlags: 1

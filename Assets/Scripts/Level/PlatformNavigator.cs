@@ -22,6 +22,10 @@ public class PlatformNavigator : MonoBehaviour
     {
         Step.Reset(StepData, Step.Manager.FirstPlatform, ResetDataStructureOnEnable, ResetDataStructureOnEnable);
     }
+    void Start()
+    {
+        Step.Reset(StepData, Step.Manager.FirstPlatform, ResetDataStructureOnEnable, ResetDataStructureOnEnable);
+    }
 
     public void Update()
     {
