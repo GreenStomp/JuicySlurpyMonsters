@@ -21,7 +21,11 @@ public class LocalNavMeshBuilder : MonoBehaviour
     private SOLinkedListMeshFilterContainer meshes;
     [SerializeField]
     private SOLinkedListTerrainContainer terrains;
+    [SerializeField]
+    [Range(0f, 10f)]
+    private float updateTime;
 
+    private float timer;
     NavMeshData m_NavMesh;
     AsyncOperation m_Operation;
     NavMeshDataInstance m_Instance;
@@ -29,11 +33,16 @@ public class LocalNavMeshBuilder : MonoBehaviour
 
     void Update()
     {
-        UpdateNavMesh(false);
+        timer += Time.unscaledDeltaTime;
+        if (timer > updateTime)
+        {
+            timer = 0f;
+            UpdateNavMesh(false);
+        }
     }
-
     void OnEnable()
     {
+        timer = 0f;
         // Construct and add navmesh
         m_NavMesh = new NavMeshData();
         m_Instance = NavMesh.AddNavMeshData(m_NavMesh);

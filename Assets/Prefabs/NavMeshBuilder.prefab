@@ -83,6 +83,7 @@ MonoBehaviour:
       m_Extent: {x: 0, y: 0, z: 0}
   meshes: {fileID: 11400000, guid: 697f09585e61afc41b1c67d4fc7fd245, type: 2}
   terrains: {fileID: 11400000, guid: 42fd45e7d68f9ed48b20d0f0b9f547a7, type: 2}
+  updateTime: 2
 --- !u!114 &114355108421967882
 MonoBehaviour:
   m_ObjectHideFlags: 1
