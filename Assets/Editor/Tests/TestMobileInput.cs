@@ -12,7 +12,7 @@ public class TestSwipe
     {
         obj = new GameObject();
         obj.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
-        swipe = obj.AddComponent<MobileInput>();
+        swipe = new MobileInput();
     }
     [TearDown]
     public void TearDownGameobjectSwipe()
@@ -137,62 +137,6 @@ public class TestSwipe
     {
         swipe.InvertedControls = false;
         Assert.That(swipe.InvertedControls, Is.Not.EqualTo(true));
-    }
-    [Test]
-    public void TestInitializzationSingleton()
-    {
-        Assert.That(MobileInput.Instance, Is.EqualTo(swipe));
-    }
-    [Test]
-    public void TestInitializzationSingletonRedLightNull()
-    {
-        Assert.That(MobileInput.Instance, Is.Not.Null);
-    }
-    [Test]
-    public void TestInitializzationSingletonRedLight()
-    {
-        GameObject o = new GameObject();
-        Assert.That(MobileInput.Instance, Is.Not.EqualTo(o.AddComponent<MobileInput>()));
-    }
-    [Test]
-    public void TestSingletonDestroyCurrentSwipe()
-    {
-        GameObject.DestroyImmediate(swipe);
-        Assert.That(MobileInput.Instance, Is.Null);
-    }
-    [Test]
-    public void TestSingletonDestroyNewSwipeInstance()
-    {
-        GameObject o = new GameObject();
-        MobileInput temp = o.AddComponent<MobileInput>();
-        Assert.That(temp, Is.Not.EqualTo(MobileInput.Instance));
-    }
-    [Test]
-    public void TestSingletonDestroyCurrentSwipeAndCreateNew()
-    {
-        GameObject.DestroyImmediate(swipe);
-        swipe = obj.AddComponent<MobileInput>();
-        Assert.That(MobileInput.Instance, Is.EqualTo(swipe));
-    }
-    [Test]
-    public void TestSingletonDestroyCurrentSwipeRedLight()
-    {
-        GameObject.DestroyImmediate(swipe);
-        Assert.That(MobileInput.Instance, !Is.Not.Null);
-    }
-    [Test]
-    public void TestSingletonDestroyNewSwipeInstanceRedLight()
-    {
-        GameObject o = new GameObject();
-        MobileInput temp = o.AddComponent<MobileInput>();
-        Assert.That(temp, !Is.EqualTo(MobileInput.Instance));
-    }
-    [Test]
-    public void TestSingletonDestroyCurrentSwipeAndCreateNewRedLight()
-    {
-        GameObject.DestroyImmediate(swipe);
-        swipe = obj.AddComponent<MobileInput>();
-        Assert.That(MobileInput.Instance, !Is.Not.EqualTo(swipe));
     }
 
 #if UNITY_STANDALONE
@@ -1945,26 +1889,4 @@ public class TestSwipe
     }
 
 #endif
-
-    [UnityTest]
-    public IEnumerator TestSingletonDestroyNewSwipe()
-    {
-        GameObject o = new GameObject();
-        MobileInput temp = o.AddComponent<MobileInput>();
-
-        yield return null;
-
-        Assert.That(!temp);
-    }
-
-    [UnityTest]
-    public IEnumerator TestSingletonDestroyNewSwipeRedLight()
-    {
-        GameObject o = new GameObject();
-        MobileInput temp = o.AddComponent<MobileInput>();
-
-        yield return null;
-
-        Assert.That(!(temp != null));
-    }
 }

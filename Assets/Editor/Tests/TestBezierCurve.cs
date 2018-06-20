@@ -3,14 +3,14 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 [Category("Tools")]
-[TestOf(typeof(BezierCurve))]
+[TestOf(typeof(V3BezierCurve))]
 public class TestBezierCurve
 {
-    BezierCurve curve;
+    V3BezierCurve curve;
     [SetUp]
     public void SetUpBezierCurve()
     {
-        curve = new BezierCurve();
+        curve = new V3BezierCurve();
     }
     [Test]
     public void TestInitializzationLength()
@@ -35,7 +35,7 @@ public class TestBezierCurve
     [Test]
     public void TestInitializzationValidPoints()
     {
-        Assert.That(curve.ValidPoints, Is.EqualTo(BezierCurve.MinValidPoints));
+        Assert.That(curve.ValidPoints, Is.EqualTo(V3BezierCurve.MinValidPoints));
     }
     [Test]
     public void TestInitializzationValidPointsRedLight()
@@ -226,7 +226,7 @@ public class TestBezierCurve
     public void TestSetOverflowUpValidPoints()
     {
         curve.ValidPoints = 10;
-        Assert.That(curve.ValidPoints, Is.EqualTo(BezierCurve.MaxValidPoints));
+        Assert.That(curve.ValidPoints, Is.EqualTo(V3BezierCurve.MaxValidPoints));
     }
     [Test]
     public void TestSetOverflowUpValidPointsRedLight()
@@ -238,7 +238,7 @@ public class TestBezierCurve
     public void TestSetOverflowDownValidPoints()
     {
         curve.ValidPoints = 0;
-        Assert.That(curve.ValidPoints, Is.EqualTo(BezierCurve.MinValidPoints));
+        Assert.That(curve.ValidPoints, Is.EqualTo(V3BezierCurve.MinValidPoints));
     }
     [Test]
     public void TestSetOverflowDownValidPointsRedLight()
@@ -313,7 +313,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyValidPoints()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.ValidPoints, Is.EqualTo(4));
@@ -321,7 +321,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyValidPointsRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.ValidPoints, Is.Not.EqualTo(3));
@@ -329,7 +329,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyLength()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.Length, Is.EqualTo(15.9009).Within(0.0001));
@@ -337,7 +337,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyLengthRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.Length, Is.Not.EqualTo(16).Within(0.0001));
@@ -345,7 +345,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyInverseLength()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.InverseLength, Is.EqualTo(0.0628).Within(0.0001));
@@ -353,7 +353,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyInverseLengthRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.InverseLength, Is.Not.EqualTo(0.07).Within(0.0001));
@@ -361,7 +361,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyStartPosition()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.Start.x, Is.EqualTo(1).Within(0.0001));
@@ -371,7 +371,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyStartPositionRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.Start.x, Is.Not.EqualTo(0).Within(0.0001));
@@ -381,7 +381,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyP1Position()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.P1.x, Is.EqualTo(5).Within(0.0001));
@@ -391,7 +391,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyP1PositionRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.P1.x, Is.Not.EqualTo(3).Within(0.0001));
@@ -401,7 +401,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyP2Position()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.P2.x, Is.EqualTo(3).Within(0.0001));
@@ -411,7 +411,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyP2PositionRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.P2.x, Is.Not.EqualTo(1).Within(0.0001));
@@ -421,7 +421,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyEndPosition()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.End.x, Is.EqualTo(10).Within(0.0001));
@@ -431,7 +431,7 @@ public class TestBezierCurve
     [Test]
     public void TestCopyEndPositionRedLight()
     {
-        BezierCurve other = new BezierCurve();
+        V3BezierCurve other = new V3BezierCurve();
         other.Set(Vector3.one, new Vector3(5, 5, 2), new Vector3(3, 5, 4), new Vector3(10, 10, 10), 4);
         curve.Copy(other);
         Assert.That(curve.End.x, Is.Not.EqualTo(0).Within(0.0001));

@@ -1,35 +1,67 @@
 ﻿using UnityEngine;
+using System;
+using SOPRO;
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
-public class Coin : MonoBehaviour, IPoolable
+public class Coin : MonoBehaviour
 {
-    public IPoolable Prefab { get; set; }
-    /// <summary>
-    /// Returns coin gameobject. Faster than accessing coin.gameObject
-    /// </summary>
-    public GameObject Self { get { if (self == null) self = this.gameObject; return this.self; } }
-    /// <summary>
-    /// Returns coin position. Faster than accessing transform.position
-    /// </summary>
-    public Vector3 Position { get { return transf.position; } }
+    [NonSerialized]
+    public SOPool Pool;
 
-    private GameObject self;
-    private Transform transf;
-    void OnTriggerEnter(Collider other)
+    public SOVariableUint CoinsPickedCounter;
+    public SOVariableUint CoinsMissedCounter;
+    public SOVariableUint CoinsPickedValueCounter;
+    public SOVariableUint CoinsMissedValueCounter;
+
+    public LayerHolder CoinLayer;
+    public LayerHolder MonsterLayer;
+    public LayerHolder ObjDestroyerLayer;
+
+    public ReferenceUint CoinValue;
+
+    public bool IsRecycled { get; private set; }
+
+    private GameObject myGameObject;
+
+    public void Collected()
     {
-        if (other.gameObject.layer == GameManager.MonsterLayer)
-            this.self.SetActive(false);
+        CoinsPickedCounter.Value++;
+        CoinsPickedValueCounter.Value += CoinValue.Value;
+        this.Pool.Recycle(myGameObject);
     }
-    void Awake()
+    void OnEnable()
     {
-        self = this.gameObject;
-        transf = GetComponent<Transform>();
+        this.IsRecycled = false;
     }
-    //void Reset()
-    //{
-    //    Rigidbody rb = GetComponent<Rigidbody>();
-    //    rb.useGravity = false;
-    //    rb.isKinematic = true;
-    //    rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-    //    GetComponent<Collider>().isTrigger = true;
-    //}
+    void OnDisable()
+    {
+        this.IsRecycled = true;
+    }
+    void OnTriggerEnter(Collider collider)
+    {
+        int collidedLayer = collider.gameObject.layer;
+
+        if (collidedLayer == this.MonsterLayer.LayerIndex)
+        {
+            this.Collected();
+        }
+        else if (collidedLayer == this.ObjDestroyerLayer.LayerIndex)
+        {
+            CoinsMissedCounter.Value++;
+            CoinsMissedValueCounter.Value += CoinValue.Value;
+            this.Pool.Recycle(myGameObject);
+        }
+    }
+    void Start()
+    {
+        this.gameObject.layer = CoinLayer.LayerIndex;
+        myGameObject = gameObject;
+    }
+    void Reset()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        GetComponent<Collider>().isTrigger = true;
+    }
 }

@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     private int maxNumberOfLives = 10;
     [SerializeField]
     private int numberOfLives = 3;
+
     private void Update()
     {
         if (numberOfLives == 0)

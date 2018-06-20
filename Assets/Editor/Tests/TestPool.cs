@@ -4,19 +4,19 @@ using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
 [Category("Pools")]
-[TestOf(typeof(Pool<BezierCurve>))]
+[TestOf(typeof(Pool<V3BezierCurve>))]
 public class TestPool
 {
-    Pool<BezierCurve> pool;
-    BezierCurve original;
-    Func<BezierCurve, BezierCurve> allocator;
+    Pool<V3BezierCurve> pool;
+    V3BezierCurve original;
+    Func<V3BezierCurve, V3BezierCurve> allocator;
     [SetUp]
     public void SetupPoolAllocatorAndOriginal()
     {
-        original = new BezierCurve();
+        original = new V3BezierCurve();
         original.Set(Vector3.one, new Vector3(5, 5, 5), new Vector3(8, 6, 7), new Vector3(10, 10, 10), 4);
-        allocator = (c) => { BezierCurve newInstance = new BezierCurve(); newInstance.Copy(original); return newInstance; };
-        pool = new Pool<BezierCurve>(allocator, original, 10, (c) => { c.ValidPoints = 3; });
+        allocator = (c) => { V3BezierCurve newInstance = new V3BezierCurve(); newInstance.Copy(original); return newInstance; };
+        pool = new Pool<V3BezierCurve>(allocator, original, 10, (c) => { c.ValidPoints = 3; });
     }
     [Test]
     public void TestInitializzationPreallocation()
@@ -99,7 +99,7 @@ public class TestPool
     [Test]
     public void TestDifferenceStoredAndInstanciated()
     {
-        BezierCurve current = null;
+        V3BezierCurve current = null;
         for (int i = 0; i < 10; i++)
         {
             current = pool.Get(original);
@@ -118,13 +118,13 @@ public class TestPool
     [Test]
     public void TestRecycleCountIncrease()
     {
-        pool.Recycle(new BezierCurve());
+        pool.Recycle(new V3BezierCurve());
         Assert.That(pool.ElementsStored, Is.EqualTo(11));
     }
     [Test]
     public void TestRecycleCountIncreaseRedLight()
     {
-        pool.Recycle(new BezierCurve());
+        pool.Recycle(new V3BezierCurve());
         Assert.That(pool.ElementsStored, Is.Not.EqualTo(10));
     }
     [Test]
@@ -134,8 +134,8 @@ public class TestPool
         {
             pool.Get(original);
         }
-        pool.Recycle(new BezierCurve());
-        Assert.That(pool.Get(original).ValidPoints, Is.EqualTo(BezierCurve.MinValidPoints));
+        pool.Recycle(new V3BezierCurve());
+        Assert.That(pool.Get(original).ValidPoints, Is.EqualTo(V3BezierCurve.MinValidPoints));
     }
     [Test]
     public void TestDifferenceRecycledAndGettedRedLight()
@@ -144,7 +144,7 @@ public class TestPool
         {
             pool.Get(original);
         }
-        pool.Recycle(new BezierCurve());
+        pool.Recycle(new V3BezierCurve());
         Assert.That(pool.Get(original).ValidPoints, Is.Not.EqualTo(4));
     }
     [Test]
@@ -162,9 +162,9 @@ public class TestPool
     [Test]
     public void TestClearOnDestroy()
     {
-        BezierCurve temp = new BezierCurve();
+        V3BezierCurve temp = new V3BezierCurve();
         pool.Recycle(temp);
-        pool.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one, 2); });
+        pool.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one); });
         Assert.That(temp.Start.x, Is.EqualTo(100));
         Assert.That(temp.Start.y, Is.EqualTo(100));
         Assert.That(temp.Start.z, Is.EqualTo(100));
@@ -172,9 +172,9 @@ public class TestPool
     [Test]
     public void TestClearOnDestroyRedLight()
     {
-        BezierCurve temp = new BezierCurve();
+        V3BezierCurve temp = new V3BezierCurve();
         pool.Recycle(temp);
-        pool.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one, 2); });
+        pool.Clear((o) => { if (o.ValidPoints == 2) o.Set(new Vector3(100, 100, 100), Vector3.one); });
         Assert.That(temp.Start.x, Is.Not.EqualTo(1));
         Assert.That(temp.Start.y, Is.Not.EqualTo(1));
         Assert.That(temp.Start.z, Is.Not.EqualTo(1));
