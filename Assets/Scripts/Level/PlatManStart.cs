@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+[DefaultExecutionOrder(-500)]
 public class PlatManStart : MonoBehaviour
 {
     public PlatformManager Manager;

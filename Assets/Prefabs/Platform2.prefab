@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 23573848391982458}
   - component: {fileID: 33871335363780276}
   - component: {fileID: 114185312694989864}
-  - component: {fileID: 54192809236588538}
   - component: {fileID: 65686763252122972}
   m_Layer: 14
   m_Name: GameObject
@@ -114,6 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041557553359134}
   - component: {fileID: 114211892160870060}
+  - component: {fileID: 54681365334600274}
   m_Layer: 14
   m_Name: Platform2
   m_TagString: Untagged
@@ -555,12 +555,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333201051490370}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54192809236588538
+--- !u!54 &54681365334600274
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1333201051490370}
+  m_GameObject: {fileID: 1882402206584782}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -617,6 +617,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a14d50d9eea5e46b40052d9780ea90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Meshes: {fileID: 11400000, guid: 697f09585e61afc41b1c67d4fc7fd245, type: 2}
+  m_Terrains: {fileID: 11400000, guid: 42fd45e7d68f9ed48b20d0f0b9f547a7, type: 2}
+  filter: {fileID: 33871335363780276}
+  terrain: {fileID: 0}
 --- !u!114 &114211892160870060
 MonoBehaviour:
   m_ObjectHideFlags: 1
