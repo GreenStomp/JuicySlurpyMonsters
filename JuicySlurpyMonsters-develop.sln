@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuicySlurpyMonsters-develop", "Assembly-CSharp.csproj", "{FA6445C0-1693-C0C3-CEC7-17E30A079768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuicySlurpyMonsters-develop", "Assembly-CSharp-Editor.csproj", "{7935144F-E26F-3477-AE70-3B5296C39086}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA6445C0-1693-C0C3-CEC7-17E30A079768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6445C0-1693-C0C3-CEC7-17E30A079768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6445C0-1693-C0C3-CEC7-17E30A079768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6445C0-1693-C0C3-CEC7-17E30A079768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7935144F-E26F-3477-AE70-3B5296C39086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7935144F-E26F-3477-AE70-3B5296C39086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7935144F-E26F-3477-AE70-3B5296C39086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7935144F-E26F-3477-AE70-3B5296C39086}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
